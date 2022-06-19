@@ -1,3 +1,4 @@
+import { join } from 'path'
 import { defineConfig } from 'vite'
 import transformerVariantGroup from '@unocss/transformer-variant-group'
 import presetIcons from '@unocss/preset-icons'
@@ -5,8 +6,17 @@ import Unocss from 'unocss/vite'
 import react from '@vitejs/plugin-react'
 import { presetUno } from 'unocss'
 
+function resolve(dir: string): string {
+  return join(__dirname, dir)
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': resolve('src/'),
+    },
+  },
   plugins: [
     react(),
     Unocss({

@@ -19,6 +19,7 @@
     "@mui/material": "^5.7.0",
     "@unocss/reset": "^0.33.2",
     "axios": "^0.27.2",
+    "immer": "^9.0.15",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.32.2",
