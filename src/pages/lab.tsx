@@ -1,15 +1,10 @@
 import { Box, Button, Stack, Typography } from '@mui/material'
-import { useAuthStore } from '@/store/auth'
+import { Observer } from 'mobx-react-lite'
+import { TimerStore } from '@/store/auth.store'
 
 export default function Lab() {
-  const status = useAuthStore(state => state.status)
-
-  const login = useAuthStore(state => state.login)
-
-  const logout = useAuthStore(state => state.logout)
-
-  return (
-    <Stack direction={'column'} spacing={5}>
+  return <Observer>
+    {() => <Stack direction={'column'} spacing={5}>
       <div className="mt-4 -mb-3">
         <div className="not-prose relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25">
           <div
@@ -18,8 +13,9 @@ export default function Lab() {
           <div className="relative rounded-xl overflow-auto p-8">
             <div className="flex items-center justify-center">
             <span className="relative inline-flex">
-              <button type="button"
-                      className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-sky-500 bg-white dark:bg-slate-800 transition ease-in-out duration-150 cursor-not-allowed ring-1 ring-slate-900/10 dark:ring-slate-200/20"
+              <button
+                type="button"
+                className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-sky-500 bg-white dark:bg-slate-800 transition ease-in-out duration-150 cursor-not-allowed ring-1 ring-slate-900/10 dark:ring-slate-200/20"
               >
                 Powered by Unocss
               </button>
@@ -76,9 +72,17 @@ export default function Lab() {
       </Stack>
 
       <Box className={'center text-3xl'}>
-        <Typography>{status}</Typography>
-        <Button variant={'contained'} onClick={() => { status === 'login' ? logout() : login() }}>{status === 'login' ? 'logout' : 'login'}</Button>
+        <Typography>
+          {TimerStore.status}
+          <Button variant={'contained'} onClick={() => {
+            if (TimerStore.status === 'logout') {
+              TimerStore.login()
+            } else {
+              TimerStore.logout()
+            }
+          }}>{TimerStore.status === 'logout' ? 'login' : 'logout'}</Button>
+        </Typography>
       </Box>
-    </Stack>
-  )
+    </Stack>}
+  </Observer>
 }

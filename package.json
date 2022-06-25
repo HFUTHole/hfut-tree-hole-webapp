@@ -20,13 +20,15 @@
     "@unocss/reset": "^0.33.2",
     "axios": "^0.27.2",
     "immer": "^9.0.15",
+    "mobx": "^6.6.0",
+    "mobx-persist-store": "^1.0.6",
+    "mobx-react-lite": "^3.4.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.32.2",
     "react-query": "^3.39.0",
     "react-router-dom": "6",
-    "use-immer": "^0.7.0",
-    "zustand": "4.0.0-rc.1"
+    "use-immer": "^0.7.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.23.0",
