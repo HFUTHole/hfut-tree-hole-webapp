@@ -1,8 +1,12 @@
 import { Box, Button, Stack, Typography } from '@mui/material'
-import { Observer } from 'mobx-react-lite'
+import { Observer, observer } from 'mobx-react-lite'
+import { useState } from 'react'
 import { TimerStore } from '@/store/auth.store'
+import { settingsStore } from '@/store/setting.store'
 
-export default function Lab() {
+const Lab = () => {
+  const [setting] = useState(() => settingsStore)
+
   return <Observer>
     {() => <Stack direction={'column'} spacing={5}>
       <div className="mt-4 -mb-3">
@@ -67,22 +71,30 @@ export default function Lab() {
         <div className="i-logos-vue" />
         <div className={'i-vscode-icons:file-type-reactjs'} />
         <div className={'i-logos:unocss'} />
-        <button className="i-carbon-sun dark:i-carbon-moon" />
+        <button className="i-carbon-sun dark:i-carbon-moon" onClick={() => {
+          if (setting.mode === 'dark') {
+            setting.setModeLight()
+          } else {
+            setting.setModeDark()
+          }
+        }}/>
         <div className="i-twemoji-grinning-face-with-smiling-eyes hover:i-twemoji-face-with-tears-of-joy" />
       </Stack>
 
-      <Box className={'center text-3xl'}>
+      <Box className={'center text-3xl col gap2'}>
         <Typography>
           {TimerStore.status}
-          <Button variant={'contained'} onClick={() => {
-            if (TimerStore.status === 'logout') {
-              TimerStore.login()
-            } else {
-              TimerStore.logout()
-            }
-          }}>{TimerStore.status === 'logout' ? 'login' : 'logout'}</Button>
         </Typography>
+        <Button variant={'contained'} onClick={() => {
+          if (TimerStore.status === 'logout') {
+            TimerStore.login()
+          } else {
+            TimerStore.logout()
+          }
+        }}>{TimerStore.status === 'logout' ? 'login' : 'logout'}</Button>
       </Box>
     </Stack>}
   </Observer>
 }
+
+export default Lab
