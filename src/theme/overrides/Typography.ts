@@ -1,6 +1,6 @@
-// ----------------------------------------------------------------------
+import type { CustomThemeOptions } from '@/theme/overrides/index'
 
-export default function Typography(theme) {
+export default function Typography(theme: CustomThemeOptions) {
   return {
     MuiTypography: {
       styleOverrides: {
@@ -10,7 +10,11 @@ export default function Typography(theme) {
         gutterBottom: {
           marginBottom: theme.spacing(1),
         },
+        root: {
+          color: theme.mode === 'light' ? theme.palette.light.text.primary : theme.palette.dark.text.primary,
+        },
       },
+
     },
-  };
+  }
 }

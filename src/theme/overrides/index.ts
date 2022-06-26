@@ -1,4 +1,4 @@
-import type { ThemeOptions } from '@mui/material'
+import type { Theme, ThemeOptions } from '@mui/material'
 import Fab from './Fab'
 import Card from './Card'
 import Chip from './Chip'
@@ -45,7 +45,7 @@ import { IconButton } from './IconButton'
 import type { CustomShadows, Shadows } from '@/theme/theme-config/shadows'
 import type { Palette, ThemeMode } from '@/theme/theme-config/palette'
 
-export interface CustomThemeOptions {
+export type CustomThemeOptions = {
   palette: Palette
   customShadows: CustomShadows['light'] | CustomShadows['dark']
   shadows: Shadows['light'] | Shadows['dark']
@@ -53,8 +53,7 @@ export interface CustomThemeOptions {
   components?: any
   typography: any
   mode: ThemeMode
-
-}
+} & Theme
 
 export type OverrideFn = (theme: CustomThemeOptions) => Required<ThemeOptions>['components']
 

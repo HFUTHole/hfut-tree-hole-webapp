@@ -14,4 +14,6 @@ export function LoadingScreen() {
   useMount(() => {
     NProgress.done()
   })
+
+  return <></>
 }

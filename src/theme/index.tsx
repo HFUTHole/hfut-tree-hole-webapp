@@ -6,14 +6,14 @@ import { observer } from 'mobx-react-lite'
 import { CssBaseline, StyledEngineProvider } from '@mui/material'
 import shadows, { customShadows } from './theme-config/shadows'
 import palette from '@/theme/theme-config/palette'
-import type { CustomThemeOptions } from '@/theme/overrides'
 import { mergeOverrideComps } from '@/theme/overrides'
 import typography from '@/theme/theme-config/typography'
 import { settingsStore } from '@/store/setting.store'
 
 const ThemeConfig = observer((props: { children: ReactNode }) => {
   const [settings] = useState(() => settingsStore)
-  const themeOptions = useMemo<CustomThemeOptions>(() => {
+  const themeOptions = useMemo(() => {
+    palette.mode = settings.mode
     return {
       palette,
       shadows: shadows[settings.mode],

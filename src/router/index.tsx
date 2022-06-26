@@ -1,7 +1,7 @@
 import { useRoutes } from 'react-router-dom'
 import type { LazyExoticComponent } from 'react'
 import { Suspense, lazy } from 'react'
-import { LoadingScreen } from '@/components/LoadingScreen/LoadingScreen'
+import { LoadingScreen } from '@/components/loading-screen/LoadingScreen'
 
 const Loadable = (Component: LazyExoticComponent<any>) => (props: Record<string, any>) => {
   return (

@@ -92,6 +92,7 @@ const COMMON = {
   success: { ...SUCCESS, contrastText: GREY[800] },
   warning: { ...WARNING, contrastText: GREY[800] },
   error: { ...ERROR, contrastText: '#fff' },
+  mode: '',
   grey: GREY,
   gradients: GRADIENTS,
   chart: CHART_COLORS,
