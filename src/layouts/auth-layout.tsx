@@ -19,8 +19,8 @@ export const AuthLayout = observer(() => {
       </Box>
       <Box className={'absolute z-1 w-screen h-screen center'}>
         <Card className={'bg-white !rounded-none rd px5 py10 !md-rounded-2xl md-px10 w-[100vw] h-[100vh] md-w-[70vw] md-h-auto md-rounded-lg'}>
-          <Box className={'col gap-y-12'}>
-            <Box className={'col gap2 y-center'}>
+          <Box className={'grid gap6'}>
+            <Box className={'grid gap2'}>
               <img src={logo} className={'w-24 h-24 rounded-full'}/>
               <Typography variant={'h3'}>登录HFUTHole</Typography>
               <p className={'text-holder text-sm'}>请输入你的账号密码</p>

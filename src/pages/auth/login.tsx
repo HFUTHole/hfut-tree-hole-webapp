@@ -32,7 +32,7 @@ const Login = observer(() => {
   }
 
   return <>
-    <Box className={'col gap5'}>
+    <Box className={'grid gap3'}>
       <Controller
         control={control}
         name={'studentId'}
