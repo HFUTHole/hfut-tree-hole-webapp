@@ -8,6 +8,10 @@ import type {
   SetStateAction,
 } from 'react'
 
+/*
+* 为什么不用const useState: import('react')['useState']?
+* 因为webstorm会把这种形式的useState识别为变量而非是函数，感官上会非常不舒服
+* */
 export {}
 declare global {
   function useContext<T>(context: Context<T>/* , (not public API) observedBits?: number|boolean */): T
