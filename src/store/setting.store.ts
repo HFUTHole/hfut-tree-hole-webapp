@@ -3,8 +3,7 @@ import { makePersistable } from 'mobx-persist-store'
 import type { ThemeMode } from '@/theme/theme-config/palette'
 import { isUndefined } from '@/shared/utils/utils'
 import type { ColorPreset, ColorPresetKeys } from '@/theme/utils/getColorPresets'
-import getColorPresets, { colorPresets, defaultPreset } from '@/theme/utils/getColorPresets'
-import type { ChangeEvent } from 'react'
+import getColorPresets, { defaultPreset } from '@/theme/utils/getColorPresets'
 
 const htmlDom = document.querySelector('html')!
 
@@ -14,6 +13,11 @@ const initMode = (mode: ThemeMode) => {
 
 class Settings {
   mode: ThemeMode = 'light'
+
+  get isLight() {
+    return this.mode === 'light'
+  }
+
   open = false
 
   currentColorPreset: ColorPreset = defaultPreset

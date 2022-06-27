@@ -24,7 +24,7 @@
   },
   "include": [
     "src",
-    "auto-imports.d.ts"
+    "react-auto-imports.d.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -3,7 +3,7 @@ import { makePersistable } from 'mobx-persist-store'
 
 export type AuthState = 'login' | 'logout'
 
-class Timer {
+class Auth {
   status: AuthState = 'logout'
 
   constructor() {
@@ -12,7 +12,12 @@ class Timer {
     makePersistable(this, {
       name: '__AUTH__',
       properties: ['status'],
+      storage: window.localStorage,
     })
+  }
+
+  get isAuthenticated() {
+    return this.status === 'login'
   }
 
   login() {
@@ -24,4 +29,4 @@ class Timer {
   }
 }
 
-export const TimerStore = new Timer()
+export const authStore = new Auth()
