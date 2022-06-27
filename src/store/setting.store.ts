@@ -28,6 +28,7 @@ class Settings {
     makePersistable(this, {
       name: '__SETTINGS__',
       properties: ['mode', 'currentColorPreset'],
+      storage: window.localStorage,
     }).then(() => {
       initMode(this.mode)
     })

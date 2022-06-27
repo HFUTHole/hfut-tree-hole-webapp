@@ -17,11 +17,10 @@ const Login = observer(() => {
   const [isShowPassword, setIsShowPassword] = useState(false)
 
   const {
-    register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<LoginForm>({ resolver: loginResolver })
+  } = useForm<LoginForm>({ resolver: loginResolver, shouldFocusError: true })
 
   const onSubmit = (data) => {
     console.log(data)
@@ -32,27 +31,38 @@ const Login = observer(() => {
   }
 
   return <>
-    <Box className={'grid gap3'}>
+    <Box className={'grid gap5'}>
       <Controller
         control={control}
         name={'studentId'}
-        render={({ field }) => <InputFiled
-          label={'学号'}
-          onChange={field.onChange}
-        />}
+        render={({ field }) => (
+          <InputFiled
+            label={'学号'}
+            errors={errors}
+            field={field}
+          />
+        )}
+      >
+      </Controller>
+      <Controller
+        name={'password'}
+        control={control}
+        render={({ field }) => (
+          <InputFiled
+            type={isShowPassword ? 'text' : 'password'}
+            label={'密码'}
+            errors={errors}
+            field={field}
+            onIconClick={() => setIsShowPassword(prev => !prev)}
+            rightIcon={<i className={isShowPassword ? 'i-eva:eye-fill' : 'i-eva:eye-off-fill'}/>}
+          />
+        )}
       >
 
       </Controller>
-      <InputFiled
-        name={'password'}
-        type={isShowPassword ? 'text' : 'password'}
-        label={'密码'}
-        onIconClick={() => setIsShowPassword(prev => !prev)}
-        rightIcon={<i className={isShowPassword ? 'i-eva:eye-fill' : 'i-eva:eye-off-fill'}/>}
-      />
       <Box className={'flex justify-between'}>
        <FormControlLabel control={<Checkbox defaultChecked/>} label={'记住我'} />
-        <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+        <Typography variant="body2" className={'center'}>
           <Link variant="subtitle2" component={RouterLink} className={'hover-cursor'} to={'/auth/register'}>
             忘记密码了?
           </Link>
