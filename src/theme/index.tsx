@@ -1,6 +1,5 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import type { ReactNode } from 'react'
-import { useMemo, useState } from 'react'
 import type { ThemeOptions } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import { CssBaseline, StyledEngineProvider } from '@mui/material'

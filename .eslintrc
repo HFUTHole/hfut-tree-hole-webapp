@@ -6,6 +6,7 @@
     "curly": "off",
     "@typescript-eslint/brace-style": "off",
     "n/handle-callback-err": "off",
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "import/order": "off",
   }
 }

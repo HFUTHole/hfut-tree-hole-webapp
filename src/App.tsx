@@ -6,11 +6,13 @@ import MotionLazyContainer from '@/components/animate/motion-lazy'
 import { observer } from 'mobx-react-lite'
 import { settingsStore } from '@/store/setting.store'
 import type { ReactNode } from 'react'
-import { useState } from 'react'
 import { Box } from '@mui/material'
+import ThemeConfig from '@/theme'
 
 const LightOrDarkModeContainer = observer(({ children }: { children: ReactNode }) => {
   const [settings] = useState(() => settingsStore)
+
+  useEffect(() => {}, [])
 
   return <>
     <Box className={`${settings.mode === 'dark' ? 'bg-[#161C24]' : ''} w-screen min-h-screen`}>
@@ -21,13 +23,15 @@ const LightOrDarkModeContainer = observer(({ children }: { children: ReactNode }
 
 export default function App() {
   return <>
-    <MotionLazyContainer>
-      <LightOrDarkModeContainer>
-        <ProgressBarStyle />
-        <Settings />
-        <Router />
-      </LightOrDarkModeContainer>
-    </MotionLazyContainer>
+    <ThemeConfig>
+      <MotionLazyContainer>
+        <LightOrDarkModeContainer>
+          <ProgressBarStyle />
+          <Settings />
+          <Router />
+        </LightOrDarkModeContainer>
+      </MotionLazyContainer>
+    </ThemeConfig>
   </>
 }
 

@@ -5,12 +5,12 @@ import presetIcons from '@unocss/preset-icons'
 import Unocss from 'unocss/vite'
 import react from '@vitejs/plugin-react'
 import { presetUno } from 'unocss'
+import AutoImport from 'unplugin-auto-import/vite'
 
 function resolve(dir: string): string {
   return join(__dirname, dir)
 }
 
-// https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
@@ -31,6 +31,18 @@ export default defineConfig({
         presetIcons(),
         transformerVariantGroup(),
       ],
+    }),
+    AutoImport({
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+      ],
+      imports: [
+        'react',
+      ],
+      dirs: [
+        './src',
+      ],
+      dts: true,
     }),
   ],
 })

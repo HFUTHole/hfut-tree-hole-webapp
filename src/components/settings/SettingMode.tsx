@@ -1,12 +1,12 @@
 import { styled } from '@mui/material/styles'
+import type { SxProps } from '@mui/material'
 import { CardActionArea, Grid, RadioGroup } from '@mui/material'
 import { observer } from 'mobx-react-lite'
-import { useMemo, useState } from 'react'
 import { BoxMask } from '@/components/settings/settings'
 import { settingsStore } from '@/store/setting.store'
 import type { CustomThemeOptions } from '@/theme/overrides'
 
-const BoxStyle = styled(CardActionArea)(({ theme }: { theme?: CustomThemeOptions }) => {
+const BoxStyle = styled(CardActionArea)(({ theme, sx }: { theme?: CustomThemeOptions; sx: SxProps }) => {
   theme = theme!
   return {
     height: 72,

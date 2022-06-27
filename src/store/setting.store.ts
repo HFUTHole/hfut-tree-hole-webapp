@@ -2,6 +2,9 @@ import { makeAutoObservable } from 'mobx'
 import { makePersistable } from 'mobx-persist-store'
 import type { ThemeMode } from '@/theme/theme-config/palette'
 import { isUndefined } from '@/shared/utils/utils'
+import type { ColorPreset, ColorPresetKeys } from '@/theme/utils/getColorPresets'
+import getColorPresets, { colorPresets, defaultPreset } from '@/theme/utils/getColorPresets'
+import type { ChangeEvent } from 'react'
 
 const htmlDom = document.querySelector('html')!
 
@@ -10,18 +13,22 @@ const initMode = (mode: ThemeMode) => {
 }
 
 class Settings {
+  mode: ThemeMode = 'light'
+  open = false
+
+  currentColorPreset: ColorPreset = defaultPreset
+
   constructor() {
     makeAutoObservable(this)
 
     makePersistable(this, {
       name: '__SETTINGS__',
-      properties: ['mode'],
+      properties: ['mode', 'currentColorPreset'],
     }).then(() => {
       initMode(this.mode)
     })
   }
 
-  mode: ThemeMode = 'light'
   setLightMode() {
     this.mode = 'light'
     htmlDom.className = 'light'
@@ -33,7 +40,6 @@ class Settings {
     htmlDom.className = 'dark'
   }
 
-  open = false
   toggleSettings(open?: boolean) {
     if (!isUndefined(open)) {
       this.open = open
@@ -52,6 +58,10 @@ class Settings {
 
   resetAll() {
     this.mode = 'light'
+  }
+
+  onColorChange(colorKey: ColorPresetKeys) {
+    this.currentColorPreset = getColorPresets(colorKey)
   }
 }
 

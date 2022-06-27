@@ -61,6 +61,8 @@ export const colorPresets = [
   },
 ]
 
+export type ColorPreset = typeof colorPresets[number]
+
 export const defaultPreset = colorPresets[0]
 export const purplePreset = colorPresets[1]
 export const cyanPreset = colorPresets[2]
@@ -68,7 +70,9 @@ export const bluePreset = colorPresets[3]
 export const orangePreset = colorPresets[4]
 export const redPreset = colorPresets[5]
 
-export default function getColorPresets(presetsKey: string) {
+export type ColorPresetKeys = 'purple' | 'cyan' | 'blue' | 'orange' | 'red' | 'default'
+
+export default function getColorPresets(presetsKey: ColorPresetKeys) {
   return {
     purple: purplePreset,
     cyan: cyanPreset,

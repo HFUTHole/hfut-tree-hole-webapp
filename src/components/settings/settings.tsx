@@ -1,7 +1,16 @@
 import { alpha, useTheme } from '@mui/material/styles'
-import { Box, ClickAwayListener, Divider, FormControlLabel, IconButton, Radio, Typography, styled } from '@mui/material'
+import {
+  Box,
+  ClickAwayListener,
+  Divider,
+  FormControlLabel,
+  IconButton,
+  Radio,
+  Stack,
+  Typography,
+  styled,
+} from '@mui/material'
 import { observer } from 'mobx-react-lite'
-import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import cssStyles from '@/theme/utils/cssStyles'
 import { NAVBAR } from '@/shared/constant/ui'
@@ -9,6 +18,7 @@ import { settingsStore } from '@/store/setting.store'
 import { varFade } from '@/components/animate/variants'
 import { ToggleButton } from '@/components/settings/ToggleButton'
 import { SettingMode } from '@/components/settings/SettingMode'
+import { SettingColorPresets } from '@/components/settings/SettingColor'
 
 const RootStyle = styled(motion.div)(({ theme }) => {
   return {
@@ -32,6 +42,17 @@ const RootStyle = styled(motion.div)(({ theme }) => {
   }
 })
 
+const SettingList = [
+  {
+    subtitle: '主题模式',
+    element: <SettingMode />,
+  },
+  {
+    subtitle: '主题颜色',
+    element: <SettingColorPresets />,
+  },
+]
+
 export const Settings = observer(() => {
   const theme = useTheme()
   const [settings] = useState(() => settingsStore)
@@ -50,7 +71,7 @@ export const Settings = observer(() => {
               <RootStyle
                 theme={theme}
                 {...varSlider}
-                className={'col gap3'}
+                className={'col'}
               >
                 <Box className={'flex justify-between items-center pl6 pr2 py4'}>
                   <Typography variant={'subtitle1'} className={'flex1'}>设置</Typography>
@@ -64,8 +85,13 @@ export const Settings = observer(() => {
                   </Box>
                 </Box>
                 <Divider sx={{ borderStyle: 'dashed' }} />
-                <Box className={'col gap5 px3'}>
-                  <SettingMode />
+                <Box className={'col gap5 px3 mt5'}>
+                  {SettingList.map(({ subtitle, element }) => {
+                    return <Stack spacing={2} key={subtitle}>
+                      <Typography variant={'subtitle2'}>{subtitle}</Typography>
+                      {element}
+                    </Stack>
+                  })}
                 </Box>
               </RootStyle>
             </ClickAwayListener>
