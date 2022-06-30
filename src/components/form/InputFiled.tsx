@@ -1,9 +1,9 @@
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import type { ReactNode } from 'react'
 import type { TextFieldProps } from '@mui/material/TextField/TextField'
-import type { ControllerFieldState, FieldErrors } from 'react-hook-form'
-import { isNotEmptyObject } from 'class-validator'
+import type { FieldErrors } from 'react-hook-form'
 import type { ControllerRenderProps } from 'react-hook-form/dist/types/controller'
+import { isEmptyObject } from '@/shared/utils/utils'
 
 type Props<T extends object = any> = {
   leftIcon?: ReactNode
@@ -19,19 +19,21 @@ export const InputFiled = ({ leftIcon, rightIcon, errors, field, onIconClick, ..
   return <>
     <TextField
       fullWidth
-      error={isNotEmptyObject(error)}
-      helperText={error?.message || ''}
+      error={!isEmptyObject(error)}
+      helperText={error?.message as string || ''}
       onChange={field!.onChange}
       inputRef={field!.ref}
-      InputProps={{
-        endAdornment: <>
+      InputProps={leftIcon || rightIcon
+        ? {
+            endAdornment: <>
           <InputAdornment position={leftIcon ? 'start' : 'end'}>
             <IconButton onClick={onIconClick}>
               {leftIcon || rightIcon}
             </IconButton>
           </InputAdornment>
         </>,
-      }}
+          }
+        : {}}
       {...other}
     />
   </>

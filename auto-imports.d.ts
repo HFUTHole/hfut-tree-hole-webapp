@@ -5,6 +5,7 @@ declare global {
   const forwardRef: typeof import('react')['forwardRef']
   const lazy: typeof import('react')['lazy']
   const memo: typeof import('react')['memo']
+  const request: typeof import('./src/service/index')['request']
   const startTransition: typeof import('react')['startTransition']
   const useCallback: typeof import('react')['useCallback']
   const useContext: typeof import('react')['useContext']

@@ -8,6 +8,7 @@ import { settingsStore } from '@/store/setting.store'
 import type { ReactNode } from 'react'
 import { Box } from '@mui/material'
 import ThemeConfig from '@/theme'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 const LightOrDarkModeContainer = observer(({ children }: { children: ReactNode }) => {
   const [settings] = useState(() => settingsStore)
@@ -21,17 +22,21 @@ const LightOrDarkModeContainer = observer(({ children }: { children: ReactNode }
   </>
 })
 
+const queryClient = new QueryClient()
+
 export default function App() {
   return <>
-    <ThemeConfig>
-      <MotionLazyContainer>
-        <LightOrDarkModeContainer>
-          <ProgressBarStyle />
-          <Settings />
-          <Router />
-        </LightOrDarkModeContainer>
-      </MotionLazyContainer>
-    </ThemeConfig>
+    <QueryClientProvider client={queryClient}>
+      <ThemeConfig>
+        <MotionLazyContainer>
+          <LightOrDarkModeContainer>
+            <ProgressBarStyle />
+            <Settings />
+            <Router />
+          </LightOrDarkModeContainer>
+        </MotionLazyContainer>
+      </ThemeConfig>
+    </QueryClientProvider>
   </>
 }
 
