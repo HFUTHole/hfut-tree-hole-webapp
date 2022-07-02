@@ -1,13 +1,12 @@
-import type { Noop } from 'react-hook-form'
-
 export function useDebounce<T extends (...args: any[]) => any>(
   fn: T,
   ms: number,
   deps = [],
-  before?: Noop,
+  immediate = false,
 ) {
   const callback = useRef<T>(fn)
   const timer = useRef<ReturnType<typeof setTimeout>>()
+  const isFirstTrigger = useRef(true)
 
   useEffect(() => {
     callback.current = fn
@@ -17,14 +16,16 @@ export function useDebounce<T extends (...args: any[]) => any>(
     timer.current && clearTimeout(timer.current)
   }, [])
 
-  return useCallback(() => {
+  return useCallback((...args: any[]) => {
     timer.current && clearTimeout(timer.current)
 
-    before && before()
-
-    timer.current = setTimeout(() => {
-      callback.current()
-    }, ms)
+    if (isFirstTrigger.current && immediate) {
+      callback.current(args)
+    } else {
+      timer.current = setTimeout(() => {
+        callback.current(args)
+      }, ms)
+    }
 
     return clear
   }, deps)

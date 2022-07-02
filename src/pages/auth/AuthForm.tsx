@@ -11,7 +11,6 @@ import Page from '@/components/page/page'
 import { Alert, Box, Checkbox, FormControlLabel, Link, Typography } from '@mui/material'
 import { InputFiled, PasswordFieldWithEye } from '@/components/form/InputFiled'
 import { LoadingButton } from '@mui/lab'
-import { useDebounce } from '@/shared/hooks/use-debounce'
 
 export const AuthForm = observer(() => {
   const [store] = useState(() => authStore)
@@ -36,7 +35,7 @@ export const AuthForm = observer(() => {
     mode: 'all',
   })
 
-  const onSubmit = useDebounce(async (data: LoginForm | RegisterForm) => {
+  const onSubmit = async (data: LoginForm | RegisterForm) => {
     setIsLoading(true)
     try {
       await (isLogin ? store.login(data) : store.register(data as RegisterForm))
@@ -53,9 +52,7 @@ export const AuthForm = observer(() => {
       })
     }
     setIsLoading(false)
-  }, 200, [], () => {
-    setIsLoading(true)
-  })
+  }
 
   const onError = (error: FieldErrors<LoginForm>) => {
     // eslint-disable-next-line no-console
