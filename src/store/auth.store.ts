@@ -1,8 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { makePersistable } from 'mobx-persist-store'
-import { useQuery } from 'react-query'
-import { dispatchLoginRequest } from '@/service/api/auth'
-import type { LoginForm } from '@/pages/auth/loginValidator'
+import { dispatchLoginRequest, dispatchRegisterRequest } from '@/service/api/auth'
+import type { LoginForm, RegisterForm } from '@/pages/auth/formValidator'
 
 export type AuthState = 'login' | 'logout'
 
@@ -25,6 +24,10 @@ class Auth {
 
   login(payload: LoginForm) {
     return dispatchLoginRequest(payload)
+  }
+
+  register(payload: RegisterForm) {
+    return dispatchRegisterRequest(payload)
   }
 
   logout() {

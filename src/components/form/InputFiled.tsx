@@ -23,6 +23,7 @@ export const InputFiled = ({ leftIcon, rightIcon, errors, field, onIconClick, ..
       helperText={error?.message as string || ''}
       onChange={field!.onChange}
       inputRef={field!.ref}
+      value={field.value}
       InputProps={leftIcon || rightIcon
         ? {
             endAdornment: <>
@@ -38,3 +39,18 @@ export const InputFiled = ({ leftIcon, rightIcon, errors, field, onIconClick, ..
     />
   </>
 }
+
+export const PasswordFieldWithEye = (props: Partial<Props>) => {
+  const [isShowPassword, setIsShowPassword] = useState(false)
+
+  return <>
+    <InputFiled
+      type={isShowPassword ? 'text' : 'password'}
+      label={'密码'}
+      onIconClick={() => setIsShowPassword(prev => !prev)}
+      rightIcon={<i className={isShowPassword ? 'i-eva:eye-fill' : 'i-eva:eye-off-fill'}/>}
+      {...props}
+    />
+  </>
+}
+

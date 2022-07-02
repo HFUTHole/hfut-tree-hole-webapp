@@ -39,6 +39,7 @@ export function Router() {
       children: [
         { element: <Navigate to={'login'} />, index: true },
         { path: 'login', element: <Login /> },
+        { path: 'register/:studentId/:password', element: <Register /> },
         { path: 'register', element: <Register /> },
       ],
     },
