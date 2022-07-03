@@ -7,7 +7,7 @@ export const AuthGuestGuard = observer((props: { children: ReactNode }) => {
   const [auth] = useState(() => authStore)
 
   if (auth.isAuthenticated) {
-    return <Navigate to={'/dashboard'} />
+    return <Navigate to={'/app'} />
   }
   return <>
     {props.children}

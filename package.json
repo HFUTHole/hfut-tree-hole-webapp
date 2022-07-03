@@ -35,6 +35,7 @@
     "react-query": "^3.39.0",
     "react-router-dom": "6",
     "react-spring": "^9.4.5",
+    "simplebar-react": "^2.4.1",
     "use-immer": "^0.7.0",
     "yup": "^0.32.11"
   },

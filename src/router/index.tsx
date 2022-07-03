@@ -28,7 +28,7 @@ export function Router() {
   return useRoutes([
     {
       path: '/',
-      element: <Navigate to={'/dashboard'}/>,
+      element: <Navigate to={'/app'}/>,
     },
     {
       path: '/auth',
@@ -46,14 +46,14 @@ export function Router() {
       ],
     },
     {
-      path: '/dashboard',
+      path: '/app',
       element: <>
         <AuthGuard>
           <DashboardLayout />
         </AuthGuard>
       </>,
       children: [
-        { element: <Navigate to={'/dashboard/home'} />, index: true },
+        { element: <Navigate to={'/app/home'} />, index: true },
         {
           path: 'home',
           element: <Home />,
