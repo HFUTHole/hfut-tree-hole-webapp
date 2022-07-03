@@ -1,7 +1,11 @@
 import { makeAutoObservable } from 'mobx'
 import { makePersistable } from 'mobx-persist-store'
-import { dispatchLoginRequest, dispatchRegisterRequest } from '@/service/api/auth'
-import type { LoginForm, RegisterForm } from '@/pages/auth/formValidator'
+import {
+  forgetPasswordRequest,
+  loginRequest,
+  registerRequest,
+} from '@/service/api/auth'
+import type { ForgetForm, LoginForm, RegisterForm } from '@/pages/auth/formValidator'
 
 export type AuthState = 'login' | 'logout'
 
@@ -23,11 +27,15 @@ class Auth {
   }
 
   login(payload: LoginForm) {
-    return dispatchLoginRequest(payload)
+    return loginRequest(payload)
   }
 
   register(payload: RegisterForm) {
-    return dispatchRegisterRequest(payload)
+    return registerRequest(payload)
+  }
+
+  forget(payload: ForgetForm) {
+    return forgetPasswordRequest(payload)
   }
 
   logout() {

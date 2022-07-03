@@ -1,8 +1,8 @@
 import { request } from '@/service'
 import type { LoginResponse } from '@/service/types/response/auth'
-import type { LoginForm, RegisterForm } from '@/pages/auth/formValidator'
+import type { ForgetForm, LoginForm, RegisterForm } from '@/pages/auth/formValidator'
 
-export function dispatchLoginRequest(loginData: LoginForm) {
+export function loginRequest(loginData: LoginForm) {
   return request<LoginResponse>({
     url: '/auth/login',
     method: 'post',
@@ -10,10 +10,18 @@ export function dispatchLoginRequest(loginData: LoginForm) {
   })
 }
 
-export function dispatchRegisterRequest(registerData: RegisterForm) {
+export function registerRequest(registerData: RegisterForm) {
   return request<LoginResponse>({
     url: '/auth/register',
     method: 'post',
     data: registerData,
+  })
+}
+
+export function forgetPasswordRequest(forgetPasswordData: ForgetForm) {
+  return request<LoginResponse>({
+    url: '/auth/forget',
+    method: 'post',
+    data: forgetPasswordData,
   })
 }

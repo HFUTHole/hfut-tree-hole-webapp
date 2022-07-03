@@ -22,6 +22,7 @@ const Home = Loadable(lazy(() => import('@/pages/dashboard/home/home')))
 // auth
 const Login = Loadable(lazy(() => import('@/pages/auth/login')))
 const Register = Loadable(lazy(() => import('@/pages/auth/register')))
+const Forget = Loadable(lazy(() => import('@/pages/auth/forget')))
 
 export function Router() {
   return useRoutes([
@@ -41,6 +42,7 @@ export function Router() {
         { path: 'login', element: <Login /> },
         { path: 'register/:studentId/:password', element: <Register /> },
         { path: 'register', element: <Register /> },
+        { path: 'forget', element: <Forget /> },
       ],
     },
     {

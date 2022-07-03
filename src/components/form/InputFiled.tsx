@@ -1,41 +1,45 @@
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import type { ReactNode } from 'react'
 import type { TextFieldProps } from '@mui/material/TextField/TextField'
-import type { FieldErrors } from 'react-hook-form'
-import type { ControllerRenderProps } from 'react-hook-form/dist/types/controller'
+import type { Control } from 'react-hook-form'
 import { isEmptyObject } from '@/shared/utils/utils'
+import { Controller } from 'react-hook-form'
 
 type Props<T extends object = any> = {
+  name: string
+  control: Control<T>
   leftIcon?: ReactNode
   rightIcon?: ReactNode
-  errors?: FieldErrors<T>
-  field: ControllerRenderProps<any, any>
   onIconClick: (...args: any[]) => void
 } & Partial<TextFieldProps>
 
-export const InputFiled = ({ leftIcon, rightIcon, errors, field, onIconClick, ...other }: Partial<Props>) => {
-  const error = useMemo(() => errors?.[field?.name as string] || {}, [errors])
+export const InputFiled = ({ control, name, leftIcon, rightIcon, onIconClick, ...other }: Partial<Props>) => {
+  const error = control?._formState.errors?.[name as string] || {}
 
   return <>
-    <TextField
-      fullWidth
-      error={!isEmptyObject(error)}
-      helperText={error?.message as string || ''}
-      onChange={field!.onChange}
-      inputRef={field!.ref}
-      value={field.value}
-      InputProps={leftIcon || rightIcon
-        ? {
-            endAdornment: <>
-          <InputAdornment position={leftIcon ? 'start' : 'end'}>
-            <IconButton onClick={onIconClick}>
-              {leftIcon || rightIcon}
-            </IconButton>
-          </InputAdornment>
-        </>,
-          }
-        : {}}
-      {...other}
+    <Controller
+      control={control}
+      name={name!}
+      render={({ field }) => (
+        <TextField
+          fullWidth
+          error={!isEmptyObject(error)}
+          helperText={error?.message as string || ''}
+          {...(field || {})}
+          InputProps={leftIcon || rightIcon
+            ? {
+                endAdornment: <>
+                <InputAdornment position={leftIcon ? 'start' : 'end'}>
+                  <IconButton onClick={onIconClick}>
+                    {leftIcon || rightIcon}
+                  </IconButton>
+                </InputAdornment>
+              </>,
+              }
+            : {}}
+          {...other}
+        />
+      )}
     />
   </>
 }

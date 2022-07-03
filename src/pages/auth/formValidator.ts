@@ -30,3 +30,13 @@ const registerForm = yup.object().shape({
 })
 
 export const registerResolver = yupResolver(registerForm)
+
+export type ForgetForm = Omit<RegisterForm, 'username'>
+
+const forgetForm = yup.object().shape({
+  ...authSchema,
+  hfutPassword: yup.string().required('密码不能为空').max(30, '信息门户密码长度不能超过30位'),
+})
+
+export const forgetResolver = yupResolver(forgetForm)
+
