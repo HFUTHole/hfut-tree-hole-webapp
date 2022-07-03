@@ -57,11 +57,12 @@ export const AuthForm = observer((props: Props) => {
   const onSubmit = async (data: LoginForm | RegisterForm) => {
     setIsLoading(true)
     try {
-      await (isLogin
+      const res = await (isLogin
         ? store.login(data)
         : isRegister
           ? store.register(data as RegisterForm)
           : store.forget(data as ForgetForm))
+      store.changeToLoginStatus(res)
     } catch (err) {
       const response = (err as AxiosError<LoginResponse>).response
       const defaultMsg = isLogin ? '登录失败' : isForget ? '找回密码失败' : '注册失败'

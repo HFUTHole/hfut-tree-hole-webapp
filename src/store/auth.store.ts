@@ -6,24 +6,26 @@ import {
   registerRequest,
 } from '@/service/api/auth'
 import type { ForgetForm, LoginForm, RegisterForm } from '@/pages/auth/formValidator'
+import type { LoginResponse } from '@/service/types/response/auth'
 
 export type AuthState = 'login' | 'logout'
 
 class Auth {
   status: AuthState = 'logout'
+  token: string | null
 
   constructor() {
     makeAutoObservable(this)
 
     makePersistable(this, {
       name: '__AUTH__',
-      properties: ['status'],
+      properties: ['status', 'token'],
       storage: window.localStorage,
     })
   }
 
   get isAuthenticated() {
-    return this.status === 'login'
+    return this.status === 'login' && !!this.token
   }
 
   login(payload: LoginForm) {
@@ -38,8 +40,14 @@ class Auth {
     return forgetPasswordRequest(payload)
   }
 
+  changeToLoginStatus(res: LoginResponse) {
+    this.status = 'login'
+    this.token = res.data.token
+  }
+
   logout() {
     this.status = 'logout'
+    this.token = null
   }
 }
 

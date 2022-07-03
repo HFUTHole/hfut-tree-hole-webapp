@@ -85,7 +85,7 @@ export const Settings = observer(() => {
                   </Box>
                 </Box>
                 <Divider sx={{ borderStyle: 'dashed' }} />
-                <Box className={'col gap5 px3 mt5'}>
+                <Box className={'grid gap5 px3 mt5'}>
                   {SettingList.map(({ subtitle, element }) => {
                     return <Stack spacing={2} key={subtitle}>
                       <Typography variant={'subtitle2'}>{subtitle}</Typography>
