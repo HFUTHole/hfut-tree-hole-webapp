@@ -1,8 +1,9 @@
 import type { BoxProps } from '@mui/material'
 import { Box, List, ListSubheader } from '@mui/material'
-import { NavList } from '@/layouts/dashboard/navbar/navList'
+import { NavListConfig } from '@/layouts/dashboard/navbar/navListConfig'
 import { styled } from '@mui/material/styles'
 import type { ReactNode } from 'react'
+import { NavListRoot } from './NavList'
 
 export const ListSubheaderStyle = styled(({ children }: { children: ReactNode }) => (
   // 规避类型报错
@@ -24,7 +25,7 @@ export const ListSubheaderStyle = styled(({ children }: { children: ReactNode })
 export function NavbarList(props: BoxProps) {
   return <>
     <Box {...props}>
-      {NavList.map(group => (
+      {NavListConfig.map(group => (
         <List key={group.subheader} disablePadding sx={{ px: 2 }}>
           <ListSubheaderStyle
           >
@@ -32,7 +33,7 @@ export function NavbarList(props: BoxProps) {
           </ListSubheaderStyle>
 
           {group.list.map(list => (
-            <p key={list.title}>{list.title}</p>
+            <NavListRoot key={list.title} list={list} />
           ))}
         </List>
       ))}

@@ -22,14 +22,14 @@
     ],
   },
 * */
-export const NavList = [
+export const NavListConfig = [
   {
     subheader: 'app',
     list: [
       {
         title: '树洞',
         path: '/app/treehole',
-        icon: 'ph:tree',
+        icon: 'i-ph:tree',
         badge: '111',
       },
     ],

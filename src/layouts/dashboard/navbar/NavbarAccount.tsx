@@ -1,7 +1,8 @@
 import { Link as RouterLink } from 'react-router-dom'
 import { styled } from '@mui/material/styles'
-import { Box, Link, Typography } from '@mui/material'
+import { Avatar, Box, Link, Typography } from '@mui/material'
 import type { CustomThemeOptions } from '@/theme/overrides'
+import AvatarImg from '@/assets/imgs/avatar.png'
 
 const RootStyle = styled('div')(({ theme }: { theme?: CustomThemeOptions }) => {
   theme = theme!
@@ -21,7 +22,7 @@ export function NavbarAccount() {
   return (
     <Link underline="none" color="inherit" component={RouterLink} to={'/'}>
       <RootStyle>
-        {'Avatar'}
+        <Avatar src={AvatarImg}/>
         <Box
           sx={{
             ml: 2,

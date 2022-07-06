@@ -40,12 +40,12 @@ export const Navbar = observer(() => {
         width: {
           lg: NAVBAR.DASHBOARD_WIDTH,
         },
-        position: 'absolute',
       }}
     >
       <Drawer
-        variant="persistent"
-        open={isDesktop ? true : store.open}
+        variant={isDesktop ? 'persistent' : 'temporary'}
+        open={true}
+        anchor={'left'}
         onClose={() => store.onClose()}
         PaperProps={{
           sx: {
@@ -56,7 +56,7 @@ export const Navbar = observer(() => {
               theme.transitions.create('width', {
                 duration: theme.transitions.duration.standard,
               }),
-            ...cssStyles(theme).bgBlur(),
+            ...(isDesktop ? { ...cssStyles(theme).bgBlur() } : {}),
             boxShadow: (theme: CustomThemeOptions) => theme.customShadows.z24,
           },
         }}
@@ -73,8 +73,6 @@ export const Navbar = observer(() => {
               pt: 3,
               pb: 2,
               px: 2.5,
-              flexShrink: 0,
-              alignItems: 'center',
             }}
           >
 
