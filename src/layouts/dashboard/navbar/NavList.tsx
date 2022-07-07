@@ -20,7 +20,7 @@ export function NavListRoot({ list }: { list: typeof NavListConfig }) {
     </>
   }
 
-  return <NavItemRoot item={list} active={active} />
+  return <NavItemRoot item={list} active={true} onOpen={undefined} />
 }
 
 function NavListSub({ list }: { list: any }) {

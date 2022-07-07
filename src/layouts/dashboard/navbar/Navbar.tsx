@@ -44,7 +44,7 @@ export const Navbar = observer(() => {
     >
       <Drawer
         variant={isDesktop ? 'persistent' : 'temporary'}
-        open={true}
+        open={isDesktop ? true : store.open}
         anchor={'left'}
         onClose={() => store.onClose()}
         PaperProps={{

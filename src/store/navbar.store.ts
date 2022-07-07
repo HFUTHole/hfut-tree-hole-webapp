@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
 class Navbar {
-  open = true
+  open = false
 
   constructor() {
     makeAutoObservable(this)

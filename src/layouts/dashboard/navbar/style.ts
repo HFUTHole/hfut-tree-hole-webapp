@@ -1,11 +1,12 @@
 import { alpha, styled } from '@mui/material/styles'
+import type { ListItemButtonProps } from '@mui/material'
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { NAVBAR } from '@/shared/constant/ui'
 import type { CustomThemeOptions } from '@/theme/overrides'
 
 export const ListItemStyle = styled(ListItemButton, {
   shouldForwardProp: prop => prop !== 'activeRoot' && prop !== 'activeSub' && prop !== 'subItem',
-})(({ activeRoot, activeSub, subItem, theme }: { activeRoot: boolean; activeSub: boolean; subItem: boolean; theme?: CustomThemeOptions }) => {
+})(({ activeRoot, activeSub, subItem, theme }: { activeRoot: boolean; activeSub: boolean; subItem: boolean; theme?: CustomThemeOptions } & ListItemButtonProps) => {
   theme = theme!
   console.log(activeRoot)
   return {
