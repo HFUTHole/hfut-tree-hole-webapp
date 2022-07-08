@@ -1,5 +1,4 @@
 import NProgress from 'nprogress'
-import { useBeforeMount } from '@/shared/lifecycle/useBeforeMount'
 import { useMount } from '@/shared/lifecycle/useMount'
 
 export function LoadingScreen() {
@@ -7,12 +6,10 @@ export function LoadingScreen() {
     showSpinner: false,
   })
 
-  useBeforeMount(() => {
-    NProgress.start()
-  })
-
   useMount(() => {
-    NProgress.done()
+    NProgress.start()
+
+    return () => NProgress.done()
   })
 
   return <></>
