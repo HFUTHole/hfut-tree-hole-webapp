@@ -8,7 +8,6 @@ export function LoadingScreen() {
 
   useMount(() => {
     NProgress.start()
-
     return () => NProgress.done()
   })
 
