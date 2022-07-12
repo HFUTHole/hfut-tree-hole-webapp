@@ -1,44 +1,67 @@
-import PropTypes from 'prop-types'
-import { NavLink as RouterLink } from 'react-router-dom'
-import { Box, ListItemText, useTheme } from '@mui/material'
+import { NavLink as RouterLink, useLocation } from 'react-router-dom'
+import { Box, Collapse, List, ListItemText, useTheme } from '@mui/material'
 import { ListItemIconStyle, ListItemStyle, ListItemTextStyle } from './style'
 import type { CustomThemeOptions } from '@/theme/overrides'
-import type { NavbarList } from '@/layouts/dashboard/navbar/NavbarList'
+import type { TNavListConfig, TNavListItem } from '@/layouts/dashboard/navbar/navListConfig'
+import { getActive } from '@/layouts/dashboard/navbar/utils'
 
-interface NavItemRooProps {
-  item: typeof NavbarList
-  open: boolean
-}
+export function NavListItemRoot({ item }: { item: TNavListItem }) {
+  const { title, path, icon } = item
 
-export function NavItemRoot({ item, open = false, active, onOpen }) {
-  const { title, path, icon, info, children } = item
-
+  const { pathname } = useLocation()
   const theme = useTheme() as CustomThemeOptions
 
+  const active = getActive(item.path, pathname)
   const color = theme.palette.primary.main
 
-  const renderContent = (
-    <>
-      {icon && (
-        <ListItemIconStyle>
-          <i className={'i-carbon:tree text-xl'} style={{ ...(active && { color }) }}/>
-        </ListItemIconStyle>)
-      }
-      <ListItemTextStyle disableTypography primary={title} />
-    </>
-  )
+  return <ListItemStyle component={RouterLink} to={path} activeRoot={active}>
+    {icon && (
+      <ListItemIconStyle>
+        <i className={`${item.icon} text-xl`} style={{ ...(active && { color }) }}/>
+      </ListItemIconStyle>)
+    }
+    <ListItemTextStyle disableTypography primary={title} />
+  </ListItemStyle>
+}
 
-  if (children) {
+function NavListSub({ list }: { list: any }) {
+  const { pathname } = useLocation()
+
+  const active = getActive(list.path, pathname)
+
+  const [open, setOpen] = useState(active)
+
+  const hasChildren = list.children
+
+  if (hasChildren) {
     return (
-      <ListItemStyle onClick={onOpen} activeRoot={active} theme={theme} activeSub={false} subItem={false}>
-        {renderContent}
-      </ListItemStyle>
+      <>
+        <NavItemSub item={list} onOpen={() => setOpen(!open)} open={open} active={active} />
+
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding sx={{ pl: 3 }}>
+            {(list.children || []).map(item => (
+              <NavItemSub key={item.title} item={item} active={getActive(item.path, pathname)} />
+            ))}
+          </List>
+        </Collapse>
+      </>
     )
   }
 
-  return <ListItemStyle component={RouterLink} to={path} activeRoot={active}>
-    {renderContent}
-  </ListItemStyle>
+  return <NavItemSub item={list} active={active} />
+}
+
+interface NavItemRootProps {
+  item: TNavListConfig
+  open: boolean
+  active: boolean
+}
+
+const onOpen = () => {}
+
+export function NavItemRoot({ item, open = false, active }: NavItemRootProps) {
+
 }
 
 export function NavItemSub({ item, open = false, active = false, onOpen }) {
@@ -64,12 +87,6 @@ export function NavItemSub({ item, open = false, active = false, onOpen }) {
   return <ListItemStyle component={RouterLink} to={path} activeSub={active} subItem>
     {renderContent}
   </ListItemStyle>
-}
-
-// ----------------------------------------------------------------------
-
-DotIcon.propTypes = {
-  active: PropTypes.bool,
 }
 
 export function DotIcon({ active }) {

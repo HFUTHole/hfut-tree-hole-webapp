@@ -3,12 +3,12 @@ import type { ListItemButtonProps } from '@mui/material'
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { NAVBAR } from '@/shared/constant/ui'
 import type { CustomThemeOptions } from '@/theme/overrides'
+import type { ReactNode } from 'react'
 
 export const ListItemStyle = styled(ListItemButton, {
   shouldForwardProp: prop => prop !== 'activeRoot' && prop !== 'activeSub' && prop !== 'subItem',
-})(({ activeRoot, activeSub, subItem, theme }: { activeRoot: boolean; activeSub: boolean; subItem: boolean; theme?: CustomThemeOptions } & ListItemButtonProps) => {
+})(({ activeRoot, activeSub, subItem, theme }: { activeRoot: boolean; activeSub: boolean; subItem: boolean; theme?: CustomThemeOptions; component: ReactNode }) => {
   theme = theme!
-  console.log(activeRoot)
   return {
     ...theme.typography.body2,
     position: 'relative',

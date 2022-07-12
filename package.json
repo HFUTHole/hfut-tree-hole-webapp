@@ -21,6 +21,7 @@
     "@mui/material": "^5.7.0",
     "@types/nprogress": "^0.2.0",
     "@unocss/reset": "^0.33.2",
+    "@unocss/runtime": "^0.44.1",
     "axios": "^0.27.2",
     "framer-motion": "^6.3.15",
     "immer": "^9.0.15",

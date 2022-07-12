@@ -3,7 +3,7 @@ import { Box, List, ListSubheader } from '@mui/material'
 import { NavListConfig } from '@/layouts/dashboard/navbar/navListConfig'
 import { styled } from '@mui/material/styles'
 import type { ReactNode } from 'react'
-import { NavListRoot } from './NavList'
+import { NavListItemRoot } from './NavItem'
 
 export const ListSubheaderStyle = styled(({ children }: { children: ReactNode }) => (
   // 规避类型报错
@@ -32,8 +32,8 @@ export function NavbarList(props: BoxProps) {
             {group.subheader}
           </ListSubheaderStyle>
 
-          {group.list.map(list => (
-            <NavListRoot key={list.title} list={list} />
+          {group.list.map(listItem => (
+            <NavListItemRoot key={listItem.path} item={listItem} />
           ))}
         </List>
       ))}
