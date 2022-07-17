@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { styled, useTheme } from '@mui/material/styles'
+import type { SxProps, Theme } from '@mui/material'
 import { Drawer, Stack } from '@mui/material'
 import { useResponsive } from '@/shared/hooks/use-responsive'
 import cssStyles from '@/theme/utils/cssStyles'
@@ -58,7 +59,7 @@ export const Navbar = observer(() => {
               }),
             ...(isDesktop ? { ...cssStyles(theme).bgBlur() } : {}),
             boxShadow: (theme: CustomThemeOptions) => theme.customShadows.z24,
-          },
+          } as SxProps<Theme>,
         }}
       >
         <Scrollbar

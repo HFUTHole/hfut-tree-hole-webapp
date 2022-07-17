@@ -1,8 +1,10 @@
 import { Link as RouterLink } from 'react-router-dom'
 import { styled } from '@mui/material/styles'
-import { Avatar, Box, Link, Typography } from '@mui/material'
+import { Box, Link, Typography } from '@mui/material'
 import type { CustomThemeOptions } from '@/theme/overrides'
-import AvatarImg from '@/assets/imgs/avatar.png'
+import { UserAvatar } from '@/components/UserAvatar'
+import { observer } from 'mobx-react-lite'
+import { authStore } from '@/store/auth.store'
 
 const RootStyle = styled('div')(({ theme }: { theme?: CustomThemeOptions }) => {
   theme = theme!
@@ -18,11 +20,11 @@ const RootStyle = styled('div')(({ theme }: { theme?: CustomThemeOptions }) => {
   }
 })
 
-export function NavbarAccount() {
+export const NavbarAccount = observer(() => {
   return (
     <Link underline="none" color="inherit" component={RouterLink} to={'/'}>
       <RootStyle>
-        <Avatar src={AvatarImg}/>
+        <UserAvatar />
         <Box
           sx={{
             ml: 2,
@@ -33,13 +35,13 @@ export function NavbarAccount() {
           }}
         >
           <Typography variant="subtitle2" noWrap>
-            Notch
+            {authStore.user.username}
           </Typography>
           <Typography variant="body2" noWrap sx={{ color: 'text.secondary' }}>
-            God
+            {authStore.user.power}
           </Typography>
         </Box>
       </RootStyle>
     </Link>
   )
-}
+})

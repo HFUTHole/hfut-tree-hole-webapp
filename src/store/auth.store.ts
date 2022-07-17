@@ -13,13 +13,18 @@ export type AuthState = 'login' | 'logout'
 class Auth {
   status: AuthState = 'logout'
   token: string | null
+  user: any = {
+    username: '未登录',
+    studentId: 2021114514,
+    power: '黑户',
+  }
 
   constructor() {
     makeAutoObservable(this)
 
     makePersistable(this, {
       name: '__AUTH__',
-      properties: ['status', 'token'],
+      properties: ['status', 'token', 'user'],
       storage: window.localStorage,
     })
   }
