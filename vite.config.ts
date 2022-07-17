@@ -22,13 +22,16 @@ export default defineConfig({
   plugins: [
     react(),
     Unocss({
-      shortcuts: {
-        'center': 'flex items-center justify-center',
-        'x-center': 'flex justify-center',
-        'y-center': 'flex items-center',
-        'col': 'flex flex-col',
-        'text-holder': 'text-gray-500/85',
-      },
+      shortcuts: [
+        {
+          'center': 'flex items-center justify-center',
+          'x-center': 'flex justify-center',
+          'y-center': 'flex items-center',
+          'col': 'flex flex-col',
+          'text-holder': 'text-gray-500/85',
+        },
+        [/wh([0-9]+)/, match => `w-[${match[1]}px] h-[${match[1]}px]`],
+      ],
       presets: [
         presetUno(),
         presetIcons(),
