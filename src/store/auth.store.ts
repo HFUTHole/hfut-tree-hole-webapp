@@ -7,23 +7,26 @@ import {
 } from '@/service/api/auth'
 import type { ForgetForm, LoginForm, RegisterForm } from '@/pages/auth/formValidator'
 import type { LoginResponse } from '@/service/types/response/auth'
+import type { IGetUserInfoData, IGetUserInfoResponseData } from '@/service/types/response/user/getUserInfo'
 
 export type AuthState = 'login' | 'logout'
+
+export const AuthStorageKey = '__AUTH__'
 
 class Auth {
   status: AuthState = 'logout'
   token: string | null
-  user: any = {
+  user: IGetUserInfoData = {
     username: '未登录',
     studentId: 2021114514,
-    power: '黑户',
+    role: '黑户',
   }
 
   constructor() {
     makeAutoObservable(this)
 
     makePersistable(this, {
-      name: '__AUTH__',
+      name: AuthStorageKey,
       properties: ['status', 'token', 'user'],
       storage: window.localStorage,
     })
@@ -53,6 +56,12 @@ class Auth {
   logout() {
     this.status = 'logout'
     this.token = null
+  }
+
+  updateUserInfo(data: IGetUserInfoResponseData) {
+    this.user = {
+      ...data.data,
+    }
   }
 }
 

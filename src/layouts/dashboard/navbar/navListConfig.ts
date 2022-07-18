@@ -29,5 +29,15 @@ export const NavListConfig = [
       },
     ],
   },
+  {
+    subheader: '用户',
+    list: [
+      {
+        title: '个人主页',
+        path: '/app/user',
+        icon: 'i-ri:user-5-line',
+      },
+    ],
+  },
 ]
 

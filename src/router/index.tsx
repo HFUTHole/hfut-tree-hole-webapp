@@ -25,6 +25,9 @@ const Login = Loadable(lazy(() => import('@/pages/auth/login')))
 const Register = Loadable(lazy(() => import('@/pages/auth/register')))
 const Forget = Loadable(lazy(() => import('@/pages/auth/forget')))
 
+// user
+const Profile = Loadable(lazy(() => import('@/pages/user/profile/Profile')))
+
 export function Router() {
   return useRoutes([
     {
@@ -57,6 +60,13 @@ export function Router() {
         { element: <Navigate to={'/app/home'} />, index: true },
         { path: 'home', element: <Home /> },
         { path: 'treehole', element: <TreeHole /> },
+        {
+          path: 'user',
+          children: [
+            { element: <Navigate to={'/app/user/profile'}/>, index: true },
+            { path: 'profile', element: <Profile /> },
+          ],
+        },
       ],
     },
     {

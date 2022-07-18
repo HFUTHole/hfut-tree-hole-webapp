@@ -22,7 +22,14 @@ const LightOrDarkModeContainer = observer(({ children }: { children: ReactNode }
   </>
 })
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+      cacheTime: 1000000,
+    },
+  },
+})
 
 export default function App() {
   return <>

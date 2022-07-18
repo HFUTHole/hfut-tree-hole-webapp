@@ -38,7 +38,7 @@ export const NavbarAccount = observer(() => {
             {authStore.user.username}
           </Typography>
           <Typography variant="body2" noWrap sx={{ color: 'text.secondary' }}>
-            {authStore.user.power}
+            {authStore.user.role}
           </Typography>
         </Box>
       </RootStyle>

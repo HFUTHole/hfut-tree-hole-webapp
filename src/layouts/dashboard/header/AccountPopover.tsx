@@ -13,6 +13,10 @@ const MenuList = [
 export const AccountPopover = observer(() => {
   const navigate = useNavigate()
 
+  const [store] = useState(() => authStore)
+
+  console.log(store.user)
+
   return (
     <>
       <HeaderPopover
@@ -22,10 +26,10 @@ export const AccountPopover = observer(() => {
         <div className={'grid gap1 py2'}>
           <Box sx={{ my: 1.5, px: 2.5 }}>
             <Typography variant="subtitle2" noWrap>
-              {authStore.user.username}
+              {store.user.username}
             </Typography>
             <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-              {authStore.user.studentId}
+              {store.user.studentId}
             </Typography>
           </Box>
 
