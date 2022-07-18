@@ -52,6 +52,7 @@ export function HeaderPopover({ iconButtonProps, children, iconButtonChildren, m
       open={open}
       anchorEl={anchorEl}
       onClose={handleClose}
+      {...menuProps}
       sx={{
         p: 0,
         mt: 1.5,
@@ -60,8 +61,8 @@ export function HeaderPopover({ iconButtonProps, children, iconButtonChildren, m
           typography: 'body2',
           borderRadius: 0.75,
         },
+        ...{ ...menuProps.sx },
       }}
-      {...menuProps}
     >
       {children}
     </MenuPopover>

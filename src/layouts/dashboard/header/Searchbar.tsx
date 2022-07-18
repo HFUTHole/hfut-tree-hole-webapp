@@ -7,8 +7,8 @@ import type { CustomThemeOptions } from '@/theme/overrides'
 const APPBAR_MOBILE = 64
 const APPBAR_DESKTOP = 92
 
-const SearchbarStyle = styled('div')(({ theme }: { theme: CustomThemeOptions }) => ({
-  ...cssStyles(theme).bgBlur(),
+const SearchbarStyle = styled('div')(({ theme }: { theme?: CustomThemeOptions }) => ({
+  ...cssStyles(theme!).bgBlur(),
   top: 0,
   left: 0,
   zIndex: 99,
@@ -17,11 +17,11 @@ const SearchbarStyle = styled('div')(({ theme }: { theme: CustomThemeOptions }) 
   position: 'absolute',
   alignItems: 'center',
   height: APPBAR_MOBILE,
-  padding: theme.spacing(0, 3),
-  boxShadow: theme.customShadows.z8,
-  [theme.breakpoints.up('md')]: {
+  padding: theme!.spacing(0, 3),
+  boxShadow: theme!.customShadows.z8,
+  [theme!.breakpoints.up('md')]: {
     height: APPBAR_DESKTOP,
-    padding: theme.spacing(0, 5),
+    padding: theme!.spacing(0, 5),
   },
 }))
 

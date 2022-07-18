@@ -99,7 +99,7 @@ export default function NotificationsPopover() {
               </ListSubheader>
             }
           >
-            {notificationDetail.unread.map(notification => (
+            {notificationDetail.unread!.map(notification => (
               <NotificationItem key={notification.id} notification={notification} />
             ))}
           </List>
@@ -112,7 +112,7 @@ export default function NotificationsPopover() {
               </ListSubheader>
             }
           >
-            {notificationDetail.alreadyRead.map(notification => (
+            {notificationDetail.alreadyRead!.map(notification => (
               <NotificationItem key={notification.id} notification={notification} />
             ))}
           </List>
