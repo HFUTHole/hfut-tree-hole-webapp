@@ -26,32 +26,33 @@ export function Image(
     />
   )
 
-  // if (ratio) {
-  //   return (
-  //     <Box
-  //       component="span"
-  //       sx={{
-  //         width: 1,
-  //         lineHeight: 0,
-  //         display: 'block',
-  //         overflow: 'hidden',
-  //         position: 'relative',
-  //         pt: getRatio(ratio),
-  //         '& .wrapper': {
-  //           top: 0,
-  //           left: 0,
-  //           right: 0,
-  //           bottom: 0,
-  //           lineHeight: 0,
-  //           position: 'absolute',
-  //           backgroundSize: 'cover !important',
-  //         },
-  //         ...sx,
-  //       }}
-  //     >
-  //       {lazyLoadComp}
-  //   )
-  // }
+  if (ratio) {
+    return (
+      <Box
+        component="span"
+        sx={{
+          width: 1,
+          lineHeight: 0,
+          display: 'block',
+          overflow: 'hidden',
+          position: 'relative',
+          pt: getRatio(ratio),
+          '& .wrapper': {
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            lineHeight: 0,
+            position: 'absolute',
+            backgroundSize: 'cover !important',
+          },
+          ...sx,
+        }}
+      >
+        {lazyLoadComp}
+      </Box>
+    )
+  }
 
   return (
     <Box

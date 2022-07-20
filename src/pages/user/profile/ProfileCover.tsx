@@ -24,8 +24,7 @@ const InfoStyle = styled('div')(({ theme }) => ({
   left: 0,
   right: 0,
   zIndex: 99,
-  position: 'relative',
-  marginTop: theme.spacing(5),
+  position: 'absolute',
   [theme.breakpoints.up('md')]: {
     right: 'auto',
     display: 'flex',
@@ -42,26 +41,28 @@ export const ProfileCover = observer(() => {
     <RootStyle>
       <Image src={cover} sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, objectFit: 'cover' }} />
       <InfoStyle>
-        <UserAvatar
-          sx={{
-            mx: 'auto',
-            borderWidth: 2,
-            borderStyle: 'solid',
-            borderColor: 'common.white',
-            width: { xs: 80, md: 128 },
-            height: { xs: 80, md: 128 },
-          }}
-        />
+        <Box className={'mt5 md-y-center md-absolute md-bottom-1 md-mt0'}>
+          <UserAvatar
+            sx={{
+              mx: 'auto',
+              borderWidth: 2,
+              borderStyle: 'solid',
+              borderColor: 'common.white',
+              width: { xs: 80, md: 128 },
+              height: { xs: 80, md: 128 },
+            }}
+          />
 
-        <Box
-          sx={{
-            ml: { md: 3 },
-            mt: { xs: 1, md: 0 },
-            textAlign: { xs: 'center', md: 'left' },
-          }}
-        >
-          <Typography className={'!text-white'} variant="h4">{store.user.username}</Typography>
-          <Typography className={'!text-white/75'}>{store.user.role}</Typography>
+          <Box
+            sx={{
+              ml: { md: 3 },
+              mt: { xs: 1, md: 0 },
+              textAlign: { xs: 'center', md: 'left' },
+            }}
+          >
+            <Typography className={'!text-white'} variant="h4">{store.user.username}</Typography>
+            <Typography className={'!text-white/75'}>{store.user.role}</Typography>
+          </Box>
         </Box>
       </InfoStyle>
     </RootStyle>
