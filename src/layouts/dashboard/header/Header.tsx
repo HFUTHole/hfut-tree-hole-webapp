@@ -9,7 +9,6 @@ import { HEADER } from '@/shared/constant/ui'
 import { observer } from 'mobx-react-lite'
 import { navbarStore } from '@/store/navbar.store'
 import type { CustomThemeOptions } from '@/theme/overrides'
-import { useUserInfo } from '@/layouts/dashboard/header/utils'
 
 const RootStyle = styled(AppBar, {
   shouldForwardProp: prop => prop !== 'isCollapse' && prop !== 'isOffset' && prop !== 'verticalLayout',
@@ -25,8 +24,6 @@ const RootStyle = styled(AppBar, {
 }))
 
 export const AppHeader = observer(() => {
-  useUserInfo()
-
   const isDesktop = useResponsive('up', 'lg')
 
   return (

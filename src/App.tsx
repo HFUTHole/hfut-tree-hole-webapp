@@ -25,8 +25,9 @@ const LightOrDarkModeContainer = observer(({ children }: { children: ReactNode }
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 0,
-      cacheTime: 1000000,
+      retry: 1,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
     },
   },
 })

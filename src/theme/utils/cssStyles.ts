@@ -12,7 +12,7 @@ function getDirection(value = 'bottom') {
 
 // ----------------------------------------------------------------------
 
-export default function cssStyles(theme: ThemeOptions) {
+export default function cssStyles(theme?: ThemeOptions) {
   return {
     bgBlur: (props?: any) => {
       const color = props?.color || (theme as any)?.palette.background.default || '#000000'

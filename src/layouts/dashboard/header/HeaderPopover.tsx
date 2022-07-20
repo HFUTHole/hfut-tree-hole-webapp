@@ -4,6 +4,7 @@ import { IconButton } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import type { MenuPopoverProps } from '@/components/MenuPopover'
 import { MenuPopover } from '@/components/MenuPopover'
+import { forwardRef } from 'react'
 
 interface HeaderPopoverProps {
   iconButtonChildren: ReactNode
@@ -11,19 +12,33 @@ interface HeaderPopoverProps {
   iconButtonProps?: IconButtonProps
   menuProps?: Partial<MenuPopoverProps>
   activeWhileSelected?: boolean
+  openProp?: boolean
 }
 
-export function HeaderPopover({ iconButtonProps, children, iconButtonChildren, menuProps, activeWhileSelected = true }: HeaderPopoverProps) {
+export const HeaderPopover = forwardRef((
+  {
+    iconButtonProps,
+    children,
+    iconButtonChildren,
+    menuProps,
+    activeWhileSelected = true,
+  }: HeaderPopoverProps, ref) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
-  const open = useMemo(() => Boolean(anchorEl), [anchorEl])
+  const [open, setOpen] = useState(false)
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
+    setOpen(true)
   }
 
   const handleClose = () => {
     setAnchorEl(null)
+    setOpen(false)
   }
+
+  useImperativeHandle(ref, () => ({
+    setOpen,
+  }))
 
   return <>
     <IconButton
@@ -67,4 +82,4 @@ export function HeaderPopover({ iconButtonProps, children, iconButtonChildren, m
       {children}
     </MenuPopover>
   </>
-}
+})

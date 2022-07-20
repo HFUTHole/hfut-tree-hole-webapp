@@ -4,6 +4,7 @@ import { UserAvatar } from '@/components/UserAvatar'
 import { observer } from 'mobx-react-lite'
 import { authStore } from '@/store/auth.store'
 import { HeaderPopover } from '@/layouts/dashboard/header/HeaderPopover'
+import { useUserInfo } from '@/layouts/dashboard/header/useUserInfo'
 
 const MenuList = [
   { title: '个人主页', path: '/app/user/profile' },
@@ -11,17 +12,19 @@ const MenuList = [
 ]
 
 export const AccountPopover = observer(() => {
+  useUserInfo()
   const navigate = useNavigate()
-
   const [store] = useState(() => authStore)
+  const headerPopoverRef = useRef<any>(null)
 
-  console.log(store.user)
+  const setOpen = (state: boolean) => headerPopoverRef.current!.setOpen(state)
 
   return (
     <>
       <HeaderPopover
         iconButtonChildren={<UserAvatar className={'wh20'}/>}
         menuProps={{ sx: { width: 250, p: 0, mt: 1.5, ml: 0.75 } }}
+        ref={headerPopoverRef}
       >
         <div className={'grid gap1 py2'}>
           <Box sx={{ my: 1.5, px: 2.5 }}>
@@ -41,7 +44,10 @@ export const AccountPopover = observer(() => {
                 <MenuItem
                   component={RouterLink}
                   to={item.path}
-                  onClick={() => navigate(item.path)}
+                  onClick={() => {
+                    navigate(item.path)
+                    setOpen(false)
+                  }}
                 >
                   {item.title}
                 </MenuItem>

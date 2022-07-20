@@ -13,7 +13,7 @@ export const DashboardLayout = observer(() => {
       <Navbar />
       <Box className={`grid gap2 ${isDesktop ? 'ml-[280px]' : ''}`}>
         <AppHeader />
-        <Box className={'px4'}>
+        <Box className={'px1'}>
           <Outlet />
         </Box>
       </Box>

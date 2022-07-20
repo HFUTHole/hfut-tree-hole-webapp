@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import { makePersistable } from 'mobx-persist-store'
 import {
   forgetPasswordRequest,
@@ -59,9 +59,9 @@ class Auth {
   }
 
   updateUserInfo(data: IGetUserInfoResponseData) {
-    this.user = {
-      ...data.data,
-    }
+    runInAction(() => {
+      this.user = data.data
+    })
   }
 }
 
