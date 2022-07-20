@@ -8,6 +8,7 @@ import { presetUno } from 'unocss'
 import AutoImport from 'unplugin-auto-import/vite'
 import presetAttributify from '@unocss/preset-attributify'
 import transformerDirective from '@unocss/transformer-directives'
+import { match } from 'assert'
 
 function resolve(dir: string): string {
   return join(__dirname, dir)
@@ -31,6 +32,7 @@ export default defineConfig({
           'text-holder': 'text-gray-500/85',
         },
         [/wh([0-9]+)/, match => `w-[${match[1]}px] h-[${match[1]}px]`],
+        [/(top|left|right|bottom)([0-9]+)/, match => `${match[1]}-[${match[2]}rem]`],
       ],
       presets: [
         presetUno(),
