@@ -25,22 +25,22 @@ const TabsWrapperStyle = styled('div')(({ theme }: { theme?: CustomThemeOptions 
 const ProfileTabs = [
   {
     value: '树洞信息',
-    icon: 'i-twemoji:deciduous-tree',
+    icon: 'i-carbon:tree',
     component: <ProfileTree />,
   },
   {
-    value: 'Profile1',
-    icon: 'i-twemoji:deciduous-tree',
+    value: '个人设置',
+    icon: 'i-carbon:settings',
     component: <ProfileTree />,
   },
   {
-    value: 'Profile2',
-    icon: 'i-twemoji:deciduous-tree',
+    value: '个人设置2',
+    icon: 'i-carbon:settings',
     component: <ProfileTree />,
   },
   {
-    value: 'Profile3',
-    icon: 'i-twemoji:deciduous-tree',
+    value: '个人设置3',
+    icon: 'i-carbon:settings',
     component: <ProfileTree />,
   },
 ]
@@ -69,7 +69,7 @@ const Profile = observer(() => {
               onChange={(e, value) => setCurrentTab(value)}
             >
               {ProfileTabs.map(tab => (
-                <Tab key={tab.value} value={tab.value} icon={<i className={tab.icon}/>} label={tab.value} />
+                <Tab disableRipple key={tab.value} value={tab.value} icon={<i className={`${tab.icon} text-lg`}/>} label={tab.value} />
               ))}
             </Tabs>
           </TabsWrapperStyle>

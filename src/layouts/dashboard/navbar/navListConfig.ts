@@ -16,16 +16,21 @@ export const NavListConfig = [
   {
     subheader: 'app',
     list: [
-      {
-        title: '主页',
-        path: '/app/home',
-        icon: 'i-carbon:home',
-      },
+      // {
+      //   title: '主页',
+      //   path: '/app/home',
+      //   icon: 'i-carbon:home',
+      // },
       {
         title: '树洞',
         path: '/app/treehole',
         icon: 'i-ph:tree',
         badge: '111',
+      },
+      {
+        title: '留言墙',
+        path: '/app/MessageWall',
+        icon: 'i-carbon:align-box-middle-left',
       },
     ],
   },

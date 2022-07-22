@@ -7,7 +7,7 @@ const instance = axios.create({
 })
 
 instance.interceptors.response.use(res => res.data, (error: AxiosError) => {
-  const msg = (error.response?.data as any).msg
+  const msg = (error.response?.data as any)?.msg
 
   if (Array.isArray(msg)) {
     (error.response?.data as any).msg = msg[0]

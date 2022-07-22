@@ -19,9 +19,9 @@ export function Image(
     <Box
       component={LazyLoadImage}
       wrapperClassName="wrapper"
-      effect={disabledEffect ? undefined : effect}
       placeholderSrc="https://zone-assets-api.vercel.app/assets/img_placeholder.svg"
       sx={{ width: 1, height: 1, objectFit: 'cover' }}
+      effect={disabledEffect ? '' : effect}
       {...other}
     />
   )

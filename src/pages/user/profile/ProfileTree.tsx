@@ -1,4 +1,5 @@
-import { Box, Card, Divider, Stack, Typography } from '@mui/material'
+import type { SxProps } from '@mui/material'
+import { Box, Button, Card, Divider, IconButton, Stack, TextField, Typography } from '@mui/material'
 import { SummaryChart } from '@/components/chart/SummaryChart'
 import type { CustomThemeOptions } from '@/theme/overrides'
 import { useTheme } from '@mui/material/styles'
@@ -41,6 +42,52 @@ const ProfileDataInfo = observer(() => {
     />
   </>
 })
+
+function ProfilePostInput() {
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+
+  const handleAttach = () => {
+    fileInputRef.current?.click()
+  }
+
+  return (
+    <Card sx={{ p: 3 }}>
+      <TextField
+        multiline
+        fullWidth
+        rows={4}
+        placeholder="Share what you are thinking here..."
+        sx={{
+          '& fieldset': {
+            borderWidth: '1px !important',
+            borderColor: (theme: CustomThemeOptions) => `${theme.palette.grey[500_32]} !important`,
+          },
+        } as SxProps}
+      />
+
+      <Box
+        sx={{
+          mt: 3,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Box sx={{ display: 'flex' }}>
+          <IconButton size="small" onClick={handleAttach} sx={{ mr: 1 }}>
+            <i className={'i-ic:round-add-photo-alternate wh24'}/>
+          </IconButton>
+          <IconButton size="small" onClick={handleAttach}>
+            <i className={'i-eva:attach-2-fill wh24'} />
+          </IconButton>
+        </Box>
+        <Button variant="contained">Post</Button>
+      </Box>
+
+      <input ref={fileInputRef} type="file" style={{ display: 'none' }} />
+    </Card>
+  )
+}
 
 export function ProfileTree() {
   return <>

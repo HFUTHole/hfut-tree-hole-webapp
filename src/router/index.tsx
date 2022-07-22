@@ -19,6 +19,7 @@ const Loadable = (Component: LazyExoticComponent<any>) => (props: Record<string,
 const Lab = Loadable(lazy(() => import('@/pages/lab')))
 const Home = Loadable(lazy(() => import('@/pages/dashboard/home/home')))
 const TreeHole = Loadable(lazy(() => import('@/pages/dashboard/TreeHole/TreeHole')))
+const MessageWall = Loadable(lazy(() => import('@/pages/dashboard/MessageWall/MessageWall')))
 
 // auth
 const Login = Loadable(lazy(() => import('@/pages/auth/login')))
@@ -57,9 +58,10 @@ export function Router() {
         </AuthGuard>
       </>,
       children: [
-        { element: <Navigate to={'/app/home'} />, index: true },
-        { path: 'home', element: <Home /> },
+        { element: <Navigate to={'/app/treehole'} />, index: true },
+        // { path: 'home', element: <Home /> },
         { path: 'treehole', element: <TreeHole /> },
+        { path: 'MessageWall', element: <MessageWall /> },
         {
           path: 'user',
           children: [
