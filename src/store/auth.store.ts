@@ -17,7 +17,7 @@ class Auth {
   status: AuthState = 'logout'
   token: string | null
   user: IGetUserInfoData = {
-    username: '未登�?',
+    username: '未登录?',
     studentId: 2021114514,
     role: '黑户',
   }
@@ -60,8 +60,7 @@ class Auth {
 
   updateUserInfo(data: IGetUserInfoResponseData) {
     runInAction(() => {
-      this.user = data.data
-      console.log(data.data)
+      this.user = data
     })
   }
 }

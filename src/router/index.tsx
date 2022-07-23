@@ -17,9 +17,9 @@ const Loadable = (Component: LazyExoticComponent<any>) => (props: Record<string,
 
 // dashboard
 const Lab = Loadable(lazy(() => import('@/pages/lab')))
-const Home = Loadable(lazy(() => import('@/pages/dashboard/home/home')))
-const TreeHole = Loadable(lazy(() => import('@/pages/dashboard/TreeHole/TreeHole')))
-const MessageWall = Loadable(lazy(() => import('@/pages/dashboard/MessageWall/MessageWall')))
+const Home = Loadable(lazy(() => import('@/pages/home/home')))
+const TreeHole = Loadable(lazy(() => import('@/pages/app/TreeHole/TreeHole')))
+const MessageWall = Loadable(lazy(() => import('@/pages/app/MessageWall/MessageWall')))
 
 // auth
 const Login = Loadable(lazy(() => import('@/pages/auth/login')))

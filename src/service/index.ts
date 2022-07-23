@@ -6,7 +6,7 @@ const instance = axios.create({
   baseURL: 'http://localhost:8000',
 })
 
-instance.interceptors.response.use(res => res.data, (error: AxiosError) => {
+instance.interceptors.response.use(res => res.data.data, (error: AxiosError) => {
   const msg = (error.response?.data as any)?.msg
 
   if (Array.isArray(msg)) {
@@ -31,5 +31,5 @@ export function request<R = any, T = any>(config: AxiosRequestConfig<T> = {}): P
   if (!config.method) {
     config.method = 'get'
   }
-  return instance(config) as unknown as Promise<AxiosResponse<R>['data']>
+  return (instance(config) as any) as unknown as Promise<AxiosResponse<R>['data']>
 }

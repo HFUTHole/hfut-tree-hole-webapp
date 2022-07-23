@@ -1,5 +1,5 @@
 export interface CommonResponse<T extends object> {
-  code: number
+  code?: number
   data: T
-  msg: string
+  msg?: string
 }
