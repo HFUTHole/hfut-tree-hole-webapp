@@ -1,6 +1,6 @@
-// ----------------------------------------------------------------------
+import type { CustomThemeOptions } from '@/theme/overrides/index'
 
-export default function Card(theme) {
+export default function Card(theme: CustomThemeOptions) {
   return {
     MuiCard: {
       styleOverrides: {
@@ -30,5 +30,5 @@ export default function Card(theme) {
         },
       },
     },
-  };
+  }
 }
