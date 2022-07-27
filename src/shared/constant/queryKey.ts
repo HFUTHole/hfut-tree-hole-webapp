@@ -1,1 +1,6 @@
-export const UserDataQueryKey = 'userInfo'
+export const queryKey = {
+  userInfo: 'userInfo',
+  treeholeModes: 'treeholeModes',
+  treeholeList: 'treeholeList',
+}
+
