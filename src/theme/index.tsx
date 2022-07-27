@@ -16,7 +16,10 @@ const ThemeConfig = observer((props: { children: ReactNode }) => {
     palette.primary = settings.currentColorPreset
 
     return {
-      palette,
+      palette: {
+        ...palette,
+        ...(settings.mode === 'light' ? palette.light : palette.dark),
+      },
       shadows: shadows[settings.mode],
       customShadows: {
         ...customShadows[settings.mode],
