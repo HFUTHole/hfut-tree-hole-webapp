@@ -6,7 +6,7 @@ import { forgetResolver, loginResolver, registerResolver } from '@/pages/auth/fo
 import type { FieldErrors } from 'react-hook-form'
 import { useForm } from 'react-hook-form'
 import type { AxiosError } from 'axios'
-import type { LoginResponse } from '@/service/types/response/auth'
+import type { LoginResponse } from '@/service/types/auth'
 import Page from '@/components/page'
 import { Alert, Box, Checkbox, FormControlLabel, Link, Typography } from '@mui/material'
 import { InputFiled, PasswordFieldWithEye } from '@/components/form/InputFiled'

@@ -13,7 +13,7 @@ type ImageProps = {
 } & LazyLoadImageProps
 
 export function Image(
-  { ratio, disabledEffect = false, effect = 'blur', sx, ...other }: ImageProps,
+  { ratio, effect = '', sx, ...other }: ImageProps,
 ) {
   const lazyLoadComp = (
     <Box
@@ -21,7 +21,7 @@ export function Image(
       wrapperClassName="wrapper"
       placeholderSrc="https://zone-assets-api.vercel.app/assets/img_placeholder.svg"
       sx={{ width: 1, height: 1, objectFit: 'cover' }}
-      effect={disabledEffect ? '' : effect}
+      effect={effect}
       {...other}
     />
   )

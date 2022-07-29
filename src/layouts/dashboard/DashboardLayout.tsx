@@ -11,9 +11,9 @@ export const DashboardLayout = observer(() => {
   return <>
     <Box>
       <Navbar />
-      <Box className={`grid gap2 ${isDesktop ? 'ml-[280px]' : ''}`}>
-        <AppHeader />
-        <Box className={'px3 md-px5 py4'}>
+      <AppHeader/>
+      <Box className={`pt-[64px] grid gap2 ${isDesktop ? 'ml-[280px]' : ''}`}>
+        <Box className={'px3 md-px5 pt2 pb4'}>
           <Outlet />
         </Box>
       </Box>

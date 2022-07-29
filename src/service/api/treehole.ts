@@ -1,5 +1,6 @@
 import { request } from '@/service'
-import { TreeholeList } from '@/__mock__/treehole'
+import type { ITreeHoleListData } from '@/service/types/treehole/list'
+import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
 
 export interface TTreeHoleMode {
   modes: Record<'value' | 'cn', string>[]
@@ -12,5 +13,19 @@ export function getTreeholeModesRequest() {
 }
 
 export function getTreeholeListRequest(mode: string) {
-  return Promise.resolve(TreeholeList)
+  return request<ITreeHoleListData[]>({
+    url: '/treehole/list',
+    params: {
+      mode,
+    },
+  })
+}
+
+export function getTreeholeDetailRequest(id: number) {
+  return request<ITreeholeDetailData>({
+    url: '/treehole/detail',
+    params: {
+      id,
+    },
+  })
 }

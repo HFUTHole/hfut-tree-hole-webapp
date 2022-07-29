@@ -16,7 +16,7 @@ const RootStyle = styled(AppBar, {
   ...cssStyles(theme!).bgBlur(),
   boxShadow: 'none',
   height: HEADER.MOBILE_HEIGHT,
-  position: 'relative',
+  position: 'fixed',
   zIndex: theme!.zIndex.appBar + 1,
   transition: theme!.transitions.create(['width', 'height'], {
     duration: theme!.transitions.duration.shorter,
@@ -27,8 +27,7 @@ export const AppHeader = observer(() => {
   const isDesktop = useResponsive('up', 'lg')
 
   return (
-      <RootStyle
-      >
+      <RootStyle>
         <Toolbar
           sx={{
             minHeight: '100% !important',

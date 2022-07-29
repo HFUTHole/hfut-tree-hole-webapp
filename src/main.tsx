@@ -7,8 +7,10 @@ import '@unocss/reset/tailwind.css'
 
 const container = createRoot(document.getElementById('root')!)
 
-container.render(<React.StrictMode>
-  <HashRouter>
+container.render(
+  <React.StrictMode>
+    <HashRouter>
       <App />
-  </HashRouter>
-</React.StrictMode>)
+    </HashRouter>
+  </React.StrictMode>,
+)

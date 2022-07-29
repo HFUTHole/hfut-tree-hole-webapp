@@ -33,17 +33,17 @@ const queryClient = new QueryClient({
 
 export default function App() {
   return <>
-    <QueryClientProvider client={queryClient}>
-      <ThemeConfig>
-        <MotionLazyContainer>
-          <LightOrDarkModeContainer>
-            <ProgressBarStyle />
-            <Settings />
-            <Router />
-          </LightOrDarkModeContainer>
-        </MotionLazyContainer>
-      </ThemeConfig>
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeConfig>
+          <MotionLazyContainer>
+            <LightOrDarkModeContainer>
+              <ProgressBarStyle />
+              <Settings />
+              <Router />
+            </LightOrDarkModeContainer>
+          </MotionLazyContainer>
+        </ThemeConfig>
+      </QueryClientProvider>
   </>
 }
 

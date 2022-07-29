@@ -1,5 +1,5 @@
 import { request } from '@/service'
-import type { LoginResponse } from '@/service/types/response/auth'
+import type { LoginResponse } from '@/service/types/auth'
 import type { ForgetForm, LoginForm, RegisterForm } from '@/pages/auth/formValidator'
 
 export function loginRequest(loginData: LoginForm) {

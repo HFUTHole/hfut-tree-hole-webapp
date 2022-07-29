@@ -1,4 +1,4 @@
-import type { CommonResponse } from '@/service/types/response/common'
+import type { CommonResponse } from '@/service/types/common'
 
 export type IGetUserInfoData = any
 

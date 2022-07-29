@@ -1,6 +1,9 @@
 export const queryKey = {
   userInfo: 'userInfo',
-  treeholeModes: 'treeholeModes',
-  treeholeList: 'treeholeList',
+  treehole: {
+    modes: 'treeholeModes',
+    list: 'treeholeList',
+    detail: 'treeholeDetail',
+  },
 }
 

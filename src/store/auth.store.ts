@@ -6,8 +6,8 @@ import {
   registerRequest,
 } from '@/service/api/auth'
 import type { ForgetForm, LoginForm, RegisterForm } from '@/pages/auth/formValidator'
-import type { LoginResponse } from '@/service/types/response/auth'
-import type { IGetUserInfoData, IGetUserInfoResponseData } from '@/service/types/response/user/getUserInfo'
+import type { LoginResponse } from '@/service/types/auth'
+import type { IGetUserInfoData, IGetUserInfoResponseData } from '@/service/types/user/getUserInfo'
 
 export type AuthState = 'login' | 'logout'
 
@@ -50,7 +50,7 @@ class Auth {
 
   changeToLoginStatus(res: LoginResponse) {
     this.status = 'login'
-    this.token = res.data.token
+    this.token = res.token
   }
 
   logout() {
