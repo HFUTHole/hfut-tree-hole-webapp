@@ -1,5 +1,5 @@
 export interface ITreeHoleListData {
-  desc: string
+  content: string
   id: string
   createTime: string
   commentsNum: number

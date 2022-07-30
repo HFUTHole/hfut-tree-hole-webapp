@@ -43,8 +43,11 @@ const TreeholeHeader = observer(() => {
 
 const Treehole = observer(() => {
   return <>
-    <Page title={'树洞'} className={'grid gap5 items-center md-max-w-[45vw]'}>
-      <TreeholeHeader/>
+    <Page
+      title={'树洞'}
+      className={'grid gap5 items-center md-max-w-[45vw]'}
+    >
+      <TreeholeHeader />
       <TreeholeList />
     </Page>
   </>

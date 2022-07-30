@@ -1,14 +1,14 @@
-export interface ITreeholeDetailData {
-  desc: string
-  id: string
-  createTime: string
-  commentsNum: number
-  stars: number
-  comments: Comment[]
-  imgs: any[]
+import type { ITreeHoleListData } from '@/service/types/treehole/list'
+
+export interface ITreeholeDetailData extends ITreeHoleListData {
+  comments: ITreeholeDetailDataComment[]
 }
 
-export interface Comment {
+export interface ITreeholeDetailDataComment extends ITreeholeDetailDataReply {
+  reply: ITreeholeDetailDataReply[]
+}
+
+export interface ITreeholeDetailDataReply {
   avatar: string
   isHost: boolean
   content: string

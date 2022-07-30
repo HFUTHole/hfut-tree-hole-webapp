@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { authStore } from '@/store/auth.store'
 import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import type { ForgetForm, LoginForm, RegisterForm } from '@/pages/auth/formValidator'
 import { forgetResolver, loginResolver, registerResolver } from '@/pages/auth/formValidator'
 import type { FieldErrors } from 'react-hook-form'
@@ -11,8 +11,8 @@ import Page from '@/components/page'
 import { Alert, Box, Checkbox, FormControlLabel, Link, Typography } from '@mui/material'
 import { InputFiled, PasswordFieldWithEye } from '@/components/form/InputFiled'
 import { LoadingButton } from '@mui/lab'
-import { varFade } from '@/components/animate/variants'
 import type { ErrorResponse } from '@/service/types/common'
+import { BasicMotion } from '@/components/animate/basic-motion'
 
 interface Props {
   mode: 'login' | 'register' | 'forget'
@@ -92,11 +92,11 @@ export const AuthForm = observer((props: Props) => {
           <Alert severity={'info'}>{props.tip}</Alert>
           <AnimatePresence>
             {errors?.afterSubmit && (
-              <motion.div {...varFade().in}>
+              <BasicMotion>
                 <Alert className={'mt2'} severity={'error'}>
                   {errors?.afterSubmit?.message}
                 </Alert>
-              </motion.div>
+              </BasicMotion>
             )}
           </AnimatePresence>
           <Box className={'grid gap5'}>

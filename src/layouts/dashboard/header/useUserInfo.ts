@@ -4,13 +4,11 @@ import { getUserInfoRequest } from '@/service/api/user'
 import { authStore } from '@/store/auth.store'
 
 export function useUserInfo() {
-  const { data } = useQuery(queryKey.userInfo, getUserInfoRequest)
-
-  useEffect(() => {
-    if (data) {
+  const { data } = useQuery(queryKey.userInfo, getUserInfoRequest, {
+    onSuccess(data) {
       authStore.updateUserInfo(data)
-    }
-  }, [data])
+    },
+  })
 
   return {
     data,
