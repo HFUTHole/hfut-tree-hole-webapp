@@ -3,3 +3,10 @@ export interface CommonResponse<T extends object> {
   data: T
   msg?: string
 }
+
+export interface ErrorResponse {
+  error: string
+  msg: string
+  statusCode: number
+  time: string
+}
