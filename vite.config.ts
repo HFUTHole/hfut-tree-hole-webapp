@@ -7,7 +7,6 @@ import react from '@vitejs/plugin-react'
 import { presetUno } from 'unocss'
 import AutoImport from 'unplugin-auto-import/vite'
 import presetAttributify from '@unocss/preset-attributify'
-import { match } from 'assert'
 
 function resolve(dir: string): string {
   return join(__dirname, dir)
@@ -29,15 +28,15 @@ export default defineConfig({
           'y-center': 'flex items-center',
           'col': 'flex flex-col',
           'text-holder': 'text-gray-500/85',
-          'j-between': 'flex justify-between',
         },
         [/wh([0-9]+)/, match => `w-[${match[1]}px] h-[${match[1]}px]`],
         [/(top|left|right|bottom)([0-9]+)/, match => `${match[1]}-[${match[2]}rem]`],
         [/flex([0-9]+)/, match => `flex-[${match[1]}]`],
+        [/j-([a-z]+)/, match => `justify-${match[1]}`],
       ],
       presets: [
-        presetUno(),
         presetAttributify(),
+        presetUno(),
         presetIcons(),
 
       ],

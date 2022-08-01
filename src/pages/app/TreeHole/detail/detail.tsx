@@ -2,11 +2,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { queryKey } from '@/shared/constant/queryKey'
 import { getTreeholeDetailRequest } from '@/service/api/treehole'
-import { TreeholeListCard } from '@/pages/app/TreeHole/TreeholeList'
 import { SkeletonPostCard } from '@/components/skeleton/SkeletonPostCard'
+import type { SxProps } from '@mui/material'
 import { Fab, Paper } from '@mui/material'
-import { TreeholeCommentsList } from '@/pages/app/TreeHole/detail/CommentList'
+import { TreeholeCommentsList, TreeholeDetailBottomIcons } from '@/pages/app/TreeHole/detail/CommentList'
 import Page from '@/components/page'
+import { TreeholeListItem } from '@/pages/app/TreeHole/TreeholeListItem'
+import type { CustomThemeOptions } from '@/theme/overrides'
 
 export default function TreeholeDetail() {
   const params = useParams<{ id: string }>()
@@ -30,8 +32,11 @@ export default function TreeholeDetail() {
       )}
       {isSuccess && (
         <div className={'grid gap2'}>
-          <Paper className={'p4'}>
-            <TreeholeListCard data={data} />
+          <Paper className={'p4'} sx={{
+            boxShadow: (theme: CustomThemeOptions) => theme.customShadows.card,
+          } as SxProps}>
+            <TreeholeListItem data={data} />
+            <TreeholeDetailBottomIcons data={data}/>
           </Paper>
           <Paper className={'p4'}>
             <TreeholeCommentsList data={data} />

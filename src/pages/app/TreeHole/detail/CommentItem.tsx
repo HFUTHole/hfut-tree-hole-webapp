@@ -12,14 +12,21 @@ import {
 } from '@mui/material'
 import type { ITreeholeDetailDataComment, ITreeholeDetailDataReply } from '@/service/types/treehole/detail'
 import type { CustomThemeOptions } from '@/theme/overrides'
+import { BasicMotion } from '@/components/animate/basic-motion'
+import { AnimatePresence } from 'framer-motion'
 
-export function TreeholeBlogCommentItem({ data }: { data: ITreeholeDetailDataComment | ITreeholeDetailDataReply }) {
+interface Props {
+  data: ITreeholeDetailDataComment | ITreeholeDetailDataReply
+  isReply?: boolean
+}
+
+const spacing = 3
+
+export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
   const [openReply, setOpenReply] = useState(false)
 
-  const hasReply = data.reply && data.reply.length > 0
-
   const handleOpenReply = () => {
-    setOpenReply(true)
+    setOpenReply(prev => !prev)
   }
 
   return (
@@ -28,21 +35,21 @@ export function TreeholeBlogCommentItem({ data }: { data: ITreeholeDetailDataCom
         disableGutters
         sx={{
           alignItems: 'flex-start',
-          py: 3,
-          ...(hasReply && {
+          ...(isReply && {
             ml: 'auto',
-            width: (theme) => `calc(100% - ${theme.spacing(7)})`,
-          }),
+            width: (theme: CustomThemeOptions) => `calc(100% - ${theme.spacing(spacing)})`,
+          } as SxProps),
         }}
       >
         <ListItemAvatar>
-          <Avatar src={'/'} sx={{ width: 48, height: 48 }} />
+          <Avatar src={'/'} className={`${isReply ? '!wh34' : ''}`} />
         </ListItemAvatar>
 
         <ListItemText
           primaryTypographyProps={{ variant: 'subtitle1' }}
           secondary={
             <>
+              <p className={'font-semibold'}>{data.username}</p>
               <Typography
                 gutterBottom
                 variant="caption"
@@ -53,50 +60,50 @@ export function TreeholeBlogCommentItem({ data }: { data: ITreeholeDetailDataCom
               >
                 {data.createTime}
               </Typography>
-              <Typography component="span" variant="body2">
+              <Typography component="span" variant="subtitle2">
                 <strong>{data.content}</strong>
               </Typography>
             </>
           }
         />
-
-        {!hasReply && (
-          <Button size="small" onClick={handleOpenReply} sx={{ position: 'absolute', right: 0 }}>
-            回复
-          </Button>
-        )}
+        <Button size="small" onClick={handleOpenReply} sx={{ position: 'absolute', right: 0 }}>
+          回复
+        </Button>
       </ListItem>
 
-      {!hasReply && openReply && (
-        <Box
-          sx={{
-            mb: 3,
-            ml: 'auto',
-            width: (theme) => `calc(100% - ${theme.spacing(7)})`,
-          }}
-        >
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="Write comment"
-            sx={
-              {
-                '& fieldset': {
-                  borderWidth: `1px !important`,
-                  borderColor: (theme: CustomThemeOptions) => `${theme.palette.grey[500_32]} !important`,
-                },
-              } as SxProps
-            }
-          />
-        </Box>
-      )}
+      <AnimatePresence>
+        {openReply && (
+          <BasicMotion>
+            <Box
+              sx={{
+                mb: 3,
+                ml: 'auto',
+                width: theme => `calc(100% - ${theme.spacing(7)})`,
+              }}
+            >
+              <TextField
+                fullWidth
+                size="small"
+                placeholder="回复ta"
+                sx={
+                  {
+                    '& fieldset': {
+                      borderWidth: '1px !important',
+                      borderColor: (theme: CustomThemeOptions) => `${theme.palette.grey[500_32]} !important`,
+                    },
+                  } as SxProps
+                }
+              />
+              <div className={'mt1 flex j-end'}>
+                <Button variant="contained">回复</Button>
+              </div>
+            </Box>
 
-      <Divider
-        sx={{
-          ml: 'auto',
-          width: (theme) => `calc(100% - ${theme.spacing(7)})`,
-        }}
-      />
+          </BasicMotion>
+        )}
+      </AnimatePresence>
+
+      {}
     </>
   )
 }

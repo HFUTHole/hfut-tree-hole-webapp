@@ -1,6 +1,6 @@
-// ----------------------------------------------------------------------
+import type { CustomThemeOptions } from '@/theme/overrides/index'
 
-export default function Paper(theme) {
+export default function Paper(theme: CustomThemeOptions) {
   return {
     MuiPaper: {
       defaultProps: {
@@ -20,5 +20,5 @@ export default function Paper(theme) {
         },
       },
     },
-  };
+  }
 }
