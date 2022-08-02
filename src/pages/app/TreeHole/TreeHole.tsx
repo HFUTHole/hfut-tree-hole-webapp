@@ -19,7 +19,7 @@ const TreeholeHeader = observer(() => {
   })
 
   return <>
-    <div className={'j-between'}>
+    <div className={'flex j-between'}>
       <TextField
         select
         size={'small'}

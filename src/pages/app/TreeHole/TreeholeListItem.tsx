@@ -2,17 +2,17 @@ import type { ITreeHoleListData } from '@/service/types/treehole/list'
 import { Box, IconButton, Typography } from '@mui/material'
 import { Image } from '@/components/Image'
 import { UserAvatar } from '@/components/UserAvatar'
-import {ICONS} from "@/shared/constant/icons";
+import { ICONS } from '@/shared/constant/icons'
 
 export const TreeholeListItemBottomIcons = ({ data }: { data: ITreeHoleListData }) => {
   const contentIcons = [
-    { icon: ICONS.stars, value: data.stars },
+    { icon: ICONS.stars, value: data.stars || 1 },
     { icon: ICONS.reply, value: data.commentsNum },
   ]
 
   return (
     <Box className={'flex gap2'}>
-      {contentIcons.map((item) => (
+      {contentIcons.map(item => (
         <Box
           className={'y-center text-xs'}
           key={item.icon}
@@ -39,7 +39,7 @@ export const TreeholeListItemContent = ({ content }: { content: ITreeHoleListDat
         </Typography>
         {content.imgs?.length > 0 && (
           <Box className={'w-full flex gap1 flex-wrap rounded-md overflow-hidden'}>
-            {content.imgs.map((item) => (
+            {content.imgs.map(item => (
               <Image key={item} className={'flex1 max-h-64 object-cover'} src={item} />
             ))}
           </Box>
