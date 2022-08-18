@@ -43,7 +43,7 @@ export const SettingMode = observer(() => {
                     color: 'primary.main',
                     boxShadow: (theme: CustomThemeOptions) => theme.customShadows.z20,
                   }),
-                }}
+                } as SxProps}
               >
                 <i className={`${index === 0 ? 'i-carbon:sun' : 'i-carbon:moon'} h-[28px] w-[28px]`} />
                 <BoxMask value={modeItem} />

@@ -19,6 +19,8 @@ import { varFade } from '@/components/animate/variants'
 import { ToggleButton } from '@/components/settings/ToggleButton'
 import { SettingMode } from '@/components/settings/SettingMode'
 import { SettingColorPresets } from '@/components/settings/SettingColor'
+import { Icon } from '@/components/Icon'
+import { ICONS } from '@/shared/constant/icons'
 
 const RootStyle = styled(motion.div)(({ theme }) => {
   return {
@@ -77,10 +79,10 @@ export const Settings = observer(() => {
                   <Typography variant={'subtitle1'} className={'flex1'}>设置</Typography>
                   <Box className={'flex flex1'}>
                     <IconButton className={'flex1'} onClick={() => settings.resetAll()}>
-                      <i className={'i-ic:round-refresh h-[20px] w-[20px]'}/>
+                      <Icon icon={ICONS.refresh} className={'wh20'}/>
                     </IconButton>
                     <IconButton className={'flex1'} onClick={() => settings.closeSetting()}>
-                      <i className={'i-eva:close-fill h-[20px] w-[20px]'}/>
+                      <Icon icon={ICONS.close} className={'wh20'}/>
                     </IconButton>
                   </Box>
                 </Box>

@@ -7,6 +7,7 @@ import type {
   ReducerWithoutAction, Ref, RefObject,
   SetStateAction,
 } from 'react'
+import type React from 'react'
 
 /*
 * 为什么不用const useState: import('react')['useState']?
@@ -14,6 +15,9 @@ import type {
 * */
 export {}
 declare global {
+
+  type FC<T = {}> = React.FC<T>
+
   function useContext<T>(context: Context<T>/* , (not public API) observedBits?: number|boolean */): T
   /**
    * Returns a stateful value, and a function to update it.
