@@ -1,17 +1,27 @@
-import type { ITreeHoleListData } from '@/service/types/treehole/list'
-
-export interface ITreeholeDetailData extends ITreeHoleListData {
-  comments: ITreeholeDetailDataComment[]
+export interface ITreeholeDetailData {
+  id: number
+  content: string
+  stars: number
+  imgs: string[]
+  comments: Comment[]
+  createTime: string
+  user: User2
+  comments_length: number
+  isStar: boolean
 }
 
-export interface ITreeholeDetailDataComment extends ITreeholeDetailDataReply {
-  reply: ITreeholeDetailDataReply[]
-}
-
-export interface ITreeholeDetailDataReply {
-  avatar: string
-  isHost: boolean
+interface Comment {
+  _id: string
   content: string
   createTime: string
+  user: User
+}
+
+interface User {
   username: string
+}
+
+interface User2 {
+  username: string
+  roles: string[]
 }

@@ -6,6 +6,8 @@ import { AuthGuestGuard } from '@/guard/GuestGuard'
 import { AuthGuard } from '@/guard/AuthGuard'
 import { DashboardLayout } from '@/layouts/dashboard/DashboardLayout'
 import { AuthLayout } from '@/layouts/auth-layout'
+import '@/assets/styles/animate.css'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 const Loadable = (Component: LazyExoticComponent<any>) => (props: Record<string, any>) => {
   return (
@@ -31,7 +33,7 @@ const Forget = Loadable(lazy(() => import('@/pages/auth/forget')))
 // user
 const Profile = Loadable(lazy(() => import('@/pages/user/profile/Profile')))
 
-export function Router() {
+function Routes() {
   return useRoutes([
     {
       path: '/',
@@ -84,4 +86,14 @@ export function Router() {
       element: <Lab />,
     },
   ])
+}
+
+export const Router = () => {
+  return (
+    <TransitionGroup>
+      <CSSTransition classNames="fade" timeout={300}>
+        <Routes />
+      </CSSTransition>
+    </TransitionGroup>
+  )
 }

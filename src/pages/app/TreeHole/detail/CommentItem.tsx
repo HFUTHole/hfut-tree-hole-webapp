@@ -2,21 +2,21 @@ import type { SxProps } from '@mui/material'
 import {
   Avatar,
   Box,
-  Button,
-  Divider,
+  Button, Divider,
   ListItem,
   ListItemAvatar,
   ListItemText,
   TextField,
   Typography,
 } from '@mui/material'
-import type { ITreeholeDetailDataComment, ITreeholeDetailDataReply } from '@/service/types/treehole/detail'
 import type { CustomThemeOptions } from '@/theme/overrides'
 import { BasicMotion } from '@/components/animate/basic-motion'
 import { AnimatePresence } from 'framer-motion'
+import { formatTime } from '@/shared/utils/time'
+import type { ICommentsItem } from '@/service/types/treehole/list'
 
 interface Props {
-  data: ITreeholeDetailDataComment | ITreeholeDetailDataReply
+  data: ICommentsItem
   isReply?: boolean
 }
 
@@ -41,15 +41,15 @@ export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
           } as SxProps),
         }}
       >
-        <ListItemAvatar>
+        <ListItemAvatar className="grid gap1">
           <Avatar src={'/'} className={`${isReply ? '!wh34' : ''}`} />
+          <Typography className="!text-sm" variant="subtitle2">{data.user.username}</Typography>
         </ListItemAvatar>
 
         <ListItemText
           primaryTypographyProps={{ variant: 'subtitle1' }}
           secondary={
             <>
-              <p className={'font-semibold'}>{data.username}</p>
               <Typography
                 gutterBottom
                 variant="caption"
@@ -58,7 +58,7 @@ export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
                   color: 'text.disabled',
                 }}
               >
-                {data.createTime}
+                {formatTime(data.createTime)}
               </Typography>
               <Typography component="span" variant="subtitle2">
                 <strong>{data.content}</strong>
@@ -66,10 +66,16 @@ export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
             </>
           }
         />
-        <Button size="small" onClick={handleOpenReply} sx={{ position: 'absolute', right: 0 }}>
+        {/* <Button size="small" onClick={handleOpenReply} sx={{ position: 'absolute', right: 0 }}>
           回复
-        </Button>
+        </Button> */}
       </ListItem>
+      <Divider
+        sx={{
+          ml: 'auto',
+          width: theme => `calc(100% - ${theme.spacing(7)})`,
+        }}
+      />
 
       <AnimatePresence>
         {openReply && (
@@ -101,9 +107,9 @@ export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
 
           </BasicMotion>
         )}
+
       </AnimatePresence>
 
-      {}
     </>
   )
 }

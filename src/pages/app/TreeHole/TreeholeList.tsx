@@ -10,13 +10,16 @@ import { AlertTip } from '@/components/SnackbarAlert'
 import { Link } from 'react-router-dom'
 import { BasicMotion } from '@/components/animate/basic-motion'
 import { TreeholeListItem, TreeholeListItemBottomIcons } from '@/pages/app/TreeHole/TreeholeListItem'
+import { HoleEmpty } from '@/pages/app/TreeHole/HoleEmpty'
 
 export const TreeholeList = observer(() => {
   const [store] = useState(() => treeholeListModeStore)
+  const [skip, setSkip] = useState(0)
+  const [limit, setLimit] = useState(10)
 
   const { isSuccess, data, isFetching, isError } = useQuery(
-    [queryKey.treehole.list, store.mode],
-    () => getTreeholeListRequest(store.mode),
+    [queryKey.treehole.list, store.mode, skip, limit],
+    () => getTreeholeListRequest(store.mode, skip, limit),
     {
       onError: () => {
         AlertTip({
@@ -27,11 +30,17 @@ export const TreeholeList = observer(() => {
           msg: '可能是网络的原因，请稍后再试',
         })
       },
+      keepPreviousData: true,
     },
   )
 
   return (
     <>
+      {
+        isSuccess
+        && data!.length === 0
+        && <HoleEmpty />
+      }
       <AnimatePresence exitBeforeEnter>
         {isSuccess
           && !isFetching

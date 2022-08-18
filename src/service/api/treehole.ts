@@ -12,16 +12,18 @@ export function getTreeholeModesRequest() {
   })
 }
 
-export function getTreeholeListRequest(mode: string) {
+export function getTreeholeListRequest(mode: string, skip: number, limit: number) {
   return request<ITreeHoleListData[]>({
     url: '/treehole/list',
     params: {
       mode,
+      skip,
+      limit,
     },
   })
 }
 
-export function getTreeholeDetailRequest(id: number) {
+export function getTreeholeDetailRequest(id: string) {
   return request<ITreeholeDetailData>({
     url: '/treehole/detail',
     params: {

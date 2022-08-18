@@ -57,7 +57,7 @@ export const AccountPopover = observer(() => {
 
           <Divider sx={{ borderStyle: 'dashed' }} />
 
-          <MenuItem sx={{ m: 1 }}>
+          <MenuItem sx={{ m: 1 }} onClick={() => store.logout()}>
             退出登录
           </MenuItem>
         </div>
