@@ -1,12 +1,9 @@
 import { join } from 'path'
 import { defineConfig } from 'vite'
-import transformerVariantGroup from '@unocss/transformer-variant-group'
-import presetIcons from '@unocss/preset-icons'
 import Unocss from 'unocss/vite'
 import react from '@vitejs/plugin-react'
-import { presetUno } from 'unocss'
+import { presetAttributify, presetIcons, presetUno } from 'unocss'
 import AutoImport from 'unplugin-auto-import/vite'
-import presetAttributify from '@unocss/preset-attributify'
 
 function resolve(dir: string): string {
   return join(__dirname, dir)
@@ -19,7 +16,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    react(),
     Unocss({
       shortcuts: [
         {
@@ -35,15 +31,13 @@ export default defineConfig({
         [/j-([a-z]+)/, match => `justify-${match[1]}`],
       ],
       presets: [
-        presetAttributify(),
         presetUno(),
+        presetAttributify(),
         presetIcons(),
+      ],
 
-      ],
-      transformers: [
-        transformerVariantGroup(),
-      ],
     }),
+    react(),
     AutoImport({
       include: [
         /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
