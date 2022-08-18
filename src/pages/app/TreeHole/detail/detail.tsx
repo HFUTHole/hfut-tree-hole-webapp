@@ -4,7 +4,7 @@ import { queryKey } from '@/shared/constant/queryKey'
 import { getTreeholeDetailRequest } from '@/service/api/treehole'
 import { SkeletonPostCard } from '@/components/skeleton/SkeletonPostCard'
 import type { SxProps } from '@mui/material'
-import { Card, Fab, Paper } from '@mui/material'
+import { Card, Paper } from '@mui/material'
 import { TreeholeCommentsList, TreeholeDetailBottomIcons } from '@/pages/app/TreeHole/detail/CommentList'
 import Page from '@/components/page'
 import { TreeholeListItem } from '@/pages/app/TreeHole/TreeholeListItem'
@@ -12,6 +12,7 @@ import type { CustomThemeOptions } from '@/theme/overrides'
 import { EmptyData } from '@/components/EmptyData'
 import type { AxiosError } from 'axios'
 import { HoleNotFound } from '@/components/HoleNotFound'
+import { CommentFab } from '@/pages/app/TreeHole/detail/CommentFab'
 
 export default function TreeholeDetail() {
   const params = useParams<{ id: string }>()
@@ -40,15 +41,10 @@ export default function TreeholeDetail() {
 
   return (
     <Page title={'树洞详情'}>
-      <Fab color={'primary'} className={'!fixed right-4 bottom-15'}>
-        <i className={'i-ic:outline-quickreply text-2xl'} />
-      </Fab>
       {isLoading && (
-        <>
           <Paper>
             <SkeletonPostCard />
           </Paper>
-        </>
       )}
       {isSuccess && (
         <div className={'grid gap3'}>
@@ -67,9 +63,8 @@ export default function TreeholeDetail() {
           </Card>
         </div>
       )}
-      {
-        isNotFound && <HoleNotFound />
-      }
+      {isNotFound && <HoleNotFound />}
+      <CommentFab />
     </Page>
   )
 }
