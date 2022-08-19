@@ -47,10 +47,10 @@ export const AuthForm = observer((props: Props) => {
             username: '',
           }
         : isForget
-        ? {
-            hfutPassword: '',
-          }
-        : {}),
+          ? {
+              hfutPassword: '',
+            }
+          : {}),
       ...(params || {}),
     },
     mode: 'onChange',
@@ -62,8 +62,8 @@ export const AuthForm = observer((props: Props) => {
       const res = await (isLogin
         ? store.login(data)
         : isRegister
-        ? store.register(data as RegisterForm)
-        : store.forget(data as ForgetForm))
+          ? store.register(data as RegisterForm)
+          : store.forget(data as ForgetForm))
       store.changeToLoginStatus(res)
     } catch (err) {
       const response = (err as AxiosError<ErrorResponse>).response
@@ -100,15 +100,18 @@ export const AuthForm = observer((props: Props) => {
             )}
           </AnimatePresence>
           <Box className={'grid gap5'}>
-            {!isLogin && !isForget ? (
+            {!isLogin && !isForget
+              ? (
               <InputFiled label={'取一个好听的名字吧≖‿≖✧'} name={'username'} control={control} />
-            ) : (
+                )
+              : (
               <></>
-            )}
+                )}
             <InputFiled label={'学号'} name={'studentId'} type={'number'} control={control} />
             <PasswordFieldWithEye control={control} label={isForget ? '新密码' : '密码'} name={'password'} />
             {!isLogin ? <PasswordFieldWithEye label={'信息门户密码'} name={'hfutPassword'} control={control} /> : <></>}
-            {isLogin ? (
+            {isLogin
+              ? (
               <Box className={'flex justify-between'}>
                 <FormControlLabel control={<Checkbox defaultChecked />} label={'记住我'} />
                 <Typography variant="body2" className={'center'}>
@@ -117,9 +120,10 @@ export const AuthForm = observer((props: Props) => {
                   </Link>
                 </Typography>
               </Box>
-            ) : (
+                )
+              : (
               <></>
-            )}
+                )}
             <LoadingButton
               type={'submit'}
               onClick={handleSubmit(onSubmit, onError)}
