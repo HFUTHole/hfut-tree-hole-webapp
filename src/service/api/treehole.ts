@@ -1,6 +1,7 @@
 import { request } from '@/service'
 import type { ITreeHoleListData } from '@/service/types/treehole/list'
 import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
+import type { Method } from 'axios'
 
 export interface TTreeHoleMode {
   modes: Record<'value' | 'cn', string>[]
@@ -37,5 +38,15 @@ export function holeCommentMutation(data: { content: string; id: number }) {
     url: '/treehole/comment',
     method: 'POST',
     data,
+  })
+}
+
+export function holeStarMutation(id: number, method: Method) {
+  return request({
+    url: '/treehole/star',
+    method,
+    data: {
+      id,
+    },
   })
 }

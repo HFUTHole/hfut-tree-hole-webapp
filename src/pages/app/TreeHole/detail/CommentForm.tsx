@@ -7,16 +7,15 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { InputFiled } from '@/components/form/InputFiled'
 import type { InferType } from 'yup/es'
 import { FormConfig } from '@/shared/constant/form'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation } from 'react-query'
 import { holeCommentMutation } from '@/service/api/treehole'
 import { useParams } from 'react-router-dom'
 import { SuccessAlert } from '@/components/SnackbarAlert'
-import { queryKey } from '@/shared/constant/queryKey'
-import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
 import { observer } from 'mobx-react-lite'
 import { authStore } from '@/store/auth.store'
 import { LoadingButton } from '@mui/lab'
 import { useDebounceFn } from 'ahooks'
+import { useHoleDetail } from '@/pages/app/TreeHole/detail/useHoleDetail'
 
 const formSchema = yup.object().shape({
   content: yup
@@ -36,11 +35,11 @@ export const CommentForm = observer((props: { setFormOpen: Function }) => {
   const param = useParams()
   const id = parseInt(param.id as string)
 
-  const client = useQueryClient()
   const mutation = useMutation(holeCommentMutation)
 
   const [store] = useState(() => authStore)
 
+  const { setQueryData } = useHoleDetail()
   const { run: onSubmit } = useDebounceFn((data: TFormSchema) => {
     mutation.mutate({
       content: data.content,
@@ -50,7 +49,7 @@ export const CommentForm = observer((props: { setFormOpen: Function }) => {
         SuccessAlert({
           msg: '评论成功',
         })
-        client.setQueryData<ITreeholeDetailData>([queryKey.treehole.detail, id], (oldData) => {
+        setQueryData((oldData) => {
           oldData!.comments.push({
             _id: res.commentId,
             content: data.content,
@@ -58,7 +57,7 @@ export const CommentForm = observer((props: { setFormOpen: Function }) => {
             createTime: `${new Date()}`,
           })
 
-          return oldData
+          return oldData!
         })
         props.setFormOpen(false)
       },

@@ -1,43 +1,69 @@
-import { useNavigate, useParams } from 'react-router-dom'
-import { useQuery } from 'react-query'
-import { queryKey } from '@/shared/constant/queryKey'
-import { getTreeholeDetailRequest } from '@/service/api/treehole'
+import { useParams } from 'react-router-dom'
+import { useMutation } from 'react-query'
+import { holeStarMutation } from '@/service/api/treehole'
 import { SkeletonPostCard } from '@/components/skeleton/SkeletonPostCard'
 import type { SxProps } from '@mui/material'
-import { Card, Paper } from '@mui/material'
-import { TreeholeCommentsList, TreeholeDetailBottomIcons } from '@/pages/app/TreeHole/detail/CommentList'
+import { Card, IconButton, Paper, Typography } from '@mui/material'
+import { TreeholeCommentsList } from '@/pages/app/TreeHole/detail/CommentList'
 import Page from '@/components/page'
 import { TreeholeListItem } from '@/pages/app/TreeHole/TreeholeListItem'
 import type { CustomThemeOptions } from '@/theme/overrides'
 import { EmptyData } from '@/components/EmptyData'
-import type { AxiosError } from 'axios'
 import { HoleNotFound } from '@/components/HoleNotFound'
 import { CommentFab } from '@/pages/app/TreeHole/detail/CommentFab'
+import { useHoleDetail } from '@/pages/app/TreeHole/detail/useHoleDetail'
+import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
+import { useTheme } from '@mui/material/styles'
+import type { Method } from 'axios'
+import { useDebounceFn } from 'ahooks'
+import { Icon } from '@/components/Icon'
+import { ICONS } from '@/shared/constant/icons'
+
+export function TreeholeDetailBottomIcons({ data }: { data: ITreeholeDetailData }) {
+  const theme = useTheme() as CustomThemeOptions
+
+  const id = parseInt(useParams().id! as string)
+  const mutation = useMutation((method: Method) => holeStarMutation(id, method))
+
+  const isStar = data.isStar
+  const { setQueryData } = useHoleDetail()
+  const { run: handleStarClick } = useDebounceFn(() => {
+    const starRamda = !isStar ? 1 : -1
+
+    setQueryData((oldData) => {
+      oldData!.isStar = !isStar
+      oldData!.stars += starRamda
+
+      return oldData!
+    })
+
+    const method: Method = !isStar ? 'POST' : 'DELETE'
+    mutation.mutate(method, {
+      onError() {
+        setQueryData((oldData) => {
+          oldData!.isStar = isStar
+          oldData!.stars += -starRamda
+
+          return oldData!
+        })
+      },
+    })
+  }, { wait: 200 })
+
+  return (
+    <div className={'center col'}>
+      <div className={'text-center'}>
+        <IconButton onClick={handleStarClick} style={isStar ? { color: theme.palette.primary.main } : {}}>
+          <Icon icon={ICONS.stars}/>
+        </IconButton>
+        <Typography variant={'subtitle2'}>{data.stars}</Typography>
+      </div>
+    </div>
+  )
+}
 
 export default function TreeholeDetail() {
-  const params = useParams<{ id: string }>()
-  const navigate = useNavigate()
-
-  const [isNotFound, setIsNotFound] = useState(false)
-
-  const id = parseInt(params.id as string)
-
-  const {
-    data,
-    isLoading,
-    isSuccess,
-  } = useQuery(
-    [queryKey.treehole.detail, id],
-    () => getTreeholeDetailRequest(id),
-    {
-      onError(err) {
-        if ((err as AxiosError).response!.status === 404) {
-          setIsNotFound(true)
-        }
-      },
-      retry: false,
-    },
-  )
+  const { isLoading, isSuccess, isNotFound, data } = useHoleDetail()
 
   return (
     <Page title={'树洞详情'}>
@@ -46,7 +72,7 @@ export default function TreeholeDetail() {
             <SkeletonPostCard />
           </Paper>
       )}
-      {isSuccess && (
+      {isSuccess && data && (
         <div className={'grid gap3'}>
           <Card className={'p4'} sx={{
             boxShadow: (theme: CustomThemeOptions) => theme.customShadows.card,
