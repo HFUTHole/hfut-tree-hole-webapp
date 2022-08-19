@@ -23,11 +23,19 @@ export function getTreeholeListRequest(mode: string, skip: number, limit: number
   })
 }
 
-export function getTreeholeDetailRequest(id: string) {
+export function getTreeholeDetailRequest(id: number) {
   return request<ITreeholeDetailData>({
     url: '/treehole/detail',
     params: {
       id,
     },
+  })
+}
+
+export function holeCommentMutation(data: { content: string; id: number }) {
+  return request<{ commentId: string }>({
+    url: '/treehole/comment',
+    method: 'POST',
+    data,
   })
 }

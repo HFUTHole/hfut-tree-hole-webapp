@@ -20,7 +20,7 @@ export default function TreeholeDetail() {
 
   const [isNotFound, setIsNotFound] = useState(false)
 
-  const id = params.id!
+  const id = parseInt(params.id as string)
 
   const {
     data,
