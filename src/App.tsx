@@ -13,8 +13,6 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 const LightOrDarkModeContainer = observer(({ children }: { children: ReactNode }) => {
   const [settings] = useState(() => settingsStore)
 
-  useEffect(() => {}, [])
-
   return <>
     <Box className={`${settings.mode === 'dark' ? 'bg-[#161C24]' : ''} w-screen min-h-screen`}>
       {children}
