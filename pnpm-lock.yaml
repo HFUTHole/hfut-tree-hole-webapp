@@ -22,6 +22,7 @@ specifiers:
   '@types/react-helmet': ^6.1.5
   '@types/react-helmet-async': ^1.0.3
   '@types/react-lazy-load-image-component': ^1.5.2
+  '@unocss/reset': ^0.45.8
   '@vitejs/plugin-react': ^1.3.0
   ahooks: ^3.7.0
   apexcharts: ^3.35.3
@@ -66,6 +67,7 @@ dependencies:
   '@mui/lab': 5.0.0-alpha.88_ohzkwcb2sydiuem5jnfjjuiemy
   '@mui/material': 5.8.5_h2u6a3oivtyocvjxeke7xcvlfa
   '@types/nprogress': 0.2.0
+  '@unocss/reset': 0.45.8
   ahooks: 3.7.0_react@18.2.0
   apexcharts: 3.35.3
   axios: 0.27.2
@@ -1639,6 +1641,10 @@ packages:
   /@unocss/reset/0.45.7:
     resolution: {integrity: sha512-Gqx62iHO2hufpnS2vSm/NzCDG4UkF+XYwkKFarLzcj0UKCtOpQ9HCzSnZC422b3pM3lOvUIPpOOSncV6MUe5lg==}
     dev: true
+
+  /@unocss/reset/0.45.8:
+    resolution: {integrity: sha512-zeIYa/d/amPhX6/del0k6K8/Hdl/nN12XCeiVfBKymlilAjQQyV64V/qdLBtSKzqegT68O/xMscla7pZDto4Hw==}
+    dev: false
 
   /@unocss/scope/0.45.7:
     resolution: {integrity: sha512-ly7feqPGuugr2nWMNSK8RUmwERr8Zzj1gy2xfhiN9UyYUafSPacHeQ7s9sdK4QHZcbtEqchiJdi7mNBhKPlb7w==}
