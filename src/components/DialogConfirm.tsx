@@ -13,7 +13,7 @@ interface Props {
   cancel?: ButtonProps['color']
 }
 
-export const DialogConfirm = (props: Props) => {
+export const ConfirmDialog = (props: Props) => {
   const handleClose = () => {
     props.onClose()
   }

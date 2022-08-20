@@ -15,7 +15,7 @@ import type { ICommentsItem } from '@/service/types/treehole/list'
 import { useMutation } from 'react-query'
 import { removeHoleCommentMutation } from '@/service/api/treehole'
 import { useHoleDetail } from '@/pages/app/TreeHole/detail/useHoleDetail'
-import { DialogConfirm } from '@/components/DialogConfirm'
+import { ConfirmDialog } from '@/components/DialogConfirm'
 
 interface Props {
   data: ICommentsItem
@@ -44,13 +44,13 @@ const CommentItemRightButton = ({ data }: { data: ICommentsItem }) => {
         },
       })
     } else {
-
+      // 完成举报
     }
   }
 
   return (
     <>
-      <DialogConfirm
+      <ConfirmDialog
         confirmText={'删除'}
         confirm={'error'}
         handleConfirm={handleConfirmClick}
