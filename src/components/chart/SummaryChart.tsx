@@ -1,4 +1,4 @@
-import merge from 'lodash/merge'
+import { merge } from 'lodash'
 import ReactApexChart from 'react-apexcharts'
 import { alpha, styled } from '@mui/material/styles'
 import { Box, Card, Stack, Typography } from '@mui/material'
