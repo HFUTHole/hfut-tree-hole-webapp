@@ -9,8 +9,6 @@ import type { InferType } from 'yup/es'
 import { FormConfig } from '@/shared/constant/form'
 import { useMutation } from 'react-query'
 import { holeCommentMutation } from '@/service/api/treehole'
-import { useParams } from 'react-router-dom'
-import { SuccessAlert } from '@/components/SnackbarAlert'
 import { observer } from 'mobx-react-lite'
 import { authStore } from '@/store/auth.store'
 import { LoadingButton } from '@mui/lab'
@@ -32,29 +30,24 @@ export const CommentForm = observer((props: { setFormOpen: Function }) => {
     mode: 'all',
   })
 
-  const param = useParams()
-  const id = parseInt(param.id as string)
-
   const mutation = useMutation(holeCommentMutation)
 
   const [store] = useState(() => authStore)
 
-  const { setQueryData } = useHoleDetail()
+  const { setQueryData, id } = useHoleDetail()
   const { run: onSubmit } = useDebounceFn((data: TFormSchema) => {
     mutation.mutate({
       content: data.content,
       id,
     }, {
       onSuccess(res) {
-        SuccessAlert({
-          msg: '评论成功',
-        })
         setQueryData((oldData) => {
           oldData!.comments.push({
             _id: res.commentId,
             content: data.content,
             user: { username: store.user.username },
             createTime: `${new Date()}`,
+            isOwner: true,
           })
 
           return oldData!

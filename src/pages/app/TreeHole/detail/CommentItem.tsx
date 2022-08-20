@@ -1,19 +1,21 @@
 import type { SxProps } from '@mui/material'
 import {
   Avatar,
-  Box,
-  Button, Divider,
+  Button,
+  DialogTitle,
+  Divider,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  TextField,
   Typography,
 } from '@mui/material'
 import type { CustomThemeOptions } from '@/theme/overrides'
-import { BasicMotion } from '@/components/animate/basic-motion'
-import { AnimatePresence } from 'framer-motion'
 import { formatTime } from '@/shared/utils/time'
 import type { ICommentsItem } from '@/service/types/treehole/list'
+import { useMutation } from 'react-query'
+import { removeHoleCommentMutation } from '@/service/api/treehole'
+import { useHoleDetail } from '@/pages/app/TreeHole/detail/useHoleDetail'
+import { DialogConfirm } from '@/components/DialogConfirm'
 
 interface Props {
   data: ICommentsItem
@@ -22,13 +24,49 @@ interface Props {
 
 const spacing = 3
 
-export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
-  const [openReply, setOpenReply] = useState(false)
+const CommentItemRightButton = ({ data }: { data: ICommentsItem }) => {
+  const mutation = useMutation(removeHoleCommentMutation)
+  const { id, setQueryData } = useHoleDetail()
 
-  const handleOpenReply = () => {
-    setOpenReply(prev => !prev)
+  const [open, setOpen] = useState(false)
+
+  const handleConfirmClick = () => {
+    if (data.isOwner) {
+      mutation.mutate({ id, commentId: data._id }, {
+        onSuccess() {
+          setQueryData((oldData) => {
+            oldData = oldData!
+            const idx = oldData.comments.findIndex(item => item._id === data._id)
+            oldData.comments.splice(idx, 1)
+
+            return oldData
+          })
+        },
+      })
+    } else {
+
+    }
   }
 
+  return (
+    <>
+      <DialogConfirm
+        confirmText={'删除'}
+        confirm={'error'}
+        handleConfirm={handleConfirmClick}
+        open={open}
+        onClose={() => setOpen(false)}
+        render={<DialogTitle>确定要删除这个评论吗?</DialogTitle>}
+      />
+      <Button size="small" onClick={() => setOpen(true)} sx={{ position: 'absolute', right: 0, color: 'error.main' }}>
+        {data.isOwner ? '删除' : '举报'}
+      </Button>
+    </>
+
+  )
+}
+
+export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
   return (
     <>
       <ListItem
@@ -66,9 +104,7 @@ export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
             </>
           }
         />
-        {/* <Button size="small" onClick={handleOpenReply} sx={{ position: 'absolute', right: 0 }}>
-          回复
-        </Button> */}
+       <CommentItemRightButton data={data}/>
       </ListItem>
       <Divider
         sx={{
@@ -77,39 +113,40 @@ export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
         }}
       />
 
-      <AnimatePresence>
-        {openReply && (
-          <BasicMotion>
-            <Box
-              sx={{
-                mb: 3,
-                ml: 'auto',
-                width: theme => `calc(100% - ${theme.spacing(7)})`,
-              }}
-            >
-              <TextField
-                fullWidth
-                size="small"
-                placeholder="回复ta"
-                sx={
-                  {
-                    '& fieldset': {
-                      borderWidth: '1px !important',
-                      borderColor: (theme: CustomThemeOptions) => `${theme.palette.grey[500_32]} !important`,
-                    },
-                  } as SxProps
-                }
-              />
-              <div className={'mt1 flex j-end'}>
-                <Button variant="contained">回复</Button>
-              </div>
-            </Box>
+      {/* <AnimatePresence> */}
+      {/*  {openReply && ( */}
+      {/*    <BasicMotion> */}
+      {/*      <Box */}
+      {/*        sx={{ */}
+      {/*          mb: 3, */}
+      {/*          ml: 'auto', */}
+      {/*          width: theme => `calc(100% - ${theme.spacing(7)})`, */}
+      {/*        }} */}
+      {/*      > */}
+      {/*        <TextField */}
+      {/*          fullWidth */}
+      {/*          size="small" */}
+      {/*          placeholder="回复ta" */}
+      {/*          sx={ */}
+      {/*            { */}
+      {/*              '& fieldset': { */}
+      {/*                borderWidth: '1px !important', */}
+      {/*                borderColor: (theme: CustomThemeOptions) => `${theme.palette.grey[500_32]} !important`, */}
+      {/*              }, */}
+      {/*            } as SxProps */}
+      {/*          } */}
+      {/*        /> */}
+      {/*        <div className={'mt1 flex j-end'}> */}
+      {/*          <Button variant="contained">回复</Button> */}
+      {/*        </div> */}
+      {/*      </Box> */}
 
-          </BasicMotion>
-        )}
+      {/*    </BasicMotion> */}
+      {/*  )} */}
 
-      </AnimatePresence>
+      {/* </AnimatePresence> */}
 
     </>
   )
 }
+

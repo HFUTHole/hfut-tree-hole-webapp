@@ -41,6 +41,14 @@ export function holeCommentMutation(data: { content: string; id: number }) {
   })
 }
 
+export function removeHoleCommentMutation(data: { id: number; commentId: string }) {
+  return request({
+    url: '/treehole/comment',
+    method: 'DELETE',
+    data,
+  })
+}
+
 export function holeStarMutation(id: number, method: Method) {
   return request({
     url: '/treehole/star',

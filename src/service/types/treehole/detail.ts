@@ -15,6 +15,7 @@ interface Comment {
   content: string
   createTime: string
   user: User
+  isOwner: boolean
 }
 
 interface User {

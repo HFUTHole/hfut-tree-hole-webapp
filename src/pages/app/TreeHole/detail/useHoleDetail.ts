@@ -8,6 +8,8 @@ import type { Updater } from 'react-query/types/core/utils'
 import type { SetDataOptions } from 'react-query/types/core/types'
 
 export const useHoleDetail = () => {
+  const client = useQueryClient()
+
   const [isNotFound, setIsNotFound] = useState(false)
 
   const id = parseInt(useParams<{ id: string }>().id as string)
@@ -18,7 +20,7 @@ export const useHoleDetail = () => {
     isLoading,
     isSuccess,
   } = useQuery(
-    key,
+    [queryKey.treehole.detail, id],
     () => getTreeholeDetailRequest(id),
     {
       onError(err) {
@@ -26,11 +28,13 @@ export const useHoleDetail = () => {
           setIsNotFound(true)
         }
       },
-      retry: false,
+      keepPreviousData: true,
     },
   )
 
-  const client = useQueryClient()
+  const invalidateData = () => {
+    client.invalidateQueries(key)
+  }
 
   const setQueryData = (
     updater: Updater<ITreeholeDetailData | undefined, ITreeholeDetailData>,
@@ -44,6 +48,8 @@ export const useHoleDetail = () => {
     data,
     isLoading,
     isSuccess,
+    id,
     setQueryData,
+    invalidateData,
   }
 }

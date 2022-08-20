@@ -18,6 +18,7 @@ export interface ICommentsItem {
   content: string
   createTime: string
   user: User
+  isOwner: boolean
 }
 
 interface User {
