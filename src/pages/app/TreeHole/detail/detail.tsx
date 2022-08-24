@@ -1,9 +1,9 @@
-import { useParams } from 'react-router-dom'
+import { Link as RouterLink, useParams } from 'react-router-dom'
 import { useMutation } from 'react-query'
 import { holeStarMutation } from '@/service/api/treehole'
 import { SkeletonPostCard } from '@/components/skeleton/SkeletonPostCard'
 import type { SxProps } from '@mui/material'
-import { Card, IconButton, Paper, Typography } from '@mui/material'
+import { Button, Card, IconButton, Paper, Typography } from '@mui/material'
 import { TreeholeCommentsList } from '@/pages/app/TreeHole/detail/CommentList'
 import Page from '@/components/page'
 import { TreeholeListItem } from '@/pages/app/TreeHole/TreeholeListItem'
@@ -18,6 +18,7 @@ import type { Method } from 'axios'
 import { useDebounceFn } from 'ahooks'
 import { Icon } from '@/components/Icon'
 import { ICONS } from '@/shared/constant/icons'
+import { HeaderBreadcrumbs } from '@/components/breadcrubmbs/HeaderBreadcrumbs'
 
 export function TreeholeDetailBottomIcons({ data }: { data: ITreeholeDetailData }) {
   const theme = useTheme() as CustomThemeOptions
@@ -67,26 +68,44 @@ export default function TreeholeDetail() {
 
   return (
     <Page title={'树洞详情'}>
+
       {isLoading && (
           <Paper>
             <SkeletonPostCard />
           </Paper>
       )}
       {isSuccess && data && (
-        <div className={'grid gap3'}>
-          <Card className={'p4'} sx={{
-            boxShadow: (theme: CustomThemeOptions) => theme.customShadows.card,
-          } as SxProps}>
-            <TreeholeListItem data={data} />
-            <TreeholeDetailBottomIcons data={data}/>
-          </Card>
-          <Card className={`${data!.comments.length > 0 ? 'p4' : ''}`}>
-            {
-              data!.comments.length > 0
-                ? <TreeholeCommentsList data={data} />
-                : <EmptyData title={'暂时还没有评论哦, 快来一个评论吧~'} />
-            }
-          </Card>
+        <div>
+          <HeaderBreadcrumbs
+            heading="树洞"
+            links={[
+              { name: '树洞广场', href: '/app/treehole' },
+              { name: '树洞详情' },
+            ]}
+            action={<Button
+              variant="contained"
+              component={RouterLink}
+              to={'/'}
+              color={'error'}
+            >
+              {data.isOwner ? '删除' : '举报'}
+            </Button>}
+          />
+          <div className={'grid gap3'}>
+            <Card className={'p4'} sx={{
+              boxShadow: (theme: CustomThemeOptions) => theme.customShadows.card,
+            } as SxProps}>
+              <TreeholeListItem data={data} />
+              <TreeholeDetailBottomIcons data={data}/>
+            </Card>
+            <Card className={`${data!.comments.length > 0 ? 'p4' : ''}`}>
+              {
+                data!.comments.length > 0
+                  ? <TreeholeCommentsList data={data} />
+                  : <EmptyData title={'暂时还没有评论哦, 快来一个评论吧~'} />
+              }
+            </Card>
+          </div>
         </div>
       )}
       {isNotFound && <HoleNotFound />}

@@ -8,6 +8,7 @@ import { useQuery } from 'react-query'
 import { queryKey } from '@/shared/constant/queryKey'
 import { getTreeholeModesRequest } from '@/service/api/treehole'
 import { treeholeListModeStore } from '@/pages/app/TreeHole/mode.store'
+import { HeaderBreadcrumbs } from '@/components/breadcrubmbs/HeaderBreadcrumbs'
 
 const TreeholeHeader = observer(() => {
   const [store] = useState(() => treeholeListModeStore)
@@ -45,10 +46,12 @@ const Treehole = observer(() => {
   return <>
     <Page
       title={'树洞'}
-      className={'grid gap5 items-center md-max-w-[45vw]'}
+      className={'grid items-center md-max-w-[45vw]'}
     >
-      <TreeholeHeader />
-      <TreeholeList />
+      <div className={'grid gap5'}>
+        <TreeholeHeader />
+        <TreeholeList />
+      </div>
     </Page>
   </>
 })

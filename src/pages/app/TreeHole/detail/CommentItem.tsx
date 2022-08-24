@@ -79,9 +79,9 @@ export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
           } as SxProps),
         }}
       >
-        <ListItemAvatar className="grid gap1">
+        <ListItemAvatar className="grid gap1 text-center">
           <Avatar src={'/'} className={`${isReply ? '!wh34' : ''}`} />
-          <Typography className="!text-sm" variant="subtitle2">{data.user.username}</Typography>
+          <Typography className="!text-sm" variant="subtitle2">{data.isOwner ? '洞主' : data.user.username}</Typography>
         </ListItemAvatar>
 
         <ListItemText

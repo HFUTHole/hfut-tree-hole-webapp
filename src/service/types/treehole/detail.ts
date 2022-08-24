@@ -8,6 +8,7 @@ export interface ITreeholeDetailData {
   user: User2
   comments_length: number
   isStar: boolean
+  isOwner: boolean
 }
 
 interface Comment {
