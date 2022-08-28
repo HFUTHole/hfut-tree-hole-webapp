@@ -1,8 +1,19 @@
 import isString from 'lodash/isString'
+import type { SxProps } from '@mui/material'
 import { Box, Link, Typography } from '@mui/material'
+import type { MyBreadcrumbsProps } from './Breadcrumbs'
 import Breadcrumbs from './Breadcrumbs'
+import type { ReactNode } from 'react'
 
-export const HeaderBreadcrumbs = ({ links, action, heading, moreLink = '' || [], sx, ...other }) => {
+type Props = {
+  heading: string
+  links: { name: string; href: string }[]
+  moreLink?: any[]
+  sx?: SxProps
+  action?: ReactNode
+} & MyBreadcrumbsProps
+
+export const HeaderBreadcrumbs = ({ links, action, heading, moreLink = '' || [], sx, ...other }: Props) => {
   return (
     <Box sx={{ ...sx }}>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>

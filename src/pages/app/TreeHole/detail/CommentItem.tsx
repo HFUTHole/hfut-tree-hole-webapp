@@ -30,6 +30,10 @@ const CommentItemRightButton = ({ data }: { data: ICommentsItem }) => {
 
   const [open, setOpen] = useState(false)
 
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
   const handleConfirmClick = () => {
     if (data.isOwner) {
       mutation.mutate({ id, commentId: data._id }, {

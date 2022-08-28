@@ -2,12 +2,12 @@ import { Link as RouterLink } from 'react-router-dom'
 import type { BreadcrumbsProps } from '@mui/material'
 import { Box, Link, Breadcrumbs as MUIBreadcrumbs, Typography } from '@mui/material'
 
-interface Props extends BreadcrumbsProps {
+export interface MyBreadcrumbsProps extends BreadcrumbsProps {
   activeLast: boolean
   links: { name: string; href: string }[]
 }
 
-export default function Breadcrumbs({ links, activeLast = false, ...other }: Props) {
+export default function Breadcrumbs({ links, activeLast = false, ...other }: MyBreadcrumbsProps) {
   const currentLink = links[links.length - 1].name
 
   const listDefault = links.map(link => <LinkItem key={link.name} link={link} />)
