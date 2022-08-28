@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx'
-import { makePersistable } from 'mobx-persist-store'
+import { clearPersistedStore, makePersistable } from 'mobx-persist-store'
 import {
   forgetPasswordRequest,
   loginRequest,
@@ -53,9 +53,9 @@ class Auth {
     this.token = res.token
   }
 
-  logout() {
+  async logout() {
     this.status = 'logout'
-    this.token = null
+    await clearPersistedStore(this)
   }
 
   updateUserInfo(data: IGetUserInfoResponseData) {

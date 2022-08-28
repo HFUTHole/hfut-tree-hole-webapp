@@ -1,10 +1,11 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
-import { Box, Divider, MenuItem, Typography } from '@mui/material'
+import { Box, Button, Divider, MenuItem, Typography } from '@mui/material'
 import { UserAvatar } from '@/components/UserAvatar'
 import { observer } from 'mobx-react-lite'
 import { authStore } from '@/store/auth.store'
 import { HeaderPopover } from '@/layouts/dashboard/header/HeaderPopover'
 import { useUserInfo } from '@/layouts/dashboard/header/useUserInfo'
+import { LoadingButton } from '@mui/lab'
 
 const MenuList = [
   { title: '个人主页', path: '/app/user/profile' },
@@ -57,13 +58,27 @@ export const AccountPopover = observer(() => {
 
           <Divider sx={{ borderStyle: 'dashed' }} />
 
-          <MenuItem sx={{ m: 1 }} onClick={() => store.logout()}>
-            退出登录
-          </MenuItem>
+          <Logout />
         </div>
       </HeaderPopover>
     </>
   )
 })
+
+const Logout = () => {
+  const [store] = useState(() => authStore)
+
+  const [loading, setLoading] = useState(false)
+
+  return (
+    <LoadingButton loading={loading} sx={{ m: 1 }} onClick={async () => {
+      setLoading(true)
+      await store.logout()
+      setLoading(false)
+    }}>
+      退出登录
+    </LoadingButton>
+  )
+}
 
 export default AccountPopover
