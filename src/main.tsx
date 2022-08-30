@@ -4,6 +4,7 @@ import { HashRouter } from 'react-router-dom'
 import App from './App'
 import 'virtual:uno.css'
 import '@unocss/reset/tailwind.css'
+import '@wangeditor/editor/dist/css/style.css'
 
 const container = createRoot(document.getElementById('root')!)
 

@@ -20,6 +20,7 @@ const Loadable = (Component: LazyExoticComponent<any>) => (props: Record<string,
 // treehole
 const TreeHole = Loadable(lazy(() => import('@/pages/app/TreeHole/TreeHole')))
 const TreeHoleDetail = Loadable(lazy(() => import('@/pages/app/TreeHole/detail/detail')))
+const TreeholeNew = Loadable(lazy(() => import('@/pages/app/TreeHole/new/new')))
 
 // dashboard
 const Lab = Loadable(lazy(() => import('@/pages/lab')))
@@ -69,6 +70,7 @@ function Routes() {
           children: [
             { element: <TreeHole />, index: true },
             { path: 'detail/:id', element: <TreeHoleDetail /> },
+            { path: 'new', element: <TreeholeNew /> },
           ],
         },
         { path: 'MessageWall', element: <MessageWall /> },

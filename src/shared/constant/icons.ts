@@ -7,4 +7,5 @@ export const ICONS = {
   close: 'i-eva:close-fill',
   refresh: 'i-ic:round-refresh',
   img: 'i-carbon:image',
+  add: 'i-material-symbols:add',
 }

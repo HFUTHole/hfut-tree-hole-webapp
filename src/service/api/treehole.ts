@@ -58,3 +58,13 @@ export function holeStarMutation(id: number, method: Method) {
     },
   })
 }
+
+export function postHoleMutation(content: string) {
+  return request({
+    url: '/treehole/create',
+    method: 'POST',
+    data: {
+      content,
+    },
+  })
+}
