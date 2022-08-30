@@ -1,6 +1,7 @@
 import { Box, Button, Stack } from '@mui/material'
 import { Observer } from 'mobx-react-lite'
 import { settingsStore } from '@/store/setting.store'
+import parse from 'html-react-parser'
 
 const Lab = () => {
   const [setting] = useState(() => settingsStore)

@@ -63,3 +63,5 @@ const CustomAlertSeverity = (props: AlertTipProps, severity: AlertColor) => {
 }
 
 export const SuccessAlert = (props: AlertTipProps) => CustomAlertSeverity(props, 'success')
+
+export const FailedAlert = (props: AlertTipProps) => CustomAlertSeverity(props, 'error')

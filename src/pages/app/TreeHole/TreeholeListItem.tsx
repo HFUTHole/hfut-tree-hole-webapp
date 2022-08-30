@@ -5,6 +5,7 @@ import { UserAvatar } from '@/components/UserAvatar'
 import { ICONS } from '@/shared/constant/icons'
 import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
 import { formatTime } from '@/shared/utils/time'
+import parse from 'html-react-parser'
 
 export const TreeholeListItemBottomIcons = ({ data }: { data: ITreeHoleListData }) => {
   const contentIcons = [
@@ -37,7 +38,7 @@ export const TreeholeListItemContent = ({ content }: { content: ITreeHoleListDat
     <>
       <Box className={'grid gap3 py3'}>
         <Typography variant={'subtitle2'} className={'whitespace-pre-wrap'}>
-          {content.content}
+          {parse(content.content)}
         </Typography>
         {content.imgs?.length > 0 && (
           <Box className={'w-full flex gap1 flex-wrap rounded-md overflow-hidden'}>

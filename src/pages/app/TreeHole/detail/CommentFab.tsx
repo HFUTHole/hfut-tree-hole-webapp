@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { CommentForm } from '@/pages/app/TreeHole/detail/CommentForm'
 import { varFade, varSlide } from '@/components/animate/variants'
 import { BasicMotion } from '@/components/animate/basic-motion'
+import { MyFab } from '@/components/MyFab'
 
 export const CommentFab = () => {
   const [openComment, setOpenComment] = useState(false)
@@ -12,13 +13,10 @@ export const CommentFab = () => {
       <AnimatePresence>
         {!openComment && (
           <BasicMotion>
-            <Fab
-              color={'primary'}
-              className={'!fixed right-4 bottom-15'}
+            <MyFab
+              icon={'i-ic:outline-quickreply'}
               onClick={() => setOpenComment(prev => !prev)}
-            >
-              <i className={'i-ic:outline-quickreply text-2xl'} />
-            </Fab>
+            />
           </BasicMotion>
         )}
       </AnimatePresence>

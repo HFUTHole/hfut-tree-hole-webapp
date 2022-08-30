@@ -1,9 +1,9 @@
-import { Link as RouterLink, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useMutation } from 'react-query'
 import { holeStarMutation } from '@/service/api/treehole'
 import { SkeletonPostCard } from '@/components/skeleton/SkeletonPostCard'
 import type { SxProps } from '@mui/material'
-import { Button, Card, IconButton, Paper, Typography } from '@mui/material'
+import { Card, IconButton, Paper, Typography } from '@mui/material'
 import { TreeholeCommentsList } from '@/pages/app/TreeHole/detail/CommentList'
 import Page from '@/components/page'
 import { TreeholeListItem } from '@/pages/app/TreeHole/TreeholeListItem'
@@ -18,7 +18,7 @@ import type { Method } from 'axios'
 import { useDebounceFn } from 'ahooks'
 import { Icon } from '@/components/Icon'
 import { ICONS } from '@/shared/constant/icons'
-import { HeaderBreadcrumbs } from '@/components/breadcrubmbs/HeaderBreadcrumbs'
+import { DetailBreadcrumbs } from '@/pages/app/TreeHole/detail/Breadcrumbs'
 
 export function TreeholeDetailBottomIcons({ data }: { data: ITreeholeDetailData }) {
   const theme = useTheme() as CustomThemeOptions
@@ -76,21 +76,7 @@ export default function TreeholeDetail() {
       )}
       {isSuccess && data && (
         <div>
-          <HeaderBreadcrumbs
-            heading="树洞"
-            links={[
-              { name: '树洞广场', href: '/app/treehole' },
-              { name: '树洞详情' },
-            ]}
-            action={<Button
-              variant="contained"
-              component={RouterLink}
-              to={'/'}
-              color={'error'}
-            >
-              {data.isOwner ? '删除' : '举报'}
-            </Button>}
-          />
+          <DetailBreadcrumbs data={data} />
           <div className={'grid gap3'}>
             <Card className={'p4'} sx={{
               boxShadow: (theme: CustomThemeOptions) => theme.customShadows.card,
