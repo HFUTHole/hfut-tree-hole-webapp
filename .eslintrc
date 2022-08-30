@@ -1,5 +1,5 @@
 {
-  "extends": "@antfu",
+  "extends": ["@antfu", "plugin:react/recommended"],
   "rules": {
     "quote-props": "off",
     "no-useless-return": "off",
@@ -7,6 +7,7 @@
     "@typescript-eslint/brace-style": "off",
     "n/handle-callback-err": "off",
     "react/display-name": "off",
-    "import/order": "off"
+    "import/order": "off",
+    "react/react-in-jsx-scope": "off"
   }
 }
