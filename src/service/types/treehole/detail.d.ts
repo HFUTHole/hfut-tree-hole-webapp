@@ -1,4 +1,4 @@
-export interface ITreeholeDetailData {
+export declare interface ITreeholeDetailData {
   id: number
   content: string
   stars: number

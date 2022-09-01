@@ -1,4 +1,4 @@
-export interface ITreeHoleListData {
+export declare interface ITreeHoleListData {
   id: number
   content: string
   stars: number
