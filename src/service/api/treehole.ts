@@ -69,7 +69,7 @@ export function postHoleMutation(content: string) {
   })
 }
 
-export function removeOrReportHoleMutation({ id, isReport = false }: { id: number; isReport: boolean }) {
+export function removeOrReportHoleMutation({ id, isReport = false }: { id: number; isReport?: boolean }) {
   return request({
     url: '/treehole/remove',
     method: 'DELETE',
