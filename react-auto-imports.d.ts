@@ -11,7 +11,7 @@ import type React from 'react'
 
 /*
 * 为什么不用const useState: import('react')['useState']?
-* 因为webstorm会把这种形式的useState识别为变量而非是函数，感官上会非常不舒服
+* 因为webstorm会把这种形式的useState识别为变量而非是函数，感官上会非常不舒服，如果你使用vscode，那么请随意
 * */
 export {}
 declare global {
