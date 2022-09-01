@@ -6,7 +6,24 @@ import { Controller } from 'react-hook-form'
 export function MyEditor(props: { control: Control<any, any>; name: string }) {
   const [editor, setEditor] = useState<IDomEditor | null>(null)
 
-  const toolbarConfig: Partial<IToolbarConfig> = {}
+  const toolbarConfig: Partial<IToolbarConfig> = {
+    excludeKeys: [
+      'fullScreen',
+      'group-video',
+      'insertTable',
+      'fontFamily',
+      'lineHeight',
+      'numberedList',
+      'bulletedList',
+      'bgColor',
+      'color',
+      'headerSelect',
+      'blockquote',
+      'fontSize',
+      'group-justify',
+      'group-indent',
+    ],
+  }
   const editorConfig: Partial<IEditorConfig> = {
     placeholder: '请输入内容...',
   }

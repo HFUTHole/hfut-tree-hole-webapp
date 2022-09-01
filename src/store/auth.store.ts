@@ -7,7 +7,6 @@ import {
 } from '@/service/api/auth'
 import type { ForgetForm, LoginForm, RegisterForm } from '@/pages/auth/formValidator'
 import type { LoginResponse } from '@/service/types/auth'
-import type { IGetUserInfoData, IGetUserInfoResponseData } from '@/service/types/user/getUserInfo'
 
 export type AuthState = 'login' | 'logout'
 
@@ -16,10 +15,10 @@ export const AuthStorageKey = '__AUTH__'
 class Auth {
   status: AuthState = 'logout'
   token: string | null
-  user: IGetUserInfoData = {
+  user: Partial<IGetUserInfoData> = {
     username: '未登录?',
     studentId: 2021114514,
-    role: '黑户',
+    roles: ['黑户'],
   }
 
   constructor() {
@@ -58,11 +57,13 @@ class Auth {
     await clearPersistedStore(this)
   }
 
-  updateUserInfo(data: IGetUserInfoResponseData) {
+  updateUserInfo(data: IGetUserInfoData) {
     runInAction(() => {
       this.user = data
     })
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 export const authStore = new Auth()

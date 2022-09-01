@@ -6,6 +6,15 @@ const authSchema = {
   password: yup.string().required('密码不能为空').test('len', '密码只能为6-20位长度', value => (value?.length || 0) >= 6),
 }
 
+const hfutPasswordSchema = {
+  hfutPassword: yup.string().required('密码不能为空').max(30, '信息门户密码长度不能超过30位'),
+}
+
+export const usernameSchema = {
+  username: yup.string().required('用户名不能为空').max(100, '用户名长度不能超过20位'),
+}
+
+// login
 const loginForm = yup.object().shape({
   ...authSchema,
 })
@@ -18,6 +27,7 @@ export interface LoginForm {
 
 export const loginResolver = yupResolver(loginForm)
 
+// register
 export type RegisterForm = LoginForm & {
   hfutPassword: string
   username: string
@@ -25,17 +35,18 @@ export type RegisterForm = LoginForm & {
 
 const registerForm = yup.object().shape({
   ...authSchema,
-  hfutPassword: yup.string().required('密码不能为空').max(30, '信息门户密码长度不能超过30位'),
-  username: yup.string().required('用户名不能为空').max(100, '用户名长度不能超过20位'),
+  ...hfutPasswordSchema,
+  ...usernameSchema,
 })
 
 export const registerResolver = yupResolver(registerForm)
 
+// forget
 export type ForgetForm = Omit<RegisterForm, 'username'>
 
 const forgetForm = yup.object().shape({
   ...authSchema,
-  hfutPassword: yup.string().required('密码不能为空').max(30, '信息门户密码长度不能超过30位'),
+  ...hfutPasswordSchema,
 })
 
 export const forgetResolver = yupResolver(forgetForm)

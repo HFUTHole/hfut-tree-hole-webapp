@@ -5,21 +5,14 @@ import { styled } from '@mui/material/styles'
 import type { CustomThemeOptions } from '@/theme/overrides'
 import { ProfileCover } from '@/pages/user/profile/ProfileCover'
 import { ProfileTree } from '@/pages/user/profile/ProfileTree'
+import { ProfileSetting } from '@/pages/user/profile/ProfileSetting'
 
 const TabsWrapperStyle = styled('div')(({ theme }: { theme?: CustomThemeOptions }) => ({
   zIndex: 9,
   bottom: 0,
   width: '100%',
-  display: 'flex',
   position: 'absolute',
   backgroundColor: theme!.palette.background.paper,
-  [theme!.breakpoints.up('sm')]: {
-    justifyContent: 'center',
-  },
-  [theme!.breakpoints.up('md')]: {
-    justifyContent: 'flex-end',
-    paddingRight: theme!.spacing(3),
-  },
 }))
 
 const ProfileTabs = [
@@ -31,17 +24,7 @@ const ProfileTabs = [
   {
     value: '个人设置',
     icon: 'i-carbon:settings',
-    component: <ProfileTree />,
-  },
-  {
-    value: '个人设置2',
-    icon: 'i-carbon:settings',
-    component: <ProfileTree />,
-  },
-  {
-    value: '个人设置3',
-    icon: 'i-carbon:settings',
-    component: <ProfileTree />,
+    component: <ProfileSetting />,
   },
 ]
 
@@ -49,7 +32,7 @@ const Profile = observer(() => {
   const [currentTab, setCurrentTab] = useState(ProfileTabs[0].value)
 
   return <>
-    <Page title={'用户主页'}>
+     <Page title={'用户主页'}>
       <Container>
         <Card
           sx={{
@@ -63,9 +46,7 @@ const Profile = observer(() => {
           <TabsWrapperStyle>
             <Tabs
               value={currentTab}
-              scrollButtons="auto"
-              variant="scrollable"
-              allowScrollButtonsMobile
+              centered={true}
               onChange={(e, value) => setCurrentTab(value)}
             >
               {ProfileTabs.map(tab => (

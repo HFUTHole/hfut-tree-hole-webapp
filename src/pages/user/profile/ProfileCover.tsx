@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite'
 import { authStore } from '@/store/auth.store'
 import { Image } from '@/components/Image'
 import cover from '@/assets/imgs/user-bg.png'
+import { splitRoles } from '@/shared/utils/user'
 
 const RootStyle = styled('div')(({ theme }: { theme?: CustomThemeOptions }) => ({
   '&:before': {
@@ -41,7 +42,7 @@ export const ProfileCover = observer(() => {
     <RootStyle>
       <Image src={cover} sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, objectFit: 'cover' }} />
       <InfoStyle>
-        <Box className={'mt5 md-y-center md-absolute md-bottom-1 md-mt0'}>
+        <Box className={'mt10 md-y-center md-absolute md-bottom-1 md-mt0'}>
           <UserAvatar
             sx={{
               mx: 'auto',
@@ -57,11 +58,11 @@ export const ProfileCover = observer(() => {
             sx={{
               ml: { md: 3 },
               mt: { xs: 1, md: 0 },
-              textAlign: { xs: 'center', md: 'left' },
             }}
+            className={'text-center'}
           >
             <Typography className={'!text-white'} variant="h4">{store.user.username}</Typography>
-            <Typography className={'!text-white/75'}>{store.user.role}</Typography>
+            <Typography className={'!text-white/75'}>{splitRoles(store.user.roles!)}</Typography>
           </Box>
         </Box>
       </InfoStyle>

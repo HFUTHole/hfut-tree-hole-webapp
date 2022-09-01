@@ -34,7 +34,10 @@ instance.interceptors.request.use((req) => {
   return req
 })
 
-export function request<R = any, T = any>(config: AxiosRequestConfig<T> = {}): Promise<AxiosResponse<R>['data']> {
+export function request<
+  R = { msg: string; data: any; code: number },
+  T = any,
+  >(config: AxiosRequestConfig<T> = {}): Promise<AxiosResponse<R>['data']> {
   if (!config.method) {
     config.method = 'get'
   }

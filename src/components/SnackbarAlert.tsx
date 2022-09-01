@@ -20,24 +20,26 @@ export function SnackbarAlert({
   const [open, setOpen] = useState(true)
 
   return (
-    <Snackbar
-      anchorOrigin={
-        snackProps?.anchorOrigin
-          ? snackProps.anchorOrigin
-          : { vertical: 'top', horizontal: 'right' }
-      }
-      open={open}
-      onClose={() => setOpen(false)}
-      autoHideDuration={snackProps?.autoHideDuration || 3000}
-      {...snackProps}
-    >
-      <Alert severity="info" className={'w-full'} {...alertProps}>
-        {title && <AlertTitle>{title}</AlertTitle>}
-        <Typography variant={'subtitle2'} className={'!text-xs'}>
-          {msg}
-        </Typography>
-      </Alert>
-    </Snackbar>
+    <>
+      <Snackbar
+        anchorOrigin={
+          snackProps?.anchorOrigin
+            ? snackProps.anchorOrigin
+            : { vertical: 'top', horizontal: 'right' }
+        }
+        open={open}
+        onClose={() => setOpen(false)}
+        autoHideDuration={snackProps?.autoHideDuration || 3000}
+        {...snackProps}
+      >
+        <Alert severity="info" className={'w-full'} {...alertProps}>
+          {title && <AlertTitle>{title}</AlertTitle>}
+          <Typography variant={'subtitle2'} className={'!text-xs'}>
+            {msg}
+          </Typography>
+        </Alert>
+      </Snackbar>
+    </>
   )
 }
 
@@ -65,3 +67,5 @@ const CustomAlertSeverity = (props: AlertTipProps, severity: AlertColor) => {
 export const SuccessAlert = (props: AlertTipProps) => CustomAlertSeverity(props, 'success')
 
 export const FailedAlert = (props: AlertTipProps) => CustomAlertSeverity(props, 'error')
+
+export const WarningAlert = (props: AlertTipProps) => CustomAlertSeverity(props, 'warning')

@@ -3,7 +3,7 @@ import type { BreadcrumbsProps } from '@mui/material'
 import { Box, Link, Breadcrumbs as MUIBreadcrumbs, Typography } from '@mui/material'
 
 export interface MyBreadcrumbsProps extends BreadcrumbsProps {
-  activeLast: boolean
+  activeLast?: boolean
   links: { name: string; href: string }[]
 }
 
