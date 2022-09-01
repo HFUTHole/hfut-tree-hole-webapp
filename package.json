@@ -30,6 +30,7 @@
     "framer-motion": "^6.3.15",
     "html-react-parser": "^3.0.4",
     "immer": "^9.0.15",
+    "lodash": "^4.17.21",
     "mobx": "^6.6.0",
     "mobx-persist-store": "^1.0.6",
     "mobx-react-lite": "^3.4.0",
