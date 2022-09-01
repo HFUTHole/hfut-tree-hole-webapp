@@ -13,7 +13,7 @@ import { observer } from 'mobx-react-lite'
 import { authStore } from '@/store/auth.store'
 import { LoadingButton } from '@mui/lab'
 import { useDebounceFn } from 'ahooks'
-import { useHoleDetail } from '@/pages/app/TreeHole/detail/useHoleDetail'
+import { useHoleDetail } from '@/swr/useHoleDetail'
 
 const formSchema = yup.object().shape({
   content: yup

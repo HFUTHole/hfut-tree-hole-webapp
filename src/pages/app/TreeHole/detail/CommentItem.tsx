@@ -14,7 +14,7 @@ import { formatTime } from '@/shared/utils/time'
 import type { ICommentsItem } from '@/service/types/treehole/list'
 import { useMutation } from 'react-query'
 import { removeHoleCommentMutation } from '@/service/api/treehole'
-import { useHoleDetail } from '@/pages/app/TreeHole/detail/useHoleDetail'
+import { useHoleDetail } from '@/swr/useHoleDetail'
 import { ConfirmDialog } from '@/components/DialogConfirm'
 
 interface Props {

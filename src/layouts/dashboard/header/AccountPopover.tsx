@@ -1,10 +1,10 @@
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
-import { Box, Button, Divider, MenuItem, Typography } from '@mui/material'
+import { Box, Divider, MenuItem, Typography } from '@mui/material'
 import { UserAvatar } from '@/components/UserAvatar'
 import { observer } from 'mobx-react-lite'
 import { authStore } from '@/store/auth.store'
 import { HeaderPopover } from '@/layouts/dashboard/header/HeaderPopover'
-import { useUserInfo } from '@/layouts/dashboard/header/useUserInfo'
+import { useUserInfo } from '@/swr/useUserInfo'
 import { LoadingButton } from '@mui/lab'
 
 const MenuList = [
