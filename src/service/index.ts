@@ -1,25 +1,24 @@
 import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
 import { AuthStorageKey } from '@/store/auth.store'
-import { AlertTip } from '@/components/SnackbarAlert'
+import { FailedAlert } from '@/components/SnackbarAlert'
 
 const instance = axios.create({
   baseURL: 'http://localhost:8000',
 })
 
 instance.interceptors.response.use(res => res.data.data, (error: AxiosError) => {
-  const msg = (error.response?.data as any)?.msg
+  let msg = (error.response?.data as any)?.msg
 
   if (Array.isArray(msg)) {
     (error.response?.data as any).msg = msg[0]
-  } else {
-    AlertTip({
-      msg,
-      alertProps: {
-        severity: 'error',
-      },
-    })
+    msg = msg[0]
   }
+
+  FailedAlert({
+    msg,
+  })
+
   throw error
 })
 
