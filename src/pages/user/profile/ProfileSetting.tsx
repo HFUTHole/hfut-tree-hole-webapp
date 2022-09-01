@@ -5,12 +5,13 @@ import { InputFiled } from '@/components/form/InputFiled'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { authStore } from '@/store/auth.store'
-import { ContainedButton } from '@/components/Button'
 import { usernameSchema } from '@/pages/auth/formValidator'
 import { useMutation } from 'react-query'
 import { updateUserInfoMutation } from '@/service/api/user'
 import { SuccessAlert, WarningAlert } from '@/components/SnackbarAlert'
 import { useDebounceFn } from 'ahooks'
+import { useUserInfo } from '@/swr/useUserInfo'
+import { LoadingButton } from '@mui/lab'
 
 export interface IUpdateUserInputs {
   username: string
@@ -30,12 +31,14 @@ export const ProfileSetting = observer(() => {
     mode: 'all',
   })
 
+  const [loading, setLoading] = useState(false)
   const mutate = useMutation(updateUserInfoMutation)
+  const { invalidateData } = useUserInfo()
 
   const { run: onSubmit } = useDebounceFn((data: IUpdateUserInputs) => {
     const dirtyFieldsKeys = Object.keys(dirtyFields)
 
-    Object.entries(data).forEach(([key, val]) => {
+    Object.entries(data).forEach(([key, _]) => {
       if (!dirtyFieldsKeys.includes(key)) {
         Reflect.deleteProperty(data, key)
       }
@@ -48,11 +51,17 @@ export const ProfileSetting = observer(() => {
       return
     }
 
+    setLoading(true)
     mutate.mutate(data, {
-      onSuccess() {
+      async onSuccess() {
+        await invalidateData()
         SuccessAlert({
           msg: '更改信息成功',
         })
+        setLoading(false)
+      },
+      onError() {
+        setLoading(false)
       },
     })
   }, { wait: 200 })
@@ -66,9 +75,13 @@ export const ProfileSetting = observer(() => {
           label={'用户名'}
         />
       </div>
-      <ContainedButton onClick={handleSubmit(onSubmit)}>
-        Save Changes
-      </ContainedButton>
+      <LoadingButton
+        variant={'contained'}
+        onClick={handleSubmit(onSubmit)}
+        loading={loading}
+      >
+        保存修改
+      </LoadingButton>
     </Card>
   )
 })

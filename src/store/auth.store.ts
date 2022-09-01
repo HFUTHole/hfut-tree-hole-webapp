@@ -15,10 +15,14 @@ export const AuthStorageKey = '__AUTH__'
 class Auth {
   status: AuthState = 'logout'
   token: string | null
-  user: Partial<IGetUserInfoData> = {
-    username: '未登录?',
-    studentId: 2021114514,
-    roles: ['黑户'],
+  userData = {
+    user: {
+      username: '未登录?',
+      studentId: 2021114514,
+      roles: ['黑户'],
+    },
+    holesPostNum: 0,
+    stars: 0,
   }
 
   constructor() {
@@ -26,9 +30,13 @@ class Auth {
 
     makePersistable(this, {
       name: AuthStorageKey,
-      properties: ['status', 'token', 'user'],
+      properties: ['status', 'token', 'userData'],
       storage: window.localStorage,
     })
+  }
+
+  get user() {
+    return this.userData.user
   }
 
   get isAuthenticated() {
@@ -59,7 +67,7 @@ class Auth {
 
   updateUserInfo(data: IGetUserInfoData) {
     runInAction(() => {
-      this.user = data
+      this.userData = data
     })
   }
 }

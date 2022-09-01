@@ -1,9 +1,13 @@
 declare interface IGetUserInfoData {
-  _id: string
+  user: User
+  holesPostNum: number
+  stars: number
+}
+
+interface User {
   studentId: number
   username: string
   password: string
   holeIds: any[]
   roles: string[]
-  __v: number
 }

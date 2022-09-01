@@ -6,27 +6,29 @@ import { useTheme } from '@mui/material/styles'
 import { observer } from 'mobx-react-lite'
 import { authStore } from '@/store/auth.store'
 
-function ProfileFollowInfo() {
+const ProfileFollowInfo = observer(() => {
+  const [store] = useState(() => authStore)
+
   return (
     <Card sx={{ py: 3 }}>
       <Stack direction="row" divider={<Divider orientation="vertical" flexItem />}>
         <Stack width={1} textAlign="center">
-          <Typography variant="h4">1111</Typography>
+          <Typography variant="h4">{store.userData.stars}</Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            树洞的赞
+            点赞的树洞
           </Typography>
         </Stack>
 
         <Stack width={1} textAlign="center">
-          <Typography variant="h4">2222</Typography>
+          <Typography variant="h4">{store.userData.holesPostNum}</Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            发布树洞
+            发布的树洞
           </Typography>
         </Stack>
       </Stack>
     </Card>
   )
-}
+})
 
 const ProfileDataInfo = observer(() => {
   const theme = useTheme() as CustomThemeOptions
@@ -94,6 +96,7 @@ export function ProfileTree() {
     <Box className={'grid gap5'}>
       <ProfileFollowInfo />
       <ProfileDataInfo />
+      <ProfilePostInput />
     </Box>
   </>
 }
