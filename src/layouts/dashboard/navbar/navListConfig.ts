@@ -14,7 +14,7 @@ export interface TNavListConfig {
 
 export const NavListConfig = [
   {
-    subheader: 'app',
+    subheader: '匿名社区',
     list: [
       // {
       //   title: '主页',
