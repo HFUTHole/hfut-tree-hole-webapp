@@ -1,11 +1,11 @@
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery } from 'react-query'
 import { queryKey } from '@/shared/constant/queryKey'
 import { getUserInfoRequest } from '@/service/api/user'
 import { authStore } from '@/store/auth.store'
+import { useQueryKey } from '@/swr/utils'
+import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
 
 export function useUserInfo() {
-  const client = useQueryClient()
-
   const key = queryKey.userInfo
   const queryResult = useQuery(key, getUserInfoRequest, {
     onSuccess(data) {
@@ -13,14 +13,10 @@ export function useUserInfo() {
     },
     staleTime: 1000 * 5 * 60,
   })
-
-  const invalidateData = async () => {
-    await client.invalidateQueries(key)
-  }
+  const queryKeyResult = useQueryKey<ITreeholeDetailData>(key)
 
   return {
     ...queryResult,
-    client,
-    invalidateData,
+    ...queryKeyResult,
   }
 }
