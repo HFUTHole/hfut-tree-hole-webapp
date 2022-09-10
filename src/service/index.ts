@@ -7,7 +7,14 @@ const instance = axios.create({
   baseURL: 'http://localhost:8000',
 })
 
-instance.interceptors.response.use(res => res.data.data, (error: AxiosError) => {
+export const ResponseSymbol = Symbol('Help get full response data')
+
+instance.interceptors.response.use(res => (
+  {
+    ...(res.data?.data || {}),
+    [ResponseSymbol]: res,
+  }
+), (error: AxiosError) => {
   let msg = (error.response?.data as any)?.msg
 
   if (Array.isArray(msg)) {
@@ -34,12 +41,16 @@ instance.interceptors.request.use((req) => {
   return req
 })
 
+type BaseResponseData<T = Record<string, any>> = {
+  [ResponseSymbol]: AxiosResponse<T>
+} & T
+
 export function request<
-  R = { msg: string; data: any; code: number },
   T = any,
-  >(config: AxiosRequestConfig<T> = {}): Promise<AxiosResponse<R>['data']> {
+  R = BaseResponseData<T>,
+  >(config: AxiosRequestConfig = {}): Promise<R> {
   if (!config.method) {
     config.method = 'get'
   }
-  return (instance(config) as any) as unknown as Promise<AxiosResponse<R>['data']>
+  return (instance(config) as any) as unknown as Promise<R>
 }

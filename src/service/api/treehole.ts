@@ -12,7 +12,7 @@ export function getTreeholeModesRequest() {
 }
 
 export function getTreeholeListRequest(mode: string, skip: number, limit: number) {
-  return request<ITreeHoleListData[]>({
+  return request<ITreeHoleListData>({
     url: '/treehole/list',
     params: {
       mode,
@@ -71,12 +71,11 @@ export function removeOrReportHoleMutation({ id, isReport = false, msg = '' }: {
   const url = isReport ? '/report/hole' : '/treehole/remove'
   const method: Method = isReport ? 'POST' : 'DELETE'
 
+  const data = { id, ...(isReport && { msg }) }
+
   return request({
     url,
     method,
-    data: {
-      id,
-      msg,
-    },
+    data,
   })
 }

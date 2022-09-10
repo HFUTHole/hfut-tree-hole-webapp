@@ -1,4 +1,8 @@
-declare interface ITreeHoleListData {
+declare type ITreeHoleListData = {
+  data: ITreeHoleListDataItem[]
+}
+
+interface ITreeHoleListDataItem {
   id: number
   content: string
   stars: number
