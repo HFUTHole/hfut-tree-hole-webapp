@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDebounceFn } from 'ahooks'
 import type { IReportMsgSchema } from '@/pages/app/TreeHole/detail/Breadcrumbs'
 import { SuccessAlert } from '@/components/SnackbarAlert'
+import { ResponseSymbol } from '@/service'
 
 export function useBreadcrumbsLogic(data: ITreeholeDetailData) {
   const [open, setOpen] = useState(false)
@@ -24,12 +25,17 @@ export function useBreadcrumbsLogic(data: ITreeholeDetailData) {
 
   const { run: handleConfirmClick } = useDebounceFn((formData: IReportMsgSchema) => {
     setLoading(true)
+
     mutation.mutate({ id, isReport: !data.isOwner, msg: formData.msg }, {
-      onSuccess() {
+      onSuccess(data) {
         close()
         SuccessAlert({
-          msg: '举报成功',
+          msg: data[ResponseSymbol].data.msg,
         })
+
+        if (isOwner) {
+          navigate('/app')
+        }
       },
       onError() {
         close()

@@ -3,7 +3,6 @@ import { queryKey } from '@/shared/constant/queryKey'
 import { getUserInfoRequest } from '@/service/api/user'
 import { authStore } from '@/store/auth.store'
 import { useQueryKey } from '@/swr/utils'
-import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
 
 export function useUserInfo() {
   const key = queryKey.userInfo

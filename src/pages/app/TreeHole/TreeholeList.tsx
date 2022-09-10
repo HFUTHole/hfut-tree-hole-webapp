@@ -38,13 +38,13 @@ export const TreeholeList = observer(() => {
     <>
       {
         isSuccess
-        && data!.length === 0
+        && data.data!.length === 0
         && <HoleEmpty />
       }
       <AnimatePresence exitBeforeEnter>
         {isSuccess
           && !isFetching
-          && data!.map(item => (
+          && data.data!.map(item => (
             <BasicMotion key={item.id}>
               <Link to={`detail/${item.id}`}>
                 <Card className={'px5 py3'}>
