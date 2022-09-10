@@ -42,13 +42,13 @@ instance.interceptors.request.use((req) => {
 })
 
 type BaseResponseData<T = Record<string, any>> = {
-  [ResponseSymbol]: AxiosResponse<T>
+  [ResponseSymbol]?: AxiosResponse<T>
 } & T
 
 export function request<
   T = any,
   R = BaseResponseData<T>,
-  >(config: AxiosRequestConfig = {}): Promise<R> {
+  >(config: AxiosRequestConfig = {}) {
   if (!config.method) {
     config.method = 'get'
   }
