@@ -4,7 +4,6 @@ import { queryKey } from '@/shared/constant/queryKey'
 import { getTreeholeDetailRequest } from '@/service/api/treehole'
 import type { AxiosError } from 'axios'
 import { useQueryKey } from '@/swr/utils'
-import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
 
 export const useHoleDetail = () => {
   const [isNotFound, setIsNotFound] = useState(false)

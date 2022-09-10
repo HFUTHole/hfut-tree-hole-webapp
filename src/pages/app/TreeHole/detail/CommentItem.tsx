@@ -30,10 +30,6 @@ const CommentItemRightButton = ({ data }: { data: ICommentsItem }) => {
 
   const [open, setOpen] = useState(false)
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
   const handleConfirmClick = () => {
     if (data.isOwner) {
       mutation.mutate({ id, commentId: data._id }, {
@@ -55,7 +51,7 @@ const CommentItemRightButton = ({ data }: { data: ICommentsItem }) => {
   return (
     <>
       <ConfirmDialog
-        confirmText={'删除'}
+        confirmText={data.isOwner ? '删除' : '举报'}
         confirm={'error'}
         handleConfirm={handleConfirmClick}
         open={open}

@@ -1,4 +1,4 @@
-export declare interface ITreeHoleListData {
+declare interface ITreeHoleListData {
   id: number
   content: string
   stars: number
@@ -13,7 +13,7 @@ interface Comments {
   length: number
 }
 
-export interface ICommentsItem {
+declare interface ICommentsItem {
   _id: string
   content: string
   createTime: string

@@ -1,6 +1,4 @@
 import { request } from '@/service'
-import type { ITreeHoleListData } from '@/service/types/treehole/list'
-import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
 import type { Method } from 'axios'
 
 export interface TTreeHoleMode {
@@ -69,12 +67,16 @@ export function postHoleMutation(content: string) {
   })
 }
 
-export function removeOrReportHoleMutation({ id, isReport = false }: { id: number; isReport?: boolean }) {
+export function removeOrReportHoleMutation({ id, isReport = false, msg = '' }: { id: number; isReport?: boolean; msg: string }) {
+  const url = isReport ? '/report/hole' : '/treehole/remove'
+  const method: Method = isReport ? 'POST' : 'DELETE'
+
   return request({
-    url: '/treehole/remove',
-    method: 'DELETE',
+    url,
+    method,
     data: {
       id,
+      msg,
     },
   })
 }
