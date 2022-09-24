@@ -9,6 +9,7 @@ import type { ReactNode } from 'react'
 import { Box } from '@mui/material'
 import ThemeConfig from '@/theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import NotistackProvider from '@/components/SnackbarProvider'
 
 const LightOrDarkModeContainer = observer(({ children }: { children: ReactNode }) => {
   const [settings] = useState(() => settingsStore)
@@ -20,27 +21,29 @@ const LightOrDarkModeContainer = observer(({ children }: { children: ReactNode }
   </>
 })
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 3,
-      refetchOnWindowFocus: false,
-      staleTime: Infinity,
-    },
-  },
-})
-
 export default function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 3,
+        refetchOnWindowFocus: false,
+        staleTime: Infinity,
+      },
+    },
+  })
+
   return <>
       <QueryClientProvider client={queryClient}>
         <ThemeConfig>
-          <MotionLazyContainer>
-            <LightOrDarkModeContainer>
-              <ProgressBarStyle />
-              <Settings />
-              <Router />
-            </LightOrDarkModeContainer>
-          </MotionLazyContainer>
+          <NotistackProvider>
+            <MotionLazyContainer>
+              <LightOrDarkModeContainer>
+                <ProgressBarStyle />
+                <Settings />
+                <Router />
+              </LightOrDarkModeContainer>
+            </MotionLazyContainer>
+          </NotistackProvider>
         </ThemeConfig>
       </QueryClientProvider>
   </>

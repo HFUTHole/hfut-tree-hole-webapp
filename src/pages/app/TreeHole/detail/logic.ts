@@ -4,8 +4,7 @@ import { removeOrReportHoleMutation } from '@/service/api/treehole'
 import { useNavigate } from 'react-router-dom'
 import { useDebounceFn } from 'ahooks'
 import type { IReportMsgSchema } from '@/pages/app/TreeHole/detail/Breadcrumbs'
-import { SuccessAlert } from '@/components/SnackbarAlert'
-import { ResponseSymbol } from '@/service'
+import { useTip } from '@/shared/hooks/use-tip'
 
 export function useBreadcrumbsLogic(data: ITreeholeDetailData) {
   const [open, setOpen] = useState(false)
@@ -18,6 +17,8 @@ export function useBreadcrumbsLogic(data: ITreeholeDetailData) {
 
   const mutation = useMutation(removeOrReportHoleMutation)
 
+  const { successTip } = useTip()
+
   const close = () => {
     setLoading(false)
     setOpen(false)
@@ -29,10 +30,8 @@ export function useBreadcrumbsLogic(data: ITreeholeDetailData) {
     mutation.mutate({ id, isReport: !data.isOwner, msg: formData.msg }, {
       onSuccess(data) {
         close()
-        SuccessAlert({
-          msg: data[ResponseSymbol].data.msg,
-        })
 
+        successTip('举报成功')
         if (isOwner) {
           navigate('/app')
         }

@@ -16,6 +16,7 @@ import { useMutation } from 'react-query'
 import { removeHoleCommentMutation } from '@/service/api/treehole'
 import { useHoleDetail } from '@/swr/useHoleDetail'
 import { ConfirmDialog } from '@/components/DialogConfirm'
+import parse from 'html-react-parser'
 
 interface Props {
   data: ICommentsItem
@@ -44,7 +45,7 @@ const CommentItemRightButton = ({ data }: { data: ICommentsItem }) => {
         },
       })
     } else {
-      // 完成举报
+      // TODO 完成举报
     }
   }
 
@@ -98,8 +99,8 @@ export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
               >
                 {formatTime(data.createTime)}
               </Typography>
-              <Typography component="span" variant="subtitle2">
-                <strong>{data.content}</strong>
+              <Typography component="span" variant="subtitle2" className={'whitespace-pre-wrap'}>
+                <strong>{parse(data.content)}</strong>
               </Typography>
             </>
           }

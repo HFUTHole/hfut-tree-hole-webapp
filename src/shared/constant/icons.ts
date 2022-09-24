@@ -8,4 +8,5 @@ export const ICONS = {
   refresh: 'i-ic:round-refresh',
   img: 'i-carbon:image',
   add: 'i-material-symbols:add',
+  vote: 'i-ic:outline-how-to-vote',
 }

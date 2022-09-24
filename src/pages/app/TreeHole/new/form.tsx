@@ -1,14 +1,18 @@
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { MyEditor } from '@/components/editor/Editor'
 import type { FieldErrors } from 'react-hook-form'
 import { FailedAlert, SuccessAlert } from '@/components/SnackbarAlert'
 import { useMutation } from 'react-query'
 import { postHoleMutation } from '@/service/api/treehole'
-import { LoadingButton } from '@mui/lab'
 import { useDebounceFn } from 'ahooks'
 import { useNavigate } from 'react-router-dom'
+import { Card } from '@mui/material'
+import { UserAvatar } from '@/components/UserAvatar'
+import { InputFiled } from '@/components/form/InputFiled'
+import { IconButton } from '@/components/IconButton'
+import { ICONS } from '@/shared/constant/icons'
+import { CreateTreeholeVote } from '@/pages/app/TreeHole/new/vote'
 
 interface Inputs {
   content: string
@@ -49,16 +53,24 @@ export const CreateHoleForm = () => {
   }
 
   return (
-    <div className={'grid gap3'}>
-      <MyEditor control={control} name={'content'}/>
-      <LoadingButton
-        className={'flex1'}
-        variant={'contained'}
-        onClick={handleSubmit(onSubmit, onError)}
-        loading={loading}
-      >
-        发布
-      </LoadingButton>
+    <div>
+      <Card className={'grid gap3 p3'}>
+        <UserAvatar />
+        <InputFiled
+          multiline
+          rows={18}
+          variant={'standard'}
+          placeholder={'记得在树洞里要文明哦~'}
+          control={control}
+          name={'content'}
+        />
+        <div className={'flex j-end items-center'}>
+          <div className={'flex gap2'}>
+            <CreateTreeholeVote />
+            <IconButton icon={ICONS.img} />
+          </div>
+        </div>
+      </Card>
     </div>
   )
 }
