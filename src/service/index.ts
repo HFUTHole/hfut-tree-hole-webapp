@@ -4,7 +4,7 @@ import { AuthStorageKey } from '@/store/auth.store'
 import { FailedAlert } from '@/components/SnackbarAlert'
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: '/api',
 })
 
 export const ResponseSymbol = Symbol('Help get full response data')

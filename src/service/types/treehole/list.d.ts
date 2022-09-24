@@ -1,8 +1,11 @@
 declare type ITreeHoleListData = {
   data: ITreeHoleListDataItem[]
+  pageSize: number
+  nextPage: number
+  hasNextPage: boolean
 }
 
-interface ITreeHoleListDataItem {
+declare interface ITreeHoleListDataItem {
   id: number
   content: string
   stars: number

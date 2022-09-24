@@ -163,7 +163,7 @@ declare global {
    * @version 16.8.0
    * @see https://reactjs.org/docs/hooks-reference.html#useref
    */
-  function useRef<T = undefined>(): MutableRefObject<T | undefined>
+  function useRef<T = any>(): MutableRefObject<T | undefined>
   /**
    * The signature is identical to `useEffect`, but it fires synchronously after all DOM mutations.
    * Use this to read layout from the DOM and synchronously re-render. Updates scheduled inside

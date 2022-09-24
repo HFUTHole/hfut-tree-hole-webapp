@@ -1,13 +1,11 @@
-import type { ITreeHoleListData } from '@/service/types/treehole/list'
 import { Box, IconButton, Typography } from '@mui/material'
 import { Image } from '@/components/Image'
 import { UserAvatar } from '@/components/UserAvatar'
 import { ICONS } from '@/shared/constant/icons'
-import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
 import { formatTime } from '@/shared/utils/time'
 import parse from 'html-react-parser'
 
-export const TreeholeListItemBottomIcons = ({ data }: { data: ITreeHoleListData }) => {
+export const TreeholeListItemBottomIcons = ({ data }: { data: ITreeHoleListDataItem }) => {
   const contentIcons = [
     { icon: ICONS.stars, value: data.stars || 1 },
     { icon: ICONS.reply, value: data.comments.length },
@@ -33,7 +31,7 @@ export const TreeholeListItemBottomIcons = ({ data }: { data: ITreeHoleListData 
   )
 }
 
-export const TreeholeListItemContent = ({ content }: { content: ITreeHoleListData | ITreeholeDetailData }) => {
+export const TreeholeListItemContent = ({ content }: { content: ITreeHoleListDataItem | ITreeholeDetailData }) => {
   return (
     <>
       <Box className={'grid gap3 py3'}>
@@ -52,14 +50,14 @@ export const TreeholeListItemContent = ({ content }: { content: ITreeHoleListDat
   )
 }
 
-export function TreeholeListItem({ data }: { data: ITreeHoleListData | ITreeholeDetailData }) {
+export function TreeholeListItem({ data }: { data: ITreeHoleListDataItem | ITreeholeDetailData }) {
   return (
     <div className={'grid gap2'}>
       <Box className={'y-center gap3'}>
         <UserAvatar />
         <Box className={'grid'}>
           <Typography variant={'subtitle2'}>#{data.id}</Typography>
-          <p className={'light:text-black/45 dark:text-white/85 !text-xs'}>{formatTime(data.createTime)}</p>
+          <p className={'text-secondary !text-xs'}>{formatTime(data.createTime)}</p>
         </Box>
       </Box>
       <TreeholeListItemContent content={data} />

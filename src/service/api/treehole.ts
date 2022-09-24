@@ -11,12 +11,12 @@ export function getTreeholeModesRequest() {
   })
 }
 
-export function getTreeholeListRequest(mode: string, skip: number, limit: number) {
+export function getTreeholeListRequest(mode: string, page: number, limit: number) {
   return request<ITreeHoleListData>({
     url: '/treehole/list',
     params: {
       mode,
-      skip,
+      page,
       limit,
     },
   })

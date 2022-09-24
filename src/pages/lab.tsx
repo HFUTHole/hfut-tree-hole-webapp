@@ -1,26 +1,57 @@
-import { Box, Button, Stack } from '@mui/material'
-import { Observer } from 'mobx-react-lite'
-import { settingsStore } from '@/store/setting.store'
-import parse from 'html-react-parser'
+import BScroll from '@better-scroll/core'
+import './style.css'
+import { useMount } from 'ahooks'
+import { InfiniteScroll } from '@/components/Scroll'
+import { useInfiniteQuery } from 'react-query'
+import { getTreeholeListRequest } from '@/service/api/treehole'
+
+const emojis = [
+  '😀 😁 😂 🤣 😃',
+  '😄 😅 😆 😉 😊',
+  '😫 😴 😌 😛 😜',
+  '👆🏻 😒 😓 😔 👇🏻',
+  '😑 😶 🙄 😏 😣',
+  '😞 😟 😤 😢 😭',
+  '🤑 😲 🙄 🙁 😖',
+  '👍 👎 👊 ✊ 🤛',
+  '🙄 ✋ 🤚 🖐 🖖',
+  '👍🏼 👎🏼 👊🏼 ✊🏼 🤛🏼',
+  '☝🏽 ✋🏽 🤚🏽 🖐🏽 🖖🏽',
+  '🌖 🌗 🌘 🌑 🌒',
+  '💫 💥 💢 💦 💧',
+  '🐠 🐟 🐬 🐳 🐋',
+  '😬 😐 😕 😯 😶',
+  '😇 😏 😑 😓 😵',
+  '🐥 🐣 🐔 🐛 🐤',
+  '💪 ✨ 🔔 ✊ ✋',
+  '👇 👊 👍 👈 👆',
+  '💛 👐 👎 👌 💘',
+  '👍🏼 👎🏼 👊🏼 ✊🏼 🤛🏼',
+  '☝🏽 ✋🏽 🤚🏽 🖐🏽 🖖🏽',
+  '🌖 🌗 🌘 🌑 🌒',
+  '💫 💥 💢 💦 💧',
+  '🐠 🐟 🐬 🐳 🐋',
+  '😬 😐 😕 😯 😶',
+  '😇 😏 😑 😓 😵',
+  '🐥 🐣 🐔 🐛 🐤',
+  '💪 ✨ 🔔 ✊ ✋',
+  '👇 👊 👍 👈 👆',
+  '💛 👐 👎 👌 💘',
+]
 
 const Lab = () => {
-  const [setting] = useState(() => settingsStore)
+  const scrollRef = useRef<HTMLDivElement | null>(null)
 
-  return <Observer>
-    {() => <Stack direction={'column'} spacing={5}>
-      <button className="i-carbon-sun dark:i-carbon-moon" onClick={() => {
-        if (setting.mode === 'dark') {
-          setting.setLightMode()
-        } else {
-          setting.setDarkMode()
-        }
-      }}/>
-      <Box className={'center text-3xl col gap2'}>
+  useMount(() => {
+    const bs = new BScroll(scrollRef.current!, {
+      probeType: 3,
+      click: true,
+    })
+  })
 
-        <Button variant={'contained'} onClick={() => settingsStore.toggleSettings()}>toggle</Button>
-      </Box>
-    </Stack>}
-  </Observer>
+  return (
+    <p>1</p>
+  )
 }
 
 export default Lab

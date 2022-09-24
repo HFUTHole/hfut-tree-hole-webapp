@@ -8,7 +8,6 @@ import { useQuery } from 'react-query'
 import { queryKey } from '@/shared/constant/queryKey'
 import { getTreeholeModesRequest } from '@/service/api/treehole'
 import { treeholeListModeStore } from '@/pages/app/TreeHole/mode.store'
-import { HeaderBreadcrumbs } from '@/components/breadcrubmbs/HeaderBreadcrumbs'
 
 const TreeholeHeader = observer(() => {
   const [store] = useState(() => treeholeListModeStore)
@@ -48,12 +47,6 @@ const Treehole = observer(() => {
       title={'树洞'}
       className={'grid items-center md-max-w-[45vw]'}
     >
-      <HeaderBreadcrumbs
-        heading="树洞"
-        links={[
-          { name: '树洞广场', href: '/app/treehole' },
-        ]}
-      />
       <div className={'grid gap5'}>
         <TreeholeHeader />
         <TreeholeList />
