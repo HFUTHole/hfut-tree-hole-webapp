@@ -9,6 +9,7 @@
     "react/display-name": "off",
     "import/order": "off",
     "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
     "@typescript-eslint/consistent-type-definitions": "off"
   }
 }
