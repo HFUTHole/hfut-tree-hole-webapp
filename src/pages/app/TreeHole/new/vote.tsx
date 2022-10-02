@@ -3,10 +3,12 @@ import { ICONS } from '@/shared/constant/icons'
 import { IconButton } from '@/components/IconButton'
 import { InputFiled } from '@/components/form/InputFiled'
 import { useFieldArray, useForm } from 'react-hook-form'
-import { useMount } from 'ahooks'
+import { useDebounceFn, useMount } from 'ahooks'
 import { ContainedButton } from '@/components/Button'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useTip } from '@/shared/hooks/use-tip'
+import { useDebounce } from '@/shared/hooks/use-debounce'
 
 enum FieldArrayAction {
   append,
@@ -23,6 +25,9 @@ const schema = yup.object().shape({
 })
 
 export const CreateTreeholeVote = () => {
+  const [open, setOpen] = useState(true)
+  const { errorTip } = useTip()
+
   const {
     control,
     handleSubmit,
@@ -30,9 +35,6 @@ export const CreateTreeholeVote = () => {
     mode: 'all',
     resolver: yupResolver(schema),
   })
-
-  const [open, setOpen] = useState(true)
-
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'vote',
@@ -56,12 +58,12 @@ export const CreateTreeholeVote = () => {
     appendField()
   })
 
-  const onSubmit = (data) => {
+  const { run: onSubmit } = useDebounceFn((data) => {
     console.log(data)
-  }
+  }, { wait: 200 })
 
   const onError = (err) => {
-    console.log(err)
+    errorTip('请确保自己填完了哦')
   }
 
   return (

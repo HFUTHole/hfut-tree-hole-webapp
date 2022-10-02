@@ -1,7 +1,8 @@
-import type { ITreeholeDetailData } from '@/service/types/treehole/detail'
 import { TreeholeBlogCommentItem } from '@/pages/app/TreeHole/detail/CommentItem'
 
-export function TreeholeCommentsList({ data }: { data: ITreeholeDetailData }) {
+export const TreeholeCommentsList: FC<{
+  data: ITreeholeDetailData
+}> = ({ data }) => {
   return (
     <div className={'grid gap2'}>
       {data.comments.map((item) => {

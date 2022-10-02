@@ -1,11 +1,9 @@
-import { Card } from '@mui/material'
 import { SkeletonPostCard } from '@/components/skeleton/SkeletonPostCard'
 import { treeholeListModeStore } from '@/pages/app/TreeHole/mode.store'
 import { observer } from 'mobx-react-lite'
 import { AnimatePresence } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import { BasicMotion } from '@/components/animate/basic-motion'
-import { TreeholeListItem, TreeholeListItemBottomIcons } from '@/pages/app/TreeHole/TreeholeListItem'
+import { TreeholeListItem } from './TreeholeListItem'
 import { HoleEmpty } from '@/pages/app/TreeHole/HoleEmpty'
 import '@/pages/style.css'
 import { useHoleList } from '@/swr/useHoleList'
@@ -49,12 +47,7 @@ export const TreeholeList = observer(() => {
                     {group.data!.map(item => (
                       <div className={'scroll-item'} key={item.id}>
                         <BasicMotion>
-                          <Link to={`detail/${item.id}`}>
-                            <Card className={'px5 py3'}>
-                              <TreeholeListItem data={item} />
-                              <TreeholeListItemBottomIcons data={item} />
-                            </Card>
-                          </Link>
+                          <TreeholeListItem data={item} />
                         </BasicMotion>
                       </div>))}
                   </Fragment>

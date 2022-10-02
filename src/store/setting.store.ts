@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { makePersistable } from 'mobx-persist-store'
 import type { ThemeMode } from '@/theme/theme-config/palette'
-import { isUndefined } from '@/shared/utils/utils'
+import { isUndefined } from '@/shared/utils/is'
 import type { ColorPreset, ColorPresetKeys } from '@/theme/utils/getColorPresets'
 import getColorPresets, { defaultPreset } from '@/theme/utils/getColorPresets'
 

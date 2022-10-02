@@ -11,7 +11,7 @@ const hfutPasswordSchema = {
 }
 
 export const usernameSchema = {
-  username: yup.string().required('用户名不能为空').max(100, '用户名长度不能超过20位'),
+  username: yup.string().required('用户名不能为空').max(10, '用户名长度不能超过10位'),
 }
 
 // login

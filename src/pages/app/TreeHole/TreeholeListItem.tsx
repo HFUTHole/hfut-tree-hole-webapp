@@ -1,66 +1,64 @@
-import { Box, IconButton, Typography } from '@mui/material'
-import { Image } from '@/components/Image'
+import { Box, Card, Divider, Typography } from '@mui/material'
 import { UserAvatar } from '@/components/UserAvatar'
-import { ICONS } from '@/shared/constant/icons'
 import { formatTime } from '@/shared/utils/time'
-import parse from 'html-react-parser'
+import { Link } from 'react-router-dom'
+import { TreeholeListItemBottomIcons, TreeholeListItemContent } from '@/pages/app/TreeHole/TreeholeListItemContent'
+import { ellipsesText } from '@/shared/utils/utils'
 
-export const TreeholeListItemBottomIcons = ({ data }: { data: ITreeHoleListDataItem }) => {
-  const contentIcons = [
-    { icon: ICONS.stars, value: data.stars || 1 },
-    { icon: ICONS.reply, value: data.comments.length },
-  ]
-
-  return (
-    <Box className={'flex gap2'}>
-      {contentIcons.map(item => (
-        <Box
-          className={'y-center text-xs'}
-          key={item.icon}
-          sx={{
-            color: 'text.disabled',
-          }}
-        >
-          <IconButton size={'small'}>
-            <i className={`!text-lg ${item.icon} flex1`} />
-          </IconButton>
-          <p>{item.value}</p>
-        </Box>
-      ))}
-    </Box>
-  )
-}
-
-export const TreeholeListItemContent = ({ content }: { content: ITreeHoleListDataItem | ITreeholeDetailData }) => {
-  return (
-    <>
-      <Box className={'grid gap3 py3'}>
-        <Typography variant={'subtitle2'} className={'whitespace-pre-wrap'}>
-          {parse(content.content)}
-        </Typography>
-        {content.imgs?.length > 0 && (
-          <Box className={'w-full flex gap1 flex-wrap rounded-md overflow-hidden'}>
-            {content.imgs.map(item => (
-              <Image key={item} className={'flex1 max-h-64 object-cover'} src={item} />
-            ))}
-          </Box>
-        )}
-      </Box>
-    </>
-  )
-}
-
-export function TreeholeListItem({ data }: { data: ITreeHoleListDataItem | ITreeholeDetailData }) {
+export const TreeholeCard: FC<{
+  data: ITreeHoleListDataItem | ITreeholeDetailData
+}> = ({ data }) => {
   return (
     <div className={'grid gap2'}>
       <Box className={'y-center gap3'}>
         <UserAvatar />
-        <Box className={'grid'}>
-          <Typography variant={'subtitle2'}>#{data.id}</Typography>
-          <p className={'text-secondary !text-xs'}>{formatTime(data.createTime)}</p>
-        </Box>
+        <div className={'flex j-between w-full'}>
+          <Box className={'grid'}>
+            <Typography variant={'subtitle2'}>#{data.id}</Typography>
+            <p className={'text-secondary !text-xs'}>{formatTime(data.createTime)}</p>
+          </Box>
+        </div>
       </Box>
       <TreeholeListItemContent content={data} />
     </div>
   )
 }
+
+const TreeholeListCommentList: FC<{
+  data: ITreeHoleListDataItem | ITreeholeDetailData
+}> = ({ data }) => {
+  return (
+    <div className={'grid w-full gap3 overflow-hidden'}>
+      {data.comments.data.map(item => (
+        <div key={item._id} className={'y-center text-sm gap2'}>
+          <Typography className={'max-w-2/12 !text-sm'} variant={'subtitle2'}>
+            {item.isOwner ? '洞主' : item.user.username}
+          </Typography>
+          <div className={'min-w-6/12 w-full break-words'}>
+            <p className={'break-words'}>
+              {ellipsesText(item.content, 30)}
+            </p>
+            <Divider className={'!mt1 w-full'}/>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export const TreeholeListItem: FC<{
+  data: ITreeHoleListDataItem | ITreeholeDetailData
+}> = ({ data }) => {
+  return (
+    <Link to={`detail/${data.id}`}>
+      <Card className={'grid gap3 px5 py3'}>
+        <div>
+          <TreeholeCard data={data} />
+          <TreeholeListItemBottomIcons data={data} />
+        </div>
+        <TreeholeListCommentList data={data}/>
+      </Card>
+    </Link>
+  )
+}
+

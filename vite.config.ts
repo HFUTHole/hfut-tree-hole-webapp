@@ -20,14 +20,14 @@ export default defineConfig({
     host: true,
   },
   plugins: [
-    ohmytsVite({
-      target: '/api',
-      rootDir: resolve('@types'),
-      proxyOptions: {
-        target: 'http://localhost:8000',
-      },
-      overwrite: false,
-    }),
+    // ohmytsVite({
+    //   target: '/api',
+    //   rootDir: resolve('@types'),
+    //   proxyOptions: {
+    //     target: 'http://localhost:8000',
+    //   },
+    //   overwrite: false,
+    // }),
     Unocss({
       shortcuts: [
         {

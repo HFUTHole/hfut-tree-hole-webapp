@@ -1,3 +1,1 @@
-export const isUndefined = (value: any): value is undefined => typeof value === 'undefined'
-
-export const isEmptyObject = (value: any): value is object => typeof value === 'object' && Object.keys(value).length === 0
+export const ellipsesText = (text: string, length: number) => text.length > length ? `${text.slice(0, length)}...` : text

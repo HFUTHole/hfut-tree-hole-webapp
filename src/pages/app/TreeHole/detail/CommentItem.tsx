@@ -99,8 +99,8 @@ export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
               >
                 {formatTime(data.createTime)}
               </Typography>
-              <Typography component="span" variant="subtitle2" className={'whitespace-pre-wrap'}>
-                <strong>{parse(data.content)}</strong>
+              <Typography component="p" variant="subtitle2" className={'whitespace-pre-wrap break-words max-w-full'}>
+                {data.content}
               </Typography>
             </>
           }

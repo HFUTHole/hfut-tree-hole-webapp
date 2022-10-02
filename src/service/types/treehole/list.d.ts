@@ -15,7 +15,7 @@ declare interface ITreeHoleListDataItem {
   createTime: string
 }
 
-interface Comments {
+declare interface ICommentsList {
   data: ICommentsItem[]
   length: number
 }

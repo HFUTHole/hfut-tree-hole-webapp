@@ -3,7 +3,7 @@ declare interface ITreeholeDetailData {
   content: string
   stars: number
   imgs: string[]
-  comments: Comment[]
+  comments: ICommentsItem[]
   createTime: string
   user: User2
   comments_length: number
@@ -11,19 +11,3 @@ declare interface ITreeholeDetailData {
   isOwner: boolean
 }
 
-interface Comment {
-  _id: string
-  content: string
-  createTime: string
-  user: User
-  isOwner: boolean
-}
-
-interface User {
-  username: string
-}
-
-interface User2 {
-  username: string
-  roles: string[]
-}
