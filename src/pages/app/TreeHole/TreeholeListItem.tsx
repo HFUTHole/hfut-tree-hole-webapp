@@ -35,8 +35,8 @@ const TreeholeListCommentList: FC<{
             {item.isOwner ? '洞主' : item.user.username}
           </Typography>
           <div className={'min-w-6/12 w-full break-words'}>
-            <p className={'break-words'}>
-              {ellipsesText(item.content, 30)}
+            <p className={'break-all'}>
+              {ellipsesText(item.content, 40)}
             </p>
             <Divider className={'!mt1 w-full'}/>
           </div>

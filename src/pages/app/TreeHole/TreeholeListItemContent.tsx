@@ -1,6 +1,5 @@
 import { ICONS } from '@/shared/constant/icons'
 import { Box, IconButton, Typography } from '@mui/material'
-import parse from 'html-react-parser'
 import { Image } from '@/components/Image'
 
 export const TreeholeListItemBottomIcons: FC<{
@@ -38,7 +37,7 @@ export const TreeholeListItemContent: FC<{
     <>
       <Box className={'grid gap3 py3'}>
         <Typography variant={'subtitle2'} className={'whitespace-pre-wrap'}>
-          {parse(content.content)}
+          {content.content}
         </Typography>
         {content.imgs?.length > 0 && (
           <Box className={'w-full flex gap1 flex-wrap rounded-md overflow-hidden'}>

@@ -8,7 +8,6 @@ import { ContainedButton } from '@/components/Button'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useTip } from '@/shared/hooks/use-tip'
-import { useDebounce } from '@/shared/hooks/use-debounce'
 
 enum FieldArrayAction {
   append,

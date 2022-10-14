@@ -85,26 +85,21 @@ export function TreeholeBlogCommentItem({ data, isReply = false }: Props) {
           <Typography className="!text-sm" variant="subtitle2">{data.isOwner ? '洞主' : data.user.username}</Typography>
         </ListItemAvatar>
 
-        <ListItemText
-          primaryTypographyProps={{ variant: 'subtitle1' }}
-          secondary={
-            <>
-              <Typography
-                gutterBottom
-                variant="caption"
-                sx={{
-                  display: 'block',
-                  color: 'text.disabled',
-                }}
-              >
-                {formatTime(data.createTime)}
-              </Typography>
-              <Typography component="p" variant="subtitle2" className={'whitespace-pre-wrap break-words max-w-full'}>
-                {data.content}
-              </Typography>
-            </>
-          }
-        />
+        <div className={'grid'}>
+          <Typography
+            gutterBottom
+            variant="caption"
+            sx={{
+              display: 'block',
+              color: 'text.disabled',
+            }}
+          >
+            {formatTime(data.createTime)}
+          </Typography>
+          <Typography component="div" variant="subtitle2" className={'whitespace-pre-wrap'}>
+            {data.content}
+          </Typography>
+        </div>
        <CommentItemRightButton data={data}/>
       </ListItem>
       <Divider

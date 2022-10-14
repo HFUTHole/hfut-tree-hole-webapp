@@ -4,7 +4,7 @@ export const TreeholeCommentsList: FC<{
   data: ITreeholeDetailData
 }> = ({ data }) => {
   return (
-    <div className={'grid gap2'}>
+    <div className={'grid gap2 p3 break-all'}>
       {data.comments.map((item) => {
         // const hasReply = item.reply.length > 0
 
